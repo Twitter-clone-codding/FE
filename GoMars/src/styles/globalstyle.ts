@@ -15,7 +15,15 @@ const GlobalStyle = createGlobalStyle<ThemeProps>`
   }
   body {
     height :764px;
-    font-family: Outfit, sans-serif;
+    font-family:
+      "TwitterChirp",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
   }
   
   li {
