@@ -1,37 +1,29 @@
-import React from "react";
-import styled from "styled-components";
-import Input from "./utils/Input";
-import Button from "./utils/Button";
-import Icon from "./utils/Icon";
-import MainHeaderList from "./components/MainHeaderList";
+
+import { QueryClient, QueryClientProvider } from "react-query";
+import { persistor, store } from "./store";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import theme from "./styles/theme";
+import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/globalstyle";
-const App = () => {
+import Nav from "./shared/route";
+
+function App() {
+  const queryClient = new QueryClient();
   return (
-    <>
-      <GlobalStyle />
-      <List>
-        <div>
-          <Button color="black" size="register" title={<>register</>} />
-          <Button color="blue" size="tweet2" title={<>tweet2</>} />
-          <Button color="blue" size="tweet1" title={<>tweet1</>} />
-          <Button color="black" size="follow" title={<>follow</>} />
-          <Button color="black" size="getVerify" title={<>getVerify</>} />
-          <Button color="black" size="login" title={<>다음</>} />
-          <Button color="black" size="logout" title={<>logout</>} />
-          <Button color="white" size="logout" title={<>cancel</>} />
-          <Button color="blue" size="message" title={<>message</>} />
-        </div>
-        <div>
-          <Input type="input" size="midium" labelValue="이름" />
-          <Input type="search" size="large" />
-        </div>
-        <div>
-          <MainHeaderList />
-        </div>
-      </List>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <Nav />
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    </QueryClientProvider>
   );
-};
+}
+
 
 export default App;
 
