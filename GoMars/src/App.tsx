@@ -1,3 +1,4 @@
+
 import { QueryClient, QueryClientProvider } from "react-query";
 import { persistor, store } from "./store";
 import { Provider } from "react-redux";
@@ -23,4 +24,14 @@ function App() {
   );
 }
 
+
 export default App;
+
+const List = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  > div > * {
+    margin-top: 20px;
+  }
+`;
