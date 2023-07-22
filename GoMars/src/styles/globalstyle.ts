@@ -8,11 +8,14 @@ const GlobalStyle = createGlobalStyle<ThemeProps>`
     box-sizing: border-box;
     
   }
-  body {
-    font-family: Outfit, sans-serif;
+  html {
+    overflow: auto scroll;
+    overscroll-behavior-y: none;
     font-size: 15px;
-    font-weight: 300;
-    line-height: 1.2;
+  }
+  body {
+    height :764px;
+    font-family: Outfit, sans-serif;
   }
   
   li {
