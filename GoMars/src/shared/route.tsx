@@ -11,7 +11,8 @@ const Nav = () => {
   return (
     <Routes>
       {/* NotAuth */}
-      <Route element={<NotAuthRoutes user={user} />}>
+
+      <Route element={<NotAuthRoutes user={true} />}>
         <Route path="/" element={<Main />}>
           <Route path="/login" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
@@ -19,7 +20,7 @@ const Nav = () => {
       </Route>
 
       {/* YesAuth */}
-      <Route element={<ProtectedRoutes user={user} />}>
+      <Route element={<ProtectedRoutes user={true} />}>
         <Route element={<Authlayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/explore" element={<Explore />} />

@@ -49,6 +49,7 @@ const Main = () => {
             </div>
           </div>
         </MainLeftContainer>
+
         <MainRightContainer>
           <div className="main-right-wrraper">
             <div className="main-right-logo">
