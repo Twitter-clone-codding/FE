@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+
 interface ButtonProps extends MyButtonProps {
   onClick?: () => void;
   title: JSX.Element;
@@ -8,6 +9,7 @@ interface MyButtonProps {
   color: "white" | "blue" | "hoverBlue" | "hoverBlack" | "lightBlack" | "black";
   backgroundColor: "white" | "blue" | "lightBlack" | "black";
   hoverColor: "hoverBlue" | "hoverBlack" | "hoverLightBlue";
+
   size:
     | "tweet1"
     | "tweet2"
