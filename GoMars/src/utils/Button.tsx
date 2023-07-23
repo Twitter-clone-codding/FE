@@ -31,14 +31,7 @@
 import styled, { css } from "styled-components";
 
 interface StyledButtonProps {
-  color:
-    | "blue"
-    | "black"
-    | "gray"
-    | "reverseBlue"
-    | "lightGray"
-    | "blur"
-    | "white";
+  color: "blue" | "black" | "gray" | "reverseBlue" | "lightGray" | "blur" | "white";
   size:
     | "tweet2"
     | "tweet1"
