@@ -1,4 +1,4 @@
 const Explore = () => {
-  return <div>Explore</div>;
+  return <div></div>;
 };
 export default Explore;

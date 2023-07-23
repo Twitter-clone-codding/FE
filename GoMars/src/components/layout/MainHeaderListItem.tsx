@@ -1,11 +1,11 @@
+import Icon from "@/utils/Icon";
 import { Link } from "react-router-dom";
-import Icon from "../utils/Icon";
 import styled from "styled-components";
 
 interface MainHeaderListItemProps {
   title?: string;
   path: string;
-  boldPath: string;
+  boldPath?: string;
   link?: string;
   color?: string;
   pathname?: string;
@@ -53,18 +53,23 @@ const MainHeaderListItem: React.FC<MainHeaderListItemProps> = (props) => {
   const boldIcon = sameTitle ? (
     <>
       <Icon path={boldPath} width={26.25} height={26.25} color={color} />
-      <div className="title">
-        <span className="bold">{title}</span>
-      </div>
+      {title && (
+        <div className="title">
+          <span className="bold">{title}</span>
+        </div>
+      )}
     </>
   ) : (
     <>
       <Icon path={path} width={26.25} height={26.25} color={color} />
-      <div className="title">
-        <span>{title}</span>
-      </div>
+      {title && (
+        <div className="title">
+          <span>{title}</span>
+        </div>
+      )}
     </>
   );
+
   return (
     <LinkContainer to={`/${lowerTitle}`} color={color}>
       <div className="link-wrapper">{boldIcon}</div>
