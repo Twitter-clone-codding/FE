@@ -1,3 +1,4 @@
+
 import { getMainTweet, getTweets } from "@/api/get";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -16,10 +17,12 @@ const Home = () => {
     };
   }, []);
   return (
+
     <BoardContainer>
       <h2>{first.result.tweet.user.nickname}</h2>
       <span>{first.result.tweet.hearts}</span>
     </BoardContainer>
+
   );
 };
 export default Home;
