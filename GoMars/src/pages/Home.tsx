@@ -16,18 +16,11 @@ const Home = () => {
       // setfirst(respoense);
       console.log(respoense);
       // first.result.tweet.content;
-      const respoense = await getTweets({ limit: 10, page: 0 });
-      setfirst(respoense);
     };
     fetch();
   }, []);
-  // return <BoardContainer></BoardContainer>;
-  // return ;
+
   return (
-    <BoardContainer>
-      {/* <h2>{first.result.tweet.user.nickname}</h2>
-      <span>{first.result.tweet.hearts}</span> */}
-    </BoardContainer>
     <div>
       {first?.result
         .map((e) => {
