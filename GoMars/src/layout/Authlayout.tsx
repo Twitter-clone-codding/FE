@@ -2,7 +2,8 @@ import useWindowHeight from "@/hooks/useWindowHeight";
 import styled from "styled-components";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
-
+import MainHeaderList from "@/components/MainHeaderList";
+import MainHeaderProfile from "@/utils/MainHeaderProfile";
 interface AuthLoyOutContainerProps {
   widowHeight: number;
 }
@@ -22,7 +23,6 @@ const SidebarContainer = styled.div`
   flex-grow: 1;
   z-index: 3;
   align-items: flex-end;
-  background-color: red;
   .sidebar-wrraper {
     display: flex;
     align-items: stretch;
@@ -43,8 +43,8 @@ const SidebarContainer = styled.div`
         padding: 0 8px;
         width: 275px;
         height: 100%;
-        background-color: black;
         justify-content: space-between;
+        flex-direction: column;
         overflow-y: auto;
       }
     }
@@ -116,8 +116,8 @@ const Authlayout = () => {
         <div className="sidebar-wrraper">
           <div className="sidebar">
             <div className="sidebar-linkprofle-container">
-              {/* 여기가 링크 컴포넌트 */}
-              {/* 여기가 프로필 컴포넌트 */}
+              <MainHeaderList />
+              <MainHeaderProfile />
             </div>
           </div>
         </div>
