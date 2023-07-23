@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 interface IconProps extends PathStyleProps {
   path: string;
+  color: string;
 }
 interface PathStyleProps {
   width: number;
@@ -20,16 +21,17 @@ const Path = styled.path`
   word-wrap: break-word; //글자 안잘리게 해줌
   fill: currentcolor; // 색을 바꾸게 도움을 줌
   user-select: none; // 드래그해서 선택불가
+  color: ${(props) => props.color};
 `;
 
 const Icon: React.FC<IconProps> = (props) => {
-  const { path, width, height } = props;
+  const { path, width, height, color } = props;
 
   return (
     <Containor width={width} height={height}>
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <g>
-          <Path d={path}></Path>
+          <Path d={path} color={color}></Path>
         </g>
       </svg>
     </Containor>
