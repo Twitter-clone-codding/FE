@@ -1,8 +1,8 @@
 import useWindowHeight from "@/hooks/useWindowHeight";
 import styled from "styled-components";
 import Header from "./Header";
+import { Outlet } from "react-router-dom";
 import MainHeaderList from "@/components/MainHeaderList";
-import Button from "@/utils/Button";
 import MainHeaderProfile from "@/utils/MainHeaderProfile";
 interface AuthLoyOutContainerProps {
   widowHeight: number;
@@ -20,7 +20,6 @@ const SidebarContainer = styled.div`
   flex-basis: auto;
   flex-direction: column;
   position: relative;
-  user-select: none;
   flex-grow: 1;
   z-index: 3;
   align-items: flex-end;
@@ -87,13 +86,14 @@ const MainContentsBoardContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  border-style: solid;
-  border-color: rgb(239, 243, 244);
   background-color: rgba(255, 255, 255, 1);
   flex-grow: 1;
   width: 100%;
+  border-style: solid;
+  border-color: rgb(239, 243, 244);
   border-left-width: 1px;
   border-right-width: 1px;
+  border-top-width: 0px;
   z-index: 1;
   max-width: 600px;
 `;
@@ -128,6 +128,7 @@ const Authlayout = () => {
             <MainContentsBoardContainer>
               <div className="hometimeline-container">
                 <Header />
+                <Outlet />
               </div>
             </MainContentsBoardContainer>
             <RightContentBoardContainer></RightContentBoardContainer>
