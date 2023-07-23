@@ -8,7 +8,7 @@ interface ButtonProps extends MyButtonProps {
 interface MyButtonProps {
   color: "white" | "blue" | "hoverBlue" | "hoverBlack" | "lightBlack" | "black";
   backgroundColor: "white" | "blue" | "lightBlack" | "black";
-  hoverColor: "hoverBlue" | "hoverBlack" | "hoverLightBlue";
+  hoverColor: "hoverBlue" | "hoverBlack" | "hoverLightBlue" | "hoverLightBlack";
 
   size:
     | "tweet1"
@@ -31,6 +31,7 @@ const colorStyles = {
   hoverLightBlue: "rgba(29, 155, 240, 0.1)",
   hoverBlack: "rgb(39, 44, 48)",
   lightblack: "rgba(15, 20, 25, 0.1)",
+  hoverLightBlack: "rgba(15, 20, 25, 0.1)",
   black: "rgb(15, 20, 25)",
   gray: "rgb(207, 217, 222)",
 };
@@ -66,13 +67,11 @@ const sizeStyles = {
     width: 300px;
     height: 40px;
     padding: 0 16px;
-    margin: 12px 0;
   `,
   login2: css`
     width: 300px;
     height: 36px;
     padding: 0 16px;
-    margin: 12px 0;
   `,
   register: css`
     width: 440px;
@@ -106,16 +105,7 @@ const MyButton = styled.button<MyButtonProps>`
 `;
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const {
-    onClick,
-    title,
-    type,
-    color,
-    size,
-    backgroundColor,
-    hoverColor,
-    borderColor,
-  } = props;
+  const { onClick, title, type, color, size, backgroundColor, hoverColor, borderColor } = props;
   return (
     <MyButton
       type={type}
@@ -131,80 +121,3 @@ const Button: React.FC<ButtonProps> = (props) => {
   );
 };
 export default Button;
-// const  = {
-//   tweet1: css`
-//
-//     /* background-color: rgb(29, 155, 240);
-//     border: 1px solid rgba(0, 0, 0, 0);
-//     color: white;
-//     &:hover {
-//       background-color: rgb(26, 140, 216);
-//     } */
-//   `,
-//   tweet2: css`
-//
-//     /* background-color: rgb(29, 155, 240);
-//     border: 1px solid rgba(0, 0, 0, 0);
-//     color: white;
-//     &:hover {
-//       background-color: rgb(26, 140, 216);
-//     } */
-//     opacity: 0.5;
-//   `,
-//   getVerify: css`
-//     /* background-color: black;
-//     border: 1px solid rgba(0, 0, 0, 0);
-//     color: white; */
-//   `,
-//   follow: css`
-//     width: 78px;
-//     height: 32px;
-//     padding: 0 16px;
-//     /* background-color: black;
-//     border: 1px solid rgba(0, 0, 0, 0);
-//     color: white; */
-//   `,
-//   logout: css`
-//     /* border: 1px solid rgba(0, 0, 0, 0);
-//     background-color: rgb(15, 20, 25);
-//     color: white;
-//     &:hover {
-//       background-color: rgb(39, 44, 48);
-//     } */
-//     /* background-color: white;
-//     color: black;
-//     &:hover {
-//       background-color: rgba(15, 20, 25, 0.1);
-//     } */
-//   `,
-//   login1: css`
-//
-//   `,
-//   login2: css`
-//
-//     /* border: 1px solid rgba(0, 0, 0, 0);
-//     background-color: rgb(15, 20, 25);
-//     color: white;
-//     &:hover {
-//       background-color: rgb(39, 44, 48);
-//     } */
-//     /* background-color: white;
-//     color: black;
-//     &:hover {
-//       background-color: rgba(15, 20, 25, 0.1);
-//     } */
-//   `,
-//   register: css`
-//
-//     opacity: 0.5;
-//     /* background-color: rgb(15, 20, 25);
-//     border: 1px solid rgba(0, 0, 0, 0);
-//     color: white; */
-//   `,
-//   message: css`
-//
-//   `,
-//   main: css`
-//
-//   `,
-// };

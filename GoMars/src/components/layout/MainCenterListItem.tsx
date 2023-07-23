@@ -85,20 +85,14 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
             <span className="hashtag">@helloworld</span>
             <span>·jul 22</span>
           </div>
-          <Icon
-            color={"rgb(83, 100, 113)"}
-            height={18.75}
-            width={18.75}
-            path={threedot}
-          />
+          <Icon color={"rgb(83, 100, 113)"} height={18.75} width={18.75} path={threedot} />
         </div>
         <div className="main-contnet">
           <div className="main-contnet-comment">
             <span>
-              여기에 가지가지 얘기다 전부 다 담길 예정인데여기에 가지가지 얘기다
-              전부 다 담길 예정인데여기에 가지가지 얘기다 전부 다 담길
-              예정인데여기에 가지가지 얘기다 전부 다 담길 예정인데여기에
-              가지가지 얘기다 전부 다 담길 예정인데여기에 가지가지 얘기다 전부
+              여기에 가지가지 얘기다 전부 다 담길 예정인데여기에 가지가지 얘기다 전부 다 담길
+              예정인데여기에 가지가지 얘기다 전부 다 담길 예정인데여기에 가지가지 얘기다 전부 다
+              담길 예정인데여기에 가지가지 얘기다 전부 다 담길 예정인데여기에 가지가지 얘기다 전부
               다 담길 예정인데
             </span>
           </div>
@@ -108,12 +102,7 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
           <div className="footer-box">
             {centerFooterArray.map((path) => (
               <div className="footer-item">
-                <Icon
-                  path={path}
-                  color={"rgb(83, 100, 113)"}
-                  height={18.75}
-                  width={18.75}
-                />
+                <Icon path={path} color={"rgb(83, 100, 113)"} height={18.75} width={18.75} />
                 <span>000</span>
               </div>
             ))}

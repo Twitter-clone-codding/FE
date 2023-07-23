@@ -3,16 +3,7 @@ import NotAuthRoutes from "./authRoute";
 import ProtectedRoutes from "./protectRoute";
 import ErrorPage from "./404";
 import { useAppSelector } from "@/hooks/useRedux";
-import {
-  Explore,
-  Home,
-  Main,
-  Messages,
-  Notifications,
-  Profile,
-  Signin,
-  Signup,
-} from "@/pages";
+import { Explore, Home, Main, Messages, Notifications, Profile, Signin, Signup } from "@/pages";
 import Authlayout from "@/layout/Authlayout";
 
 const Nav = () => {
