@@ -3,16 +3,7 @@ import NotAuthRoutes from "./authRoute";
 import ProtectedRoutes from "./protectRoute";
 import ErrorPage from "./404";
 import { useAppSelector } from "@/hooks/useRedux";
-import {
-  Explore,
-  Home,
-  Main,
-  Messages,
-  Notifications,
-  Profile,
-  Signin,
-  Signup,
-} from "@/pages";
+import { Explore, Home, Main, Messages, Notifications, Profile, Signin, Signup } from "@/pages";
 import Authlayout from "@/layout/Authlayout";
 
 const Nav = () => {
@@ -21,7 +12,7 @@ const Nav = () => {
     <Routes>
       {/* NotAuth */}
 
-      <Route element={<NotAuthRoutes user={true} />}>
+      <Route element={<NotAuthRoutes user={false} />}>
         <Route path="/" element={<Main />}>
           <Route path="/login" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
@@ -29,7 +20,7 @@ const Nav = () => {
       </Route>
 
       {/* YesAuth */}
-      <Route element={<ProtectedRoutes user={true} />}>
+      <Route element={<ProtectedRoutes user={false} />}>
         <Route element={<Authlayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/explore" element={<Explore />} />

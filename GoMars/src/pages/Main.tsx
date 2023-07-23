@@ -1,12 +1,10 @@
 import { logo } from "@/assets/img";
+import SignComponent from "@/components/SignComponent";
 import { Footer } from "@/components/main/Footer";
 import useWindowHeight from "@/hooks/useWindowHeight";
-import {
-  MainLeftContainer,
-  MainRightContainer,
-} from "@/styles/main/mainstyles";
+import { MainLeftContainer, MainRightContainer } from "@/styles/main/mainstyles";
 import { ThemeProps } from "@/styles/theme";
-import Button from "@/utils/Button";
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 interface MainContainerProps extends ThemeProps {
@@ -42,9 +40,7 @@ const Main = () => {
             <div className="left-img-container">
               <div className="main-left-box" />
               <img
-                src={
-                  "https://abs.twimg.com/sticky/illustrations/lohp_1302x955.png"
-                }
+                src={"https://abs.twimg.com/sticky/illustrations/lohp_1302x955.png"}
                 alt="asd"
                 className="imgs"
                 draggable={false}
@@ -55,41 +51,24 @@ const Main = () => {
             </div>
           </div>
         </MainLeftContainer>
-
         <MainRightContainer>
           <div className="main-right-wrraper">
             <div className="main-right-logo">
               <img src={logo} alt="aa" />
             </div>
             <div className="main-right-title">
-              <span className="title-subtitle-font">지금 일어나고 있는 일</span>
+              <span className="title-subtitle-font">잠시 자리좀 비울게요.</span>
             </div>
             <div className="main-right-subtitle">
-              <span className="title-subtitle-font">
-                오늘 트위터에 가입하세요.
-              </span>
+              <span className="title-subtitle-font">오늘 트위터에 가입하세요.</span>
             </div>
             {/* 로그인, 회원가입 컨테이너 */}
-            <div className="main-right-loginContainer"></div>
-            <Button
-              hoverColor="hoverBlue"
-              size="login1"
-              color="white"
-              backgroundColor="blue"
-              title={<span>계정 만들기</span>}
-            />
-            <Button
-              hoverColor="hoverLightBlue"
-              size="login1"
-              color="blue"
-              backgroundColor="white"
-              borderColor="gray"
-              title={<span>로그인</span>}
-            />
+            <SignComponent ismain />
           </div>
         </MainRightContainer>
       </div>
       <Footer />
+      <Outlet />
     </MainContainer>
   );
 };

@@ -6,12 +6,12 @@ interface User {
 }
 
 interface Image {
-  imgid: number;
+  imgid?: number;
   imgUrl: string;
 }
 
 interface Tweet {
-  user: User;
+  user?: User;
   content: string;
   hashtag: string;
   hearts: number;

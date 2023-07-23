@@ -215,11 +215,123 @@ const MainRightContainer = styled.div`
       font-weight: 700;
       word-wrap: break-word;
     }
-    .main-right-loginContainer {
-      height: 356px;
-      width: 100%;
+  }
+`;
+const StyledDivStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
+
+const LoginContainer = styled(StyledDivStyle)`
+  width: 100%;
+  height: 356px;
+`;
+const ButtonDivStyle = styled.div`
+  width: 300px;
+  margin-bottom: 12px;
+  max-width: 380px;
+`;
+const ButtonDivStyleApple = styled(ButtonDivStyle)`
+  margin-bottom: 0;
+`;
+const ButtonTitleStyle = styled.span`
+  font-weight: 700;
+  line-height: 20px;
+  font-size: 15px;
+  font-family: inherit;
+`;
+const ButtonTitleStyleApple = styled(ButtonTitleStyle)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+`;
+const GubunSunStyleDiv = styled(StyledDivStyle)`
+  max-width: 380px;
+  margin: 4px 0px;
+  width: 300px;
+  height: 28px;
+  .gubun-padding {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    margin: 4px -4px;
+    flex-direction: row;
+  }
+  .gubunsun-div {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0 4px;
+    min-width: 0px;
+    .sun {
+      background-color: rgb(239, 243, 244);
+      height: 1px;
+    }
+  }
+  span {
+    word-wrap: break-word;
+    line-height: 20px;
+    font-weight: 400;
+    color: rgb(15, 20, 25);
+  }
+`;
+const InformationContainer = styled.div`
+  white-space: pre-wrap;
+  flex: 1;
+  width: 300px;
+  font-size: 11px;
+  line-height: 12px;
+  margin-bottom: 20px;
+  max-width: 380px;
+  color: rgb(83, 100, 113);
+  word-wrap: break-word;
+  a {
+    font: inherit;
+    white-space: inherit;
+    word-wrap: break-word;
+    font-family: inherit;
+    color: rgb(29, 155, 240);
+    cursor: pointer;
+    span {
     }
   }
 `;
-
-export { FooterContainer, MainRightContainer, MainLeftContainer };
+const SiginInButtonContainer = styled(StyledDivStyle)`
+  margin-top: 40px;
+  .already-question {
+    line-height: 20px;
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 20px;
+    max-width: 380px;
+    color: rgb(15, 20, 25);
+    span {
+      color: inherit;
+      font: inherit;
+      white-space: inherit;
+      word-wrap: break-word;
+      font-family: inherit;
+    }
+  }
+`;
+const SignUpButtonDivStyle = styled(ButtonDivStyle)`
+  margin-bottom: 8px;
+`;
+export {
+  SiginInButtonContainer,
+  SignUpButtonDivStyle,
+  InformationContainer,
+  ButtonDivStyleApple,
+  GubunSunStyleDiv,
+  ButtonDivStyle,
+  ButtonTitleStyle,
+  ButtonTitleStyleApple,
+  FooterContainer,
+  MainRightContainer,
+  MainLeftContainer,
+  LoginContainer,
+};

@@ -66,7 +66,6 @@ const inputStyles = css`
       right: 0;
       font-size: 12px;
     }
-    ${(props) => sizeStyles[props.size]}
   }
   .comment {
     top: 0;
@@ -79,7 +78,7 @@ const inputStyles = css`
 const searchStyles = css`
   display: flex;
   flex-direction: row;
-  ${(props) => sizeStyles[props.size]}
+
   border-radius: 9999px;
   background-color: rgb(239, 243, 244);
   &:hover {
@@ -104,7 +103,7 @@ const searchStyles = css`
     display: flex;
     align-items: center;
     justify-content: center;
-  };
+  }
 `;
 
 const Containor = styled.div<StyledInputProps>`
@@ -124,16 +123,7 @@ const Containor = styled.div<StyledInputProps>`
 `;
 
 const Input: React.FC<InputProps> = (props) => {
-  const {
-    hoverColor,
-    labelValue,
-    type,
-    placeholder,
-    id,
-    icon,
-    className,
-    onChange,
-  } = props;
+  const { hoverColor, labelValue, type, placeholder, id, icon, className, onChange } = props;
   return (
     <>
       <Containor size="midium" hoverColor={hoverColor} type={type}>
@@ -142,11 +132,11 @@ const Input: React.FC<InputProps> = (props) => {
           <input type="text" onChange={(e) => onChange(e)} />
           <label htmlFor="">{labelValue}</label>
         </div>
-        {labelValue === "이름" ? (
+        {/* {labelValue === "이름" ? (
 
         ) : (
           <p className="comment">올바른 휴대폰 번호를 입력해주세요.</p>
-        )}
+        )} */}
       </Containor>
     </>
   );
