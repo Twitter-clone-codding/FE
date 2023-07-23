@@ -9,6 +9,7 @@ interface PathStyleProps {
   height: number;
 }
 const Containor = styled.div<PathStyleProps>`
+  display: flex;
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
 `;
@@ -22,6 +23,8 @@ const Path = styled.path`
   fill: currentcolor; // 색을 바꾸게 도움을 줌
   user-select: none; // 드래그해서 선택불가
   color: ${(props) => props.color};
+  width: 100%;
+  height: 100%;
 `;
 
 const Icon: React.FC<IconProps> = (props) => {

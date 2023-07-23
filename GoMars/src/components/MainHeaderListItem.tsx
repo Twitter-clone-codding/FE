@@ -3,24 +3,25 @@ import Icon from "../utils/Icon";
 import styled from "styled-components";
 
 interface MainHeaderListItemProps {
-  title?: JSX.Element;
+  title?: string;
   path: string;
+  boldPath: string;
   link?: string;
   color?: string;
+  pathname?: string;
 }
 
 const LinkContainer = styled(Link)`
   display: flex;
-  width: 259px;
-  height: 58.25px;
-  padding: 4px 0;
+  width: 236.78px;
+  height: 50.25px;
 
   * {
     color: black;
   }
   &:hover {
     .link-wrapper {
-      background-color: lightgray;
+      background-color: rgba(15, 20, 25, 0.1);
     }
   }
   .link-wrapper {
@@ -39,17 +40,34 @@ const LinkContainer = styled(Link)`
       margin-right: 16px;
     }
   }
+  .bold {
+    font-weight: 700;
+  }
 `;
 
 const MainHeaderListItem: React.FC<MainHeaderListItemProps> = (props) => {
-  const { title, path, color } = props;
+  const { title, path, boldPath, color, pathname } = props;
+  const lowerTitle = title.toLowerCase();
 
-  return (
-    <LinkContainer to="/" color={color}>
-      <div className="link-wrapper">
-        <Icon path={path} width={26.25} height={26.25} color={color} />
-        <div className="title">{title}</div>
+  const sameTitle = title.toLowerCase() === pathname.substring(1);
+  const boldIcon = sameTitle ? (
+    <>
+      <Icon path={boldPath} width={26.25} height={26.25} color={color} />
+      <div className="title">
+        <span className="bold">{title}</span>
       </div>
+    </>
+  ) : (
+    <>
+      <Icon path={path} width={26.25} height={26.25} color={color} />
+      <div className="title">
+        <span>{title}</span>
+      </div>
+    </>
+  );
+  return (
+    <LinkContainer to={`/${lowerTitle}`} color={color}>
+      <div className="link-wrapper">{boldIcon}</div>
     </LinkContainer>
   );
 };
