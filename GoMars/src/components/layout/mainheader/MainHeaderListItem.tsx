@@ -1,5 +1,5 @@
 import { LinkContainer } from "@/styles/header/MainheaderStyle";
-import Icon from "@/utils/Icon";
+import { Icon } from "@/utils";
 
 interface MainHeaderListItemProps {
   title?: string;
