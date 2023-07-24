@@ -5,6 +5,6 @@ interface AuthRouteProps {
 }
 
 const NotAuthRoutes = ({ user }: AuthRouteProps) => {
-  return user ? <Navigate to={"/main"} /> : <Outlet />;
+  return user ? <Navigate to={"/home"} /> : <Outlet />;
 };
 export default NotAuthRoutes;
