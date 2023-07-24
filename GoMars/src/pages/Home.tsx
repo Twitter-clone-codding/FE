@@ -1,13 +1,8 @@
-import { getMainTweet, getTweets } from "@/api/get";
+import { getTweets } from "@/api/get";
 import MainCenterListItem from "@/components/layout/maincenter/MainCenterListItem";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 
-const BoardContainer = styled.div`
-  width: 50px;
-  height: 50px;
-`;
 const Home = () => {
   const [first, setfirst] = useState<TweetGetResponse>();
   useEffect(() => {
@@ -26,7 +21,7 @@ const Home = () => {
         .map((e) => {
           return { ...e, key: uuidv4() };
         })
-        .map((tweet) => <MainCenterListItem key={tweet.key} {...tweet} />)}
+        .map((tweet) => <MainCenterListItem {...tweet} />)}
     </div>
   );
 };

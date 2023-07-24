@@ -8,9 +8,7 @@ import { useEffect } from "react";
 
 const Header = () => {
   const location = useLocation();
-  useEffect(() => {
-    console.log(location);
-  }, []);
+
   switch (location.pathname) {
     case "/explore":
       return <ExploreHeader />;

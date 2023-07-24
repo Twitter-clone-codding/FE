@@ -6,11 +6,6 @@ const spin = keyframes`
     }
 `;
 
-const Container = styled.div`
-  width: 80px;
-  margin: 0 auto;
-`;
-
 const LodingSpinner = styled.div<SpinnerStyleProp>`
   display: block;
   width: ${(props) => props.size}px;

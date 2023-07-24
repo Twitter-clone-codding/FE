@@ -1,6 +1,5 @@
 import { close, twitter } from "@/assets/svg";
 import { Icon } from "@/utils";
-import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 import SignComponent from "./SignComponent";
 import { SignInFormContainer, SigninBox } from "@/styles/sign/signstyles";
@@ -8,8 +7,6 @@ import { SignInFormContainer, SigninBox } from "@/styles/sign/signstyles";
 const MainComponent = () => {
   const navigate = useNavigate();
 
-  const location = useLocation();
-  const signup = location.pathname === "/signup";
   return (
     <SignInFormContainer>
       {/* 헤더 */}

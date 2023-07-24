@@ -46,20 +46,15 @@ const Icon: React.FC<IconProps> = (props) => {
   const { path, width, height, color, isgoogle = false } = props;
 
   return (
-    <Containor width={width} height={height} isgoogle={isgoogle}>
+    <Containor width={width} height={height} color={color} isgoogle={isgoogle}>
       {!isgoogle ? (
-        <svg viewBox="0 0 24 24" aria-hidden="true" color={color}>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
           <g>
             <path d={path} color={color}></path>
           </g>
         </svg>
       ) : (
-        <svg
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 48 48"
-          className="icon"
-        >
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="icon">
           <g>
             <path
               fill="#EA4335"

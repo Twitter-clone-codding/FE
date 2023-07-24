@@ -110,16 +110,7 @@ const MyButton = styled.button<MyButtonProps>`
 `;
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const {
-    onClick,
-    title,
-    type,
-    color,
-    size,
-    backgroundColor,
-    hoverColor,
-    borderColor,
-  } = props;
+  const { onClick, title, type, color, size, backgroundColor, hoverColor, borderColor } = props;
   return (
     <MyButton
       type={type}

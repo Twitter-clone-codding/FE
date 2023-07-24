@@ -1,4 +1,3 @@
-import MainComponent from "@/components/ModalComponent";
 import RegisterComponent from "@/components/RegisterComponent";
 import { Modal } from "@/utils";
 

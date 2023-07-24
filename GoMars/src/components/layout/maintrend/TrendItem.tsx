@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Icon from "@/utils/Icon";
 import { threedot } from "@/assets/svg";
+import { Icon } from "@/utils";
 const TrendItemContainer = styled.div`
   height: 82px;
   width: 100%;

@@ -1,5 +1,4 @@
 import { logo } from "@/assets/img";
-import SignComponent from "@/components/SignComponent";
 import { Footer } from "@/components/main/Footer";
 import MainLoginForm from "@/components/main/Loginform";
 import useWindowHeight from "@/hooks/useWindowHeight";
