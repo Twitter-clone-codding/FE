@@ -1,8 +1,7 @@
 import { apple } from "@/assets/svg";
-import { useAppDispatch } from "@/hooks/useRedux";
+
 import {
   ButtonTitleStyleApple,
-  InformationContainer,
   ButtonDivModalStyle,
   GubunSunModalStyleDiv,
 } from "@/styles/main/mainstyles";

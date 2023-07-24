@@ -7,9 +7,8 @@ import {
   GubunSunModalStyleDiv,
 } from "@/styles/main/mainstyles";
 import { ModalLoginForm, QuestionRegisterContainer } from "@/styles/sign/signstyles";
-import { Button, Icon } from "@/utils";
+import { Button, Icon, Spinner } from "@/utils";
 import DynamicInput from "@/utils/dynamicInput";
-import Spinner from "@/utils/spinner";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

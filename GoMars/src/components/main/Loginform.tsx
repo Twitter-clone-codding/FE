@@ -1,6 +1,4 @@
 import { apple } from "@/assets/svg";
-import { useAppDispatch } from "@/hooks/useRedux";
-import { userSet } from "@/store/slice/userSlice";
 import {
   LoginContainer,
   ButtonDivStyle,
@@ -37,7 +35,6 @@ const MainLoginForm = () => {
   const signInNavigateHandler = () => {
     navigate("/login", { state: { step: 0 } });
   };
-  const dispatch = useAppDispatch();
 
   return (
     <LoginContainer>

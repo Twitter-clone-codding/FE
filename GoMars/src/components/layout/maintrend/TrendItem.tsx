@@ -1,10 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import Icon from "@/utils/Icon";
 import { threedot } from "@/assets/svg";
 import { TrendItemContainer } from "@/styles/sidebar/sidebarStyle";
+import { Icon } from "@/utils";
 
-const TrendItem = (props) => {
+const TrendItem = () => {
   return (
     <TrendItemContainer>
       <div className="wrapper">

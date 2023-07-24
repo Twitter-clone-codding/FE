@@ -8,7 +8,7 @@ interface PathStyleProps {
   width: number;
   isgoogle?: boolean;
   height: number;
-  color: string;
+  color?: string;
 }
 const Containor = styled.div<PathStyleProps>`
   display: flex;

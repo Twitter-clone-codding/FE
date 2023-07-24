@@ -1,7 +1,5 @@
 import MainHeaderListItem from "./MainHeaderListItem";
-import styled from "styled-components";
 import svgArray, { boldSvgArray } from "@/assets/svg";
-import Icon from "@/utils/Icon";
 import Button from "@/utils/Button";
 import { useLocation } from "react-router-dom";
 import { Container } from "@/styles/header/MainheaderStyle";

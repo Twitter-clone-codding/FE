@@ -1,4 +1,3 @@
-import styled, { css } from "styled-components";
 import { threedot } from "@/assets/svg";
 import Button from "@/utils/Button";
 import { Icon } from "@/utils";
@@ -7,11 +6,6 @@ interface MainHeaderProfileProps {
   size?: "large" | "medium" | "small";
   type: "follow" | "profile";
 }
-const sizeStyles = {
-  large: css``,
-  medium: css``,
-  small: css``,
-};
 
 const MainHeaderProfile: React.FC<MainHeaderProfileProps> = (props) => {
   const { type, size } = props;
