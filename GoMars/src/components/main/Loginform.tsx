@@ -1,4 +1,6 @@
 import { apple } from "@/assets/svg";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { userSet } from "@/store/slice/userSlice";
 import {
   LoginContainer,
   ButtonDivStyle,
@@ -13,21 +15,46 @@ import {
 import { Button, Icon } from "@/utils";
 import { useNavigate } from "react-router-dom";
 
+const SOCIAL_CONFIG = {
+  google_client_id: import.meta.env.VITE_GOOGLE_CLIENT_KEY,
+  google_redirect_uri: import.meta.env.VITE_GOOGLE_REDIRENT_URI,
+  google_url: import.meta.env.VITE_GOOGLE_URL,
+};
+
+interface socialoption {
+  pathname: string;
+  search: string;
+}
+const googleLinkOptions = {
+  pathname: `${SOCIAL_CONFIG.google_url}`,
+  search: `?client_id=${SOCIAL_CONFIG.google_client_id}&redirect_uri=${SOCIAL_CONFIG.google_redirect_uri}&response_type=code&state=google&scope=https://www.googleapis.com/auth/userinfo.email`,
+};
+export const socialhandler = (option: socialoption) => {
+  window.location.href = `${option.pathname + option.search}`;
+};
 const MainLoginForm = () => {
   const navigate = useNavigate();
   const signInNavigateHandler = () => {
-    navigate("/login");
+    navigate("/login", { state: { step: 0 } });
   };
+  const dispatch = useAppDispatch();
+
   return (
     <LoginContainer>
       <ButtonDivStyle>
         <Button
+          onClick={() => socialhandler(googleLinkOptions)}
           hoverColor="hoverLightBlue"
           size="login1"
           color="blue"
           backgroundColor="white"
           borderColor="gray"
-          title={<ButtonTitleStyle>로그인</ButtonTitleStyle>}
+          title={
+            <ButtonTitleStyleApple>
+              <Icon color="" isgoogle={true} width={18} height={18} path="" />
+              <span className="google-span">Google 계정으로 로그인</span>
+            </ButtonTitleStyleApple>
+          }
         />
       </ButtonDivStyle>
       <ButtonDivStyleApple>
@@ -64,6 +91,7 @@ const MainLoginForm = () => {
           size="login1"
           color="white"
           backgroundColor="blue"
+          onClick={() => navigate("/signup")}
           title={<ButtonTitleStyle>계정 만들기</ButtonTitleStyle>}
         />
       </SignUpButtonDivStyle>

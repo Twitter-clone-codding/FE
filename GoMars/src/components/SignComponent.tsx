@@ -1,15 +1,28 @@
-import MainLoginForm from "./signin/LoginForm";
-import Modalloginform from "./signin/Modalloginform";
+import { useLocation } from "react-router-dom";
+import { Modalloginform } from "./sign";
+import MainLoginForm from "./main/Loginform";
+import ModalSignupform from "./sign/ModalSignupform";
+import RegisterComponent from "./RegisterComponent";
 
 interface SignProps {
   ismain?: boolean;
 }
 
 const SignComponent: React.FC<SignProps> = (props) => {
-  const { ismain = true } = props;
+  const location = useLocation();
   const maincontent = <MainLoginForm />;
   const modalcontent = <Modalloginform />;
+  const modalsignup = <RegisterComponent />;
 
-  return ismain ? maincontent : modalcontent;
+  switch (location.pathname) {
+    case "/login":
+      return modalcontent;
+    case "/signup":
+      return modalsignup;
+    case "/":
+      return maincontent;
+    default:
+      return;
+  }
 };
 export default SignComponent;

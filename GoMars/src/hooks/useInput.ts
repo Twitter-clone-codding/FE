@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 
-const useInput = (initialState: any) => {
-  const [form, setForm] = useState(initialState);
+export interface FormState {
+  [key: string]: string;
+}
 
-  const onChangeHandler = (event: any) => {
+const useInput = (
+  initialState: FormState
+): [FormState, (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void] => {
+  const [form, setForm] = useState<FormState>(initialState);
+
+  const onChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { className, value } = event.target;
     const newForm = {
       ...form,

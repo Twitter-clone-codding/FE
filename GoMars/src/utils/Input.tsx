@@ -78,6 +78,7 @@ const Input2: React.FC<InputProps> = (props) => {
           color="rgb(83, 100, 113)"
           isSearch={true}
         />
+
         <input />
       </InputContainor>
     ) : (

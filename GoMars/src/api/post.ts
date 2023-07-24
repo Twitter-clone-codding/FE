@@ -2,8 +2,14 @@ import { FormdataHeader } from "./get";
 import { server } from "./server";
 
 // POST /auth/login
-export const login = async (): Promise<LoginResponse> => {
-  const response = await server.post("/auth/login");
+
+interface login {
+  email: string;
+  password: string;
+}
+
+export const login = async (params: login): Promise<LoginResponse> => {
+  const response = await server.post("/auth/login", params);
   return response.data;
 };
 
