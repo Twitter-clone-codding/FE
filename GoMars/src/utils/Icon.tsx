@@ -2,19 +2,18 @@ import styled from "styled-components";
 
 interface IconProps extends PathStyleProps {
   path: string;
-  color: string;
+  isHover?: boolean;
 }
 interface PathStyleProps {
   width: number;
   height: number;
-  isSearch?: boolean;
+  color: string;
 }
 const Containor = styled.div<PathStyleProps>`
   display: flex;
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
-  position: ${(props) => (props.isSearch ? "absolute" : null)};
-  > g > path {
+  .path {
     pointer-events: auto; //svg 전용
     list-style: none;
     cursor: pointer;
@@ -28,19 +27,30 @@ const Containor = styled.div<PathStyleProps>`
     height: 100%;
   }
 `;
-
+const IconOutline = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 34.75px;
+  height: 34.75px;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: rgba(29, 155, 240, 0.1);
+  }
+`;
 const Icon: React.FC<IconProps> = (props) => {
-  const { path, width, height, color, isSearch } = props;
-
-  return (
-    <Containor width={width} height={height} isSearch={isSearch}>
+  const { path, width, height, color, isHover } = props;
+  const hoverIcon = (
+    <Containor width={width} height={height} color={color}>
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <g>
-          <path d={path} color={color}></path>
+          <path className="path" d={path}></path>
         </g>
       </svg>
     </Containor>
   );
+  return <>{isHover ? <IconOutline>{hoverIcon}</IconOutline> : hoverIcon}</>;
 };
 
 export default Icon;

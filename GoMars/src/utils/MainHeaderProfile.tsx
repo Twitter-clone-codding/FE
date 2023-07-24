@@ -1,15 +1,32 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Icon from "./Icon";
 import { threedot } from "@/assets/svg";
+import Button from "@/utils/Button";
+interface MainHeaderProfileProps {
+  size?: "large" | "medium" | "small";
+  type: "follow" | "profile";
+}
+const sizeStyles = {
+  large: css``,
+  medium: css``,
+  small: css``,
+};
 
 const ProfileContainor = styled.div`
   display: flex;
   margin: 12px 0;
-  width: 259px;
+  /* width: 259px; */
+  justify-content: space-between;
+  width: 100%;
   height: 64.06px;
   border-radius: 9999px;
   padding: 12px;
   align-items: center;
+
+  .main-info {
+    display: flex;
+    flex-direction: row;
+  }
   .avatar {
     width: 40px;
     height: 40px;
@@ -21,28 +38,40 @@ const ProfileContainor = styled.div`
     width: 159.5px;
   }
 
-  .info-icon {
+  .side-item {
     width: 35.5px;
   }
 `;
 
-const MainHeaderProfile = (props) => {
-  const {} = props;
+const MainHeaderProfile: React.FC<MainHeaderProfileProps> = (props) => {
+  const { type, size } = props;
+  const sideClickItem =
+    type === "profile" ? (
+      <Icon
+        color="rgb(15, 20, 25)"
+        height={18.75}
+        width={18.75}
+        path={threedot}
+      />
+    ) : (
+      <Button
+        backgroundColor="black"
+        color="white"
+        size="follow"
+        title={<span>Follow</span>}
+      />
+    );
+
   return (
     <ProfileContainor>
-      <div className="avatar"></div>
-      <div className="info">
-        <div className="info-name">강신범</div>
-        <div className="info-tag-name">@kaning</div>
+      <div className="main-info">
+        <div className="avatar"></div>
+        <div className="info">
+          <div className="info-name">강신범</div>
+          <div className="info-tag-name">@kaning</div>
+        </div>
       </div>
-      <div className="info-icon">
-        <Icon
-          color="rgb(15, 20, 25)"
-          height={18.75}
-          width={18.75}
-          path={threedot}
-        />
-      </div>
+      <div className="side-item">{sideClickItem}</div>
     </ProfileContainor>
   );
 };
