@@ -43,12 +43,12 @@ const IconOutline = styled.div`
   }
 `;
 const Icon: React.FC<IconProps> = (props) => {
-  const { path, width, height, color, isSearch, isgoogle = false } = props;
+  const { path, width, height, color, isgoogle = false } = props;
 
   return (
-    <Containor width={width} height={height} isSearch={isSearch} isgoogle={isgoogle}>
+    <Containor width={width} height={height} color={color} isgoogle={isgoogle}>
       {!isgoogle ? (
-        <svg viewBox="0 0 24 24" aria-hidden="true" color={color}>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
           <g>
             <path d={path} color={color}></path>
           </g>
@@ -76,10 +76,9 @@ const Icon: React.FC<IconProps> = (props) => {
           </g>
         </svg>
       )}
-
     </Containor>
   );
-  return <>{isHover ? <IconOutline>{hoverIcon}</IconOutline> : hoverIcon}</>;
+  // return <>{isHover ? <IconOutline>{hoverIcon}</IconOutline> : hoverIcon}</>;
 };
 
 export default Icon;

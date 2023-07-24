@@ -1,6 +1,6 @@
-import { CarouselItem } from "@/utils";
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
+import CarouselItem from "./CarouselItem";
 
 interface CarouselProps {}
 

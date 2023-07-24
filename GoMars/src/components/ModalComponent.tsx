@@ -9,7 +9,6 @@ const MainComponent = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const signup = location.pathname === "/signup";
   return (
     <SignInFormContainer>
       {/* 헤더 */}

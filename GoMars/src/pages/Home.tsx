@@ -1,5 +1,5 @@
 import { getMainTweet, getTweets } from "@/api/get";
-import MainCenterListItem from "@/components/layout/MainCenterListItem";
+import MainCenterListItem from "@/components/layout/maincenter/MainCenterListItem";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";

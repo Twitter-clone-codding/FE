@@ -1,8 +1,9 @@
 import { calendar } from "@/assets/svg";
-import Carousel from "@/utils/Carousel";
-import { Button, HomeHeaderBottom, Icon } from "@/utils";
-import MainHeaderProfile from "@/utils/MainHeaderProfile";
+import Carousel from "@/components/common/Carousel";
+import { Button, Icon } from "@/utils";
 import styled from "styled-components";
+import HomeHeaderBottom from "./HomeHeaderBottom";
+import MainHeaderProfile from "../mainheader/MainHeaderProfile";
 
 const DispalyRow = styled.div`
   display: flex;
@@ -133,12 +134,7 @@ const ProfileCenterList = () => {
           </div>
           <div className="main-profile-create">
             <div className="main-profile-create-icon">
-              <Icon
-                color="rgb(83, 100, 113)"
-                path={calendar}
-                height={18.75}
-                width={18.75}
-              />
+              <Icon color="rgb(83, 100, 113)" path={calendar} height={18.75} width={18.75} />
             </div>
             <div>Joined July 2023</div>
           </div>

@@ -2,8 +2,8 @@ import useWindowHeight from "@/hooks/useWindowHeight";
 import styled from "styled-components";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
-import MainHeaderProfile from "@/utils/MainHeaderProfile";
-import MainHeaderList from "@/components/layout/MainHeaderList";
+import MainHeaderList from "@/components/layout/mainheader/MainHeaderList";
+import MainHeaderProfile from "@/components/layout/mainheader/MainHeaderProfile";
 interface AuthLoyOutContainerProps {
   widowHeight: number;
 }

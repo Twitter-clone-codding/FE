@@ -10,7 +10,7 @@ import { ModalLoginForm, QuestionRegisterContainer } from "@/styles/sign/signsty
 import { Button, Icon } from "@/utils";
 import DynamicInput from "@/utils/dynamicInput";
 import Spinner from "@/utils/spinner";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Modalloginform = () => {
