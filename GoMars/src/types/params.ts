@@ -47,7 +47,7 @@ interface RegisterParams {
   password: string;
   name: string;
   birthday: string;
-  successKey: string;
+  successKey?: string;
 }
 interface EmailSendParams {
   email: string;

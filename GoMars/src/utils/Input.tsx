@@ -103,6 +103,7 @@ const Input: React.FC<InputProps> = (props) => {
         </InputContainor>
         <div className="search-input"></div>
       </>
+
     ) : (
       <InputContainor size={size} type={type}>
         <label className="label">이름</label>

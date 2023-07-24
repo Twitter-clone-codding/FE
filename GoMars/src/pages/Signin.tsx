@@ -1,10 +1,10 @@
-import Signinform from "@/components/main/MainComponent";
+import MainComponent from "@/components/ModalComponent";
 import { Modal } from "@/utils";
 
 const Signin = () => {
   return (
     <>
-      <Modal element={<Signinform />} height="650" width="600" />
+      <Modal element={<MainComponent />} height="650" width="600" />
     </>
   );
 };

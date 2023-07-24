@@ -3,7 +3,13 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 export interface UserState {
   id: string | null;
   nickname: string | null;
-  token: string | null;
+  token: string | null; // 우리 서버
+  picture?: string | null;
+  tokens?: {
+    kakao?: string | null; // 카카오
+    google?: string | null; //구글
+    naver?: string | null; // 네이버
+  };
 }
 
 const initialState: UserState = {
