@@ -1,6 +1,6 @@
 import { centerFooterArray, refresh, threedot } from "@/assets/svg";
 import { Wrapper } from "@/styles/maincenter/maincenter";
-import Icon from "@/utils/Icon";
+import { Icon } from "@/utils";
 
 const MainCenterListItem: React.FC<Tweet> = (props) => {
   const { content, createdAt, hashtag, hearts, imgList, views } = props;
