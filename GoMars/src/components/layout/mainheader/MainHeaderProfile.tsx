@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components";
-import Icon from "./Icon";
+
 import { threedot } from "@/assets/svg";
 import Button from "@/utils/Button";
+import { Icon } from "@/utils";
 interface MainHeaderProfileProps {
   size?: "large" | "medium" | "small";
   type: "follow" | "profile";

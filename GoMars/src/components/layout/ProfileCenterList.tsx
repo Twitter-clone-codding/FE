@@ -1,8 +1,9 @@
 import { calendar } from "@/assets/svg";
-import Carousel from "@/utils/Carousel";
-import { Button, HomeHeaderBottom, Icon } from "@/utils";
-import MainHeaderProfile from "@/utils/MainHeaderProfile";
+import Carousel from "@/components/common/Carousel";
+import { Button, Icon } from "@/utils";
 import styled from "styled-components";
+import MainHeaderProfile from "./mainheader/MainHeaderProfile";
+import HomeHeaderBottom from "./HomeHeaderBottom";
 
 const DispalyRow = styled.div`
   display: flex;
