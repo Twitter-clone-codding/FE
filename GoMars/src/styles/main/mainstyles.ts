@@ -232,6 +232,7 @@ const ButtonDivStyle = styled.div`
   margin-bottom: 12px;
   max-width: 380px;
 `;
+
 const ButtonDivStyleApple = styled(ButtonDivStyle)`
   margin-bottom: 0;
 `;
@@ -240,12 +241,41 @@ const ButtonTitleStyle = styled.span`
   line-height: 20px;
   font-size: 15px;
   font-family: inherit;
+  .icon {
+    direction: ltr;
+    font-weight: 400;
+    color: #3c4043;
+    cursor: pointer;
+    font-family: "Google Sans", arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.25px;
+    text-align: center;
+    white-space: nowrap;
+    display: block;
+  }
 `;
 const ButtonTitleStyleApple = styled(ButtonTitleStyle)`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
+  .google-span {
+    margin-left: 4px;
+    direction: ltr;
+
+    color: #3c4043;
+    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: 0.25px;
+    text-align: center;
+    white-space: nowrap;
+    font-family: "Google Sans", arial, sans-serif;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    flex-grow: 0;
+  }
 `;
 const GubunSunStyleDiv = styled(StyledDivStyle)`
   max-width: 380px;
@@ -279,6 +309,31 @@ const GubunSunStyleDiv = styled(StyledDivStyle)`
     color: rgb(15, 20, 25);
   }
 `;
+
+const GubunSunModalStyleDiv = styled(GubunSunStyleDiv)`
+  line-height: 20px;
+  font-weight: 400;
+  font-size: 17px;
+  height: 20px;
+  margin: 0;
+  color: rgb(15, 20, 25);
+  .gubun-padding {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    margin: 0px -4px;
+    flex-direction: row;
+  }
+  .gubunsun-div {
+    .sun {
+      background-color: rgb(207, 217, 222);
+      height: 1px;
+      margin-bottom: 8px;
+      margin-top: 8px;
+    }
+  }
+`;
+
 const InformationContainer = styled.div`
   white-space: pre-wrap;
   flex: 1;
@@ -318,10 +373,20 @@ const SiginInButtonContainer = styled(StyledDivStyle)`
     }
   }
 `;
+
 const SignUpButtonDivStyle = styled(ButtonDivStyle)`
   margin-bottom: 8px;
 `;
+
+const ButtonDivModalStyle = styled(ButtonDivStyle)`
+  width: 300px;
+  margin: 12px auto;
+  max-width: 380px;
+`;
 export {
+  StyledDivStyle,
+  GubunSunModalStyleDiv,
+  ButtonDivModalStyle,
   SiginInButtonContainer,
   SignUpButtonDivStyle,
   InformationContainer,

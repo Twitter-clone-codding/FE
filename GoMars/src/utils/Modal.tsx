@@ -15,7 +15,7 @@ const ModalContainer = styled.div<{ width: string; height: string }>`
 
   max-height: 90vh;
   height: auto;
-  background-color: #eee;
+  background-color: #fff;
   border-radius: 16px;
   z-index: 10000;
   color: black;

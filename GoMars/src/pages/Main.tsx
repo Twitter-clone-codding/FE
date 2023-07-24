@@ -1,6 +1,7 @@
 import { logo } from "@/assets/img";
 import SignComponent from "@/components/SignComponent";
 import { Footer } from "@/components/main/Footer";
+import MainLoginForm from "@/components/main/Loginform";
 import useWindowHeight from "@/hooks/useWindowHeight";
 import { MainLeftContainer, MainRightContainer } from "@/styles/main/mainstyles";
 import { ThemeProps } from "@/styles/theme";
@@ -17,7 +18,10 @@ const MainContainer = styled.div<MainContainerProps>`
   height: 100%;
   flex-direction: column;
   min-height: ${(props) => props.windowHeight}px;
-
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
   .main-wrraper {
     position: relative;
     width: 100%;
@@ -63,7 +67,7 @@ const Main = () => {
               <span className="title-subtitle-font">오늘 트위터에 가입하세요.</span>
             </div>
             {/* 로그인, 회원가입 컨테이너 */}
-            <SignComponent ismain />
+            <MainLoginForm />
           </div>
         </MainRightContainer>
       </div>
