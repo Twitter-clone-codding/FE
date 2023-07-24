@@ -117,7 +117,7 @@ const Authlayout = () => {
           <div className="sidebar">
             <div className="sidebar-linkprofle-container">
               <MainHeaderList />
-              <MainHeaderProfile />
+              <MainHeaderProfile type="profile" />
             </div>
           </div>
         </div>

@@ -13,11 +13,11 @@ const Home = () => {
   useEffect(() => {
     const fetch = async () => {
       const respoense = await getTweets({ limit: 10, page: 0 });
-      // setfirst(respoense);
+      setfirst(respoense);
       console.log(respoense);
       // first.result.tweet.content;
     };
-    fetch();
+    // fetch();
   }, []);
 
   return (

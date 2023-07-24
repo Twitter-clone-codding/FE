@@ -8,8 +8,7 @@ interface ButtonProps extends MyButtonProps {
 interface MyButtonProps {
   color: "white" | "blue" | "hoverBlue" | "hoverBlack" | "lightBlack" | "black";
   backgroundColor: "white" | "blue" | "lightBlack" | "black";
-  hoverColor: "hoverBlue" | "hoverBlack" | "hoverLightBlue" | "hoverLightBlack";
-
+  hoverColor?: "hoverBlue" | "hoverBlack" | "hoverLightBlue" | "hoverLightBlack";
   size:
     | "tweet1"
     | "tweet2"
@@ -20,7 +19,8 @@ interface MyButtonProps {
     | "login2"
     | "register"
     | "message"
-    | "main";
+    | "main"
+    | "editProfile";
   borderColor?: "blue" | "gray";
 }
 
@@ -86,6 +86,11 @@ const sizeStyles = {
     width: 300px;
     height: 40px;
   `,
+  editProfile: css`
+    width: 113.73px;
+    height: 36px;
+    font-weight: 700;
+  `,
 };
 
 const MyButton = styled.button<MyButtonProps>`
@@ -94,7 +99,7 @@ const MyButton = styled.button<MyButtonProps>`
   border-radius: 9999px;
   outline-style: none;
   transition-duration: 0.2s;
-  font-size: 17px;
+  font-size: inherit;
   border-color: ${(props) => colorStyles[props.borderColor]};
   background-color: ${(props) => colorStyles[props.backgroundColor]};
   color: ${(props) => colorStyles[props.color]};
@@ -105,7 +110,16 @@ const MyButton = styled.button<MyButtonProps>`
 `;
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const { onClick, title, type, color, size, backgroundColor, hoverColor, borderColor } = props;
+  const {
+    onClick,
+    title,
+    type,
+    color,
+    size,
+    backgroundColor,
+    hoverColor,
+    borderColor,
+  } = props;
   return (
     <MyButton
       type={type}

@@ -22,92 +22,95 @@ const sizeStyles = {
 
 const typeStyles = {
   search: css`
+    .icon-box {
+      display: flex;
+      height: 44px;
+      width: 44px;
+      justify-content: center;
+      align-items: center;
+    }
+    border-radius: 9999px;
+    background-color: rgb(239, 243, 244);
     > input {
-      border-radius: 9999px;
-      background-color: rgb(239, 243, 244);
       border: 1px solid rgba(0, 0, 0, 0);
+      background-color: transparent;
+      border-radius: 9999px;
+      padding: 12px;
     }
   `,
   insult: css`
-    > input {
-      border-radius: 4px;
-      border: 1px solid rgb(207, 217, 222);
-    }
     position: relative;
-    > label {
-      position: absolute;
-      top: 18px;
-      transition: all 0.2s ease;
-    }
-    > input:focus + label {
-      font-size: 12px;
-      color: rgb(29, 155, 240);
-      top: 8px;
-    }
   `,
 };
 
 const InputContainor = styled.div<StyledInputProps>`
-  ${(props) => sizeStyles[props.size]};
+  display: flex;
+  font-size: inherit;
   > input {
     width: 100%;
     height: 100%;
-    outline-color: rgb(29, 155, 240);
+    outline: none;
+    color: blue;
   }
+  label {
+    position: absolute;
+    font-size: 12px;
+    transition: all 0.2s ease;
+    top: 30%;
+    left: 3%;
+  }
+
+  .input:focus {
+    .label {
+      color: blue;
+    }
+    color: red;
+  }
+
+  > input:focus {
+    label {
+      font-size: 18px;
+      color: rgb(29, 155, 240);
+      margin: 8px 8px;
+    }
+  }
+  ${(props) => sizeStyles[props.size]};
   ${(props) => typeStyles[props.type]};
 `;
 export interface InputProps extends StyledInputProps {
   onChange?: ChangeEventHandler<HTMLInputElement>;
   labelValue?: string;
   placeholder?: string;
-  id?: string;
-  icon?: string;
   className?: string;
   insultAlert?: string;
 }
 
-const Input2: React.FC<InputProps> = (props) => {
-  const { size, type, insultAlert } = props;
+const Input: React.FC<InputProps> = (props) => {
+  const { size, type, placeholder } = props;
   const addContent =
     type === "search" ? (
-      <InputContainor size={size} type={type}>
-        <Icon
-          path={explore}
-          width={26.25}
-          height={26.25}
-          color="rgb(83, 100, 113)"
-          isSearch={true}
-        />
+      <>
+        <InputContainor size={size} type={type}>
+          <div className="icon-box">
+            <Icon
+              path={explore}
+              width={15.59}
+              height={15.59}
+              color="rgb(83, 100, 113)"
+            />
+          </div>
+          <input placeholder={placeholder} />
+        </InputContainor>
+        <div className="search-input"></div>
+      </>
 
-        <input />
-      </InputContainor>
     ) : (
       <InputContainor size={size} type={type}>
-        <label>입력해주세요</label>
-        <input />
+        <label className="label">이름</label>
+        <input className="input" />
       </InputContainor>
     );
   return <>{addContent}</>;
 };
 
-export default Input2;
-
-{
-  /* <>
-  <div className="input-wapper">
-    {labelValue === "이름" && <p className="conut">0 / 50</p>}
-    <input type="text" onChange={(e) => onChange(e)} />
-    
-  </div>
-  {labelValue === "이름" ? (
-    
-  ) : (
-    <p className="comment">올바른 휴대폰 번호를 입력해주세요.</p>
-  )}
-</> */
-}
-
-{
-  /* "
-        /> */
-}
+export default Input;

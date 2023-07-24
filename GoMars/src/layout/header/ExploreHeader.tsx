@@ -1,4 +1,4 @@
 const ExploreHeader = () => {
-  return <div>ExploreHeader</div>;
+  return <div></div>;
 };
 export default ExploreHeader;
