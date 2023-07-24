@@ -8,7 +8,7 @@ interface PathStyleProps {
   width: number;
   isgoogle?: boolean;
   height: number;
-  color: string;
+  color?: string;
 }
 const Containor = styled.div<PathStyleProps>`
   display: flex;
@@ -43,10 +43,10 @@ const IconOutline = styled.div`
   }
 `;
 const Icon: React.FC<IconProps> = (props) => {
-  const { path, width, height, color, isSearch, isgoogle = false } = props;
+  const { path, width, height, color, isgoogle = false } = props;
 
   return (
-    <Containor width={width} height={height} isSearch={isSearch} isgoogle={isgoogle}>
+    <Containor width={width} height={height} isgoogle={isgoogle}>
       {!isgoogle ? (
         <svg viewBox="0 0 24 24" aria-hidden="true" color={color}>
           <g>
@@ -54,7 +54,12 @@ const Icon: React.FC<IconProps> = (props) => {
           </g>
         </svg>
       ) : (
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="icon">
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 48 48"
+          className="icon"
+        >
           <g>
             <path
               fill="#EA4335"
@@ -76,10 +81,9 @@ const Icon: React.FC<IconProps> = (props) => {
           </g>
         </svg>
       )}
-
     </Containor>
   );
-  return <>{isHover ? <IconOutline>{hoverIcon}</IconOutline> : hoverIcon}</>;
+  // return <>{isHover ? <IconOutline>{hoverIcon}</IconOutline> : hoverIcon}</>;
 };
 
 export default Icon;
