@@ -43,7 +43,7 @@ const GlobalStyle = createGlobalStyle<ThemeProps>`
     cursor: pointer;
   }
 
- 
+
   `;
 
 export default GlobalStyle;
