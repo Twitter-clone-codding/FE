@@ -102,4 +102,4 @@ const ProfileContainor = styled.div`
     transition: all 0.3s ease;
   }
 `;
-export { ProfileContainor, LinkContainer, MainHeaderListContainer, Container };
+export { ProfileContainor, LinkContainer, MainHeaderListContainer };
