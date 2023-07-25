@@ -1,3 +1,4 @@
+import { register } from "@/api/post";
 import useInput from "@/hooks/useInput";
 import { useAppSelector } from "@/hooks/useRedux";
 import {
@@ -6,11 +7,39 @@ import {
   NextStepThirdButtonDiv,
   SignFourthContainer,
 } from "@/styles/sign/signupStyles";
-import { Button, DynamicInput } from "@/utils";
+import { Button, DynamicInput, Spinner } from "@/utils";
+import { useState } from "react";
 
 const SignFourth = () => {
   const { formData } = useAppSelector((state) => state.form);
+  const { selectData } = useAppSelector((state) => state.form);
   const [value, onchange] = useInput({ code: "" });
+  const [registerLoading, setRegisterLoading] = useState<boolean>(false);
+  const registerHandler = async () => {
+    setRegisterLoading(true);
+    console.log({
+      birthday: `${selectData.year}-${selectData.month}-${selectData.day}`,
+      email: formData.email,
+      password: formData.email,
+      name: formData.nickname,
+    });
+    await register({
+      birthday: `${selectData.year}-${selectData.month}-${selectData.day}`,
+      email: formData.email + "asd",
+      password: formData.email + "asd",
+      name: formData.nickname,
+    })
+      .then((res) => alert(res.msg))
+      .catch((err) => console.log(err))
+      .finally(() => setRegisterLoading(false));
+  };
+
+  const SpinnerContent = registerLoading ? (
+    <Spinner borderSize={3} color="#5585E8" size={18} spinColor="gray" />
+  ) : (
+    <span>가입</span>
+  );
+
   return (
     <SignFourthContainer>
       <div className="title">
@@ -39,12 +68,8 @@ const SignFourth = () => {
           color="white"
           hoverColor="hoverBlack"
           size="register"
-          // onClick={nextStep}
-          title={
-            <ButtonTitleStyleNextButton>
-              <span>가입</span>
-            </ButtonTitleStyleNextButton>
-          }
+          onClick={registerHandler}
+          title={<ButtonTitleStyleNextButton>{SpinnerContent}</ButtonTitleStyleNextButton>}
         />
       </NextStepFourthButtonDiv>
     </SignFourthContainer>

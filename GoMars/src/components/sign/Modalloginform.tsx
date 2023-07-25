@@ -1,6 +1,8 @@
 import { login } from "@/api/post";
 import { apple } from "@/assets/svg";
 import useInput from "@/hooks/useInput";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { userSet } from "@/store/slice/userSlice";
 import {
   ButtonDivModalStyle,
   ButtonTitleStyleApple,
@@ -9,21 +11,30 @@ import {
 import { ModalLoginForm, QuestionRegisterContainer } from "@/styles/sign/signstyles";
 import { Button, Icon, Spinner } from "@/utils";
 import DynamicInput from "@/utils/dynamicInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Modalloginform = () => {
   const [loginValue, onChangeLoginValue] = useInput({ loginValue: "" });
   const navigate = useNavigate();
   const [loginLoading, setLoginLoading] = useState<boolean>(false);
-
+  const dispatch = useAppDispatch();
   const authLoginHandler = async () => {
     setLoginLoading(true);
-    await login({ email: loginValue["loginValue"], password: "111" })
-      .then((res) => console.log(res))
+    await login({
+      email: "trgf456a@aaa.co.krasd",
+      password: "trgf456a@aaa.co.krasd",
+    })
+      .then((res) => {
+        console.log(res);
+        dispatch(userSet({ id: "trgf456a@aaa.co.krasd", nickname: "최은석", token: "ㅁㄴㅇ" }));
+      })
       .catch((err) => console.log(err))
       .finally(() => setLoginLoading(false));
   };
+  useEffect(() => {
+    console.log(loginValue);
+  }, [loginValue]);
 
   return (
     <ModalLoginForm>

@@ -43,7 +43,7 @@ const TrendItemContainer = styled.div`
     }
   }
 `;
-const TrendItem = (props) => {
+const TrendItem = () => {
   return (
     <TrendItemContainer>
       <div className="wrapper">
