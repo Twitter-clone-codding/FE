@@ -1,10 +1,10 @@
 import { threedot } from "@/assets/svg";
 import Button from "@/utils/Button";
-import { Icon, Modal } from "@/utils";
-// import { ProfileContainor } from "@/styles/header/MainheaderStyle";
-import styled, { css } from "styled-components";
 
-import { MutableRefObject, useRef, useState } from "react";
+import { Icon } from "@/utils";
+import { ProfileContainor } from "@/styles/header/MainheaderStyle";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { userLogOut } from "@/store/slice/userSlice";
 interface MainHeaderProfileProps {
   size?: "large" | "medium" | "small";
   type: "follow" | "profile";
@@ -106,68 +106,29 @@ const ProfileModalItemWrapper = styled.div`
 `;
 const MainHeaderProfile: React.FC<MainHeaderProfileProps> = (props) => {
   const { type, size } = props;
-  const modalRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
-  const [modalCheck, setModalCheck] = useState(false);
-  const onClickModalHandler = () => {
-    setModalCheck((prev: boolean) => !prev);
-  };
 
+  const dispatch = useAppDispatch();
   const sideClickItem =
     type === "profile" ? (
-      <>
-        <ProfileContainor type={type} onClick={onClickModalHandler}>
-          <div className="profile-wrapper">
-            <div className="main-info">
-              <div className="avatar1"></div>
-              <div className="info">
-                <div className="info-name">강신범</div>
-                <div className="info-tag-name">@kaning</div>
-              </div>
-            </div>
-            <div className="icon-box">
-              <Icon
-                color="rgb(15, 20, 25)"
-                height={18.75}
-                width={18.75}
-                path={threedot}
-              />
-            </div>
-          </div>
-        </ProfileContainor>
-        {modalCheck && (
-          <ProfileModalContainor>
-            <ProfileModalItemWrapper>
-              <div className="profile-modal-item">Add an existing account</div>
-              <div className="profile-modal-item">Log out @gangsinbeo72832</div>
-            </ProfileModalItemWrapper>
-          </ProfileModalContainor>
-        )}
-      </>
+      <Icon color="rgb(15, 20, 25)" height={18.75} width={18.75} path={threedot} />
     ) : (
-      <>
-        <ProfileContainor type={type}>
-          <div className="profile-wrapper">
-            <div className="main-info">
-              <div className="avatar2" />
-              <div className="info">
-                <div className="info-name">강신범</div>
-                <div className="info-tag-name">@kaning</div>
-              </div>
-            </div>
-            <div className="side-item">
-              <Button
-                backgroundColor="black"
-                color="white"
-                size="follow"
-                title={<span>Follow</span>}
-              />
-            </div>
-          </div>
-        </ProfileContainor>
-      </>
+      <Button backgroundColor="black" color="white" size="follow" title={<span>Follow</span>} />
     );
 
-  return <>{sideClickItem}</>;
+  return (
+    <ProfileContainor>
+      <div className="profile-wrapper">
+        <div className="main-info">
+          <div className="avatar" onClick={() => dispatch(userLogOut())}></div>
+          <div className="info">
+            <div className="info-name">강신범</div>
+            <div className="info-tag-name">@kaning</div>
+          </div>
+        </div>
+        <div className={type === "profile" ? "icon-box" : "side-item"}>{sideClickItem}</div>
+      </div>
+    </ProfileContainor>
+  );
 };
 
 export default MainHeaderProfile;

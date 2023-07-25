@@ -1,147 +1,42 @@
-import { register } from "@/api/post";
-import { down } from "@/assets/svg";
-import { FormState } from "@/hooks/useInput";
-import { ButtonTitleStyle, ButtonTitleStyleApple } from "@/styles/main/mainstyles";
-import { Button, Icon } from "@/utils";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { updateFormData, updateSelectData } from "@/store/slice/formSlice";
+import {
+  SignfirstContainer,
+  InputContainer,
+  BirthContainer,
+  SelectContainer,
+  NextStepButtonDiv,
+  ButtonTitleStyleNextButton,
+} from "@/styles/sign/signupStyles";
+
+import { Button } from "@/utils";
 import Select from "@/utils/Select";
 import DynamicInput from "@/utils/dynamicInput";
-import React, { ChangeEvent } from "react";
-import styled from "styled-components";
+import React from "react";
 
-const SignfirstContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  padding-left: 80px;
-  max-width: 600px;
-  padding-right: 80px;
-  flex-grow: 1;
-  .title {
-    display: flex;
-    position: relative;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    h1 {
-      direction: ltr;
-      unicode-bidi: isolate;
-      background-color: rgba(0, 0, 0, 0);
-      font-weight: 700;
-      font-size: 31px;
-      line-height: 36px;
-      color: rgb(15, 20, 25);
-      span {
-        color: inherit;
-        font: inherit;
-        white-space: inherit;
-        min-width: 0px;
-        word-wrap: break-word;
-        font-family: inherit;
-      }
-    }
-  }
-`;
-
-const BirthContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  margin-top: 20px;
-  .birth-title {
-    line-height: 20px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: rgb(15, 20, 25);
-    span {
-      color: inherit;
-      font: inherit;
-      white-space: inherit;
-      min-width: 0px;
-      word-wrap: break-word;
-      font-family: inherit;
-    }
-  }
-  .information {
-    display: inline;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    line-height: 16px;
-    font-size: 14px;
-    margin-bottom: 4px;
-    color: rgb(83, 100, 113);
-    span {
-      display: inline;
-      color: inherit;
-      font: inherit;
-      white-space: inherit;
-      min-width: 0px;
-      word-wrap: break-word;
-      font-family: inherit;
-      letter-spacing: -0.2px;
-    }
-  }
-`;
-const SelectContainer = styled.div`
-  display: flex;
-  gap: 12px;
-  flex-basis: auto;
-  position: relative;
-  z-index: 0;
-  margin: 16px 0;
-  flex-direction: row;
-`;
-const NextStepButtonDiv = styled.div`
-  display: flex;
-  margin-top: 83px;
-`;
-const ButtonTitleStyleNextButton = styled(ButtonTitleStyle)`
-  font-size: 17px;
-`;
-const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  .change-input {
-    cursor: pointer;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    line-height: 20px;
-    color: rgb(29, 155, 240);
-    text-align: right;
-    z-index: 100;
-    &:hover {
-      text-decoration-line: underline;
-      text-decoration-thickness: 1px;
-    }
-    span {
-      cursor: pointer;
-      text-align: right;
-      color: inherit;
-      font: inherit;
-      white-space: inherit;
-      word-wrap: break-word;
-      font-family: inherit;
-    }
-  }
-`;
 interface SignFirstProps {
-  value: FormState;
-  onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   nextStep: () => void;
-  select: FormState;
-  handleSelectChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 }
 
 const Signfirst: React.FC<SignFirstProps> = (props) => {
-  const { value, onChange, nextStep, select, handleSelectChange } = props;
-  const currentYear = new Date().getFullYear();
-  const registerHandler = async () => {
-    await register({
-      email: "ty_ty123@naver.com",
-      password: "1234",
-      name: "지방뚱댕이",
-      birthday: "2002-06-11",
-    });
+  const { nextStep } = props;
+
+  const formData = useAppSelector((state) => state.form.formData);
+  const selectData = useAppSelector((state) => state.form.selectData);
+  const dispatch = useAppDispatch();
+  const a = "";
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { className, value } = event.target;
+    dispatch(updateSelectData({ ...selectData, [className]: value }));
   };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { className, value } = event.target;
+    dispatch(updateFormData({ ...formData, [className]: value }));
+  };
+  console.log(formData, selectData, a);
+  const currentYear = new Date().getFullYear();
+
   return (
     <SignfirstContainer>
       <div className="title">
@@ -151,14 +46,14 @@ const Signfirst: React.FC<SignFirstProps> = (props) => {
       </div>
       <InputContainer>
         <DynamicInput
-          value={value["nickname"]}
-          handleInputChange={onChange}
+          value={formData["nickname"]}
+          handleInputChange={handleInputChange}
           placeholder="이름"
           className={"nickname"}
         />
         <DynamicInput
-          value={value["email"]}
-          handleInputChange={onChange}
+          value={formData["email"]}
+          handleInputChange={handleInputChange}
           placeholder="이메일"
           className={"email"}
         />
@@ -166,14 +61,7 @@ const Signfirst: React.FC<SignFirstProps> = (props) => {
           <span>대신 휴대폰 사용하기</span>
         </div>
       </InputContainer>
-      {/* <Button
-          hoverColor="hoverBlack"
-          size="login2"
-          color="white"
-          backgroundColor="black"
-          onClick={registerHandler}
-          title={<ButtonTitleStyleApple>회원가입하기</ButtonTitleStyleApple>}
-        /> */}
+
       <BirthContainer>
         <div className="birth-title">생년월일</div>
         <div className="information">
@@ -184,7 +72,7 @@ const Signfirst: React.FC<SignFirstProps> = (props) => {
         </div>
         <SelectContainer>
           <Select
-            selectValue={select["month"]}
+            selectValue={selectData.month}
             onChange={handleSelectChange}
             label="월"
             count={12}
@@ -194,7 +82,7 @@ const Signfirst: React.FC<SignFirstProps> = (props) => {
           />
           <Select
             onChange={handleSelectChange}
-            selectValue={select["day"]}
+            selectValue={selectData.day}
             className={"day"}
             label="일"
             count={31}
@@ -202,7 +90,7 @@ const Signfirst: React.FC<SignFirstProps> = (props) => {
             flexGrow={1}
           />
           <Select
-            selectValue={select["year"]}
+            selectValue={selectData.year}
             className={"year"}
             onChange={handleSelectChange}
             label="년"
@@ -219,9 +107,7 @@ const Signfirst: React.FC<SignFirstProps> = (props) => {
           hoverColor="hoverBlack"
           size="register"
           // onClick={nextStep}
-          onClick={() => {
-            console.log(select, value);
-          }}
+          onClick={nextStep}
           title={
             <ButtonTitleStyleNextButton>
               <span>다음</span>
@@ -232,4 +118,4 @@ const Signfirst: React.FC<SignFirstProps> = (props) => {
     </SignfirstContainer>
   );
 };
-export default React.memo(Signfirst);
+export default Signfirst;

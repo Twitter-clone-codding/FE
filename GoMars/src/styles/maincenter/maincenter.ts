@@ -1,16 +1,20 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
   padding: 0 16px;
   padding-top: 12px;
-  width: 100%;
   padding-bottom: 12px;
   display: flex;
   flex-direction: row;
   &:hover {
     background-color: rgba(0, 0, 0, 0.03);
   }
-
+  .main {
+    flex-grow: 1;
+  }
   .avartar-wrapper {
     width: 40px;
     margin-right: 12px;
@@ -35,7 +39,6 @@ const Wrapper = styled.div`
     margin-left: 4px;
   }
   .main-content-item {
-    min-height: 300px;
     background-color: lightgray;
     border-radius: 16px;
     margin-top: 12px;
@@ -54,18 +57,53 @@ const Wrapper = styled.div`
   .footer-item {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     > span {
       padding: 0 12px;
     }
   }
 `;
-const MainImgBox = styled.div<Image>`
-  min-height: 300px;
+interface ImageProps {
+  image: string;
+}
+
+const MainImgBox = styled.div<ImageProps>`
+  position: relative;
   border-radius: 16px;
   margin-top: 12px;
-  background-image: url(${(props) => props.imgUrl});
-  background-position: center;
-  background-size: cover;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  .image-box {
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    background-image: url(${(props) => props.image});
+  }
+  img {
+    opacity: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    height: auto;
+  }
 `;
 
 const Containor = styled.div`
@@ -233,22 +271,50 @@ const HomeHeaderBottomLeft = styled(HomeHeaderDiv)`
     }
   }
 `;
-
-const MainCenterListItemAvartar = styled.div`
+interface userProfileImage {
+  userProfileImage: string;
+}
+const MainCenterListItemAvartar = styled.div<userProfileImage>`
+  position: relative;
   width: 40px;
+  height: 40px;
   margin-right: 12px;
-
+  overflow: hidden;
+  border-radius: 9999px;
   .avartar {
-    width: 40px;
-    height: 40px;
-    background-color: red;
-    border-radius: 9999px;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    background-image: url(${(props) => props.userProfileImage});
+  }
+  img {
+    opacity: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    height: auto;
   }
 `;
 const MainCenterListItemContent = styled.div`
   cursor: pointer;
   width: 100%;
   .main-header {
+    margin: 0 0 2px 0;
     display: flex;
     justify-content: space-between;
   }
@@ -262,7 +328,6 @@ const MainCenterListItemContent = styled.div`
     margin-left: 4px;
   }
   .main-content-item {
-    min-height: 300px;
     background-color: lightgray;
     border-radius: 16px;
     margin-top: 12px;

@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slice/userSlice";
+import formReducer from "./slice/formSlice";
 import {
   FLUSH,
   PAUSE,
@@ -17,14 +18,18 @@ const rootReducer = combineReducers({
   user: userReducer,
 });
 
-const persistConfig = {
-  key: "root",
+const formPersistConfig = {
+  key: "form",
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedFormReducer = persistReducer(formPersistConfig, formReducer);
+
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    user: rootReducer,
+    form: persistedFormReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

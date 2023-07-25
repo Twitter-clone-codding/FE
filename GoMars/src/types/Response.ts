@@ -11,14 +11,14 @@ interface Image {
 }
 
 interface Tweet {
-  user?: User;
-  TweetId?: number;
+  user: User;
+  id: number;
   content: string;
   hashtag: string;
   hearts: number;
   heartCheck: boolean;
   views: number;
-  imgList: Image[];
+  imgList: string[];
   createdAt: string;
 }
 
@@ -100,7 +100,10 @@ interface TweetDeleteResponse {
 
 interface TweetGetResponse {
   msg: string;
-  result: Tweet[];
+  result: {
+    totalPage: number;
+    tweetsList: Tweet[];
+  };
 }
 
 interface MainTweetGetResponse {
