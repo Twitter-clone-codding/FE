@@ -1,4 +1,4 @@
-import { Input, TrendItem } from "@/utils";
+import TrendItem from "@/components/layout/maintrend/TrendItem";
 import styled from "styled-components";
 
 const ExploreContainer = styled.div`

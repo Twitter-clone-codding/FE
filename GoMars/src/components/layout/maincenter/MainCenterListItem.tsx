@@ -3,12 +3,31 @@ import { Wrapper } from "@/styles/maincenter/maincenter";
 import { Icon } from "@/utils";
 
 const MainCenterListItem: React.FC<Tweet> = (props) => {
-  const { content, createdAt, hashtag, hearts, imgList, views } = props;
+  const { content, createdAt, hashtag, hearts, imgList, views, TweetId, heartCheck, user } = props;
   const detailNavigateHandler = () => {
     console.log("imgList", imgList);
   };
-  console.log("imgList", imgList);
-  const {} = props;
+
+  console.log(
+    "content: ",
+    content,
+    "createdAt: ",
+    createdAt,
+    "hashtag: ",
+    hashtag,
+    "hearts: ",
+    hearts,
+    "imgList: ",
+    imgList,
+    "views: ",
+    views,
+    "TweetId: ",
+    TweetId,
+    "heartCheck: ",
+    heartCheck,
+    "user: ",
+    user
+  );
   return (
     <Wrapper>
       <div className="avartar-wrapper">
@@ -17,20 +36,15 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
       <div className="main">
         <div className="main-header">
           <div className="main-header-span">
-            <span>orign</span>
-            <span className="hashtag">@helloworld</span>
+            <span>{user?.nickname}</span>
+            <span className="hashtag">@{user?.nickname}</span>
             <span>·jul 22</span>
           </div>
           <Icon color={"rgb(83, 100, 113)"} height={18.75} width={18.75} path={threedot} />
         </div>
         <div className="main-contnet">
           <div className="main-contnet-comment">
-            <span>
-              여기에 가지가지 얘기다 전부 다 담길 예정인데여기에 가지가지 얘기다 전부 다 담길
-              예정인데여기에 가지가지 얘기다 전부 다 담길 예정인데여기에 가지가지 얘기다 전부 다
-              담길 예정인데여기에 가지가지 얘기다 전부 다 담길 예정인데여기에 가지가지 얘기다 전부
-              다 담길 예정인데
-            </span>
+            <span>{content}</span>
           </div>
           <div className="main-content-item" />
         </div>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { SignFourth, SignSecond, SignThird, Signfirst } from "./signupstep";
 import { SignInFormContainer, SignUpFormContainer, SigninBox } from "@/styles/sign/signstyles";
 import { Icon } from "@/utils";
-import { close, twitter } from "@/assets/svg";
+import { close, prev, twitter } from "@/assets/svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import ModalSignupform from "./sign/ModalSignupform";
 import useInput from "@/hooks/useInput";
@@ -18,29 +18,15 @@ const RegisterComponent = ({ state = 1 }: initailStateProp) => {
   const navigate = useNavigate();
   const nextStep = () => setSignStep(SignStep + 1);
   const prevStep = () => setSignStep(SignStep - 1);
-
+  const [toggle, setToggle] = useState<boolean>(false);
   const StepSignUp = () => {
-    const [select, handleSelectChange] = useInput({
-      month: "",
-      day: "",
-      year: "",
-    });
-    const [formvalue, formOnchange] = useInput({ nickname: "", email: "" });
     switch (SignStep) {
       case 1:
-        return (
-          <Signfirst
-            onChange={formOnchange}
-            value={formvalue}
-            nextStep={nextStep}
-            select={select}
-            handleSelectChange={handleSelectChange}
-          />
-        );
+        return <Signfirst nextStep={nextStep} />;
       case 2:
-        return <SignSecond />;
+        return <SignSecond toggle={toggle} setToggle={setToggle} nextStep={nextStep} />;
       case 3:
-        return <SignThird />;
+        return <SignThird nextStep={nextStep} />;
       case 4:
         return <SignFourth />;
       default:
@@ -77,9 +63,15 @@ const RegisterComponent = ({ state = 1 }: initailStateProp) => {
       {/* 헤더 */}
       <div className="signin-Header-container">
         <div className="header-navigater">
-          <div className="close-container" onClick={nextStep}>
-            <Icon color="#000" height={20} path={close} width={20} />
-          </div>
+          {SignStep < 2 ? (
+            <div className="close-container" onClick={() => navigate(-1)}>
+              <Icon color="#000" height={20} path={close} width={20} />
+            </div>
+          ) : (
+            <div className="close-container" onClick={prevStep}>
+              <Icon color="#000" height={20} path={prev} width={20} />
+            </div>
+          )}
         </div>
         <div className="header-next">
           <h2>

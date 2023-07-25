@@ -1,16 +1,20 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
   padding: 0 16px;
   padding-top: 12px;
-  width: 100%;
   padding-bottom: 12px;
   display: flex;
   flex-direction: row;
   &:hover {
     background-color: rgba(0, 0, 0, 0.03);
   }
-
+  .main {
+    flex-grow: 1;
+  }
   .avartar-wrapper {
     width: 40px;
     margin-right: 12px;

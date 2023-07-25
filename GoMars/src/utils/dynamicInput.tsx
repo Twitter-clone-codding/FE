@@ -1,4 +1,3 @@
-import { FormState } from "@/hooks/useInput";
 import { StyledDivStyle } from "@/styles/main/mainstyles";
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
@@ -106,14 +105,15 @@ const InputBox = styled.div`
 
 interface InputProps {
   value: string;
-  handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
-  className: string;
+  className?: string;
 }
 
 const DynamicInput: React.FC<InputProps> = (props) => {
-  const { value, placeholder, handleInputChange, className } = props;
+  const { value, placeholder, handleInputChange = () => {}, className } = props;
   const [active, setActive] = useState<boolean>(false);
+
   return (
     <InputDivContainer>
       <InputLabel className={active ? "active" : ""}>

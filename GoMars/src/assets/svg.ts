@@ -93,9 +93,8 @@ export const centerFooterArray = [reply, retweet, like, view, share];
 
 export default svgArray;
 
-<<<<<<< HEAD
 export const down = "M3.543 8.96l1.414-1.42L12 14.59l7.043-7.05 1.414 1.42L12 17.41 3.543 8.96z";
-=======
-export const down =
-  "M3.543 8.96l1.414-1.42L12 14.59l7.043-7.05 1.414 1.42L12 17.41 3.543 8.96z";
->>>>>>> 830dd94173ac061e0f9a6d3149f711dcde303a7c
+export const prev =
+  "M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z";
+export const check =
+  "M9.64 18.952l-5.55-4.861 1.317-1.504 3.951 3.459 8.459-10.948L19.4 6.32 9.64 18.952z";
