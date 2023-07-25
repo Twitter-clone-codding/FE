@@ -101,6 +101,7 @@ interface TweetDeleteResponse {
 interface TweetGetResponse {
   msg: string;
   result: Tweet[];
+  totalPage: number;
 }
 
 interface MainTweetGetResponse {

@@ -166,6 +166,28 @@ const SignUpFormContainer = styled(SignInFormContainer)`
     min-height: 32px;
     min-width: 56px;
     .close-container {
+      cursor: pointer;
+      display: flex;
+      border-radius: 9999px;
+      border: 1px solid;
+      user-select: none;
+      min-height: 36px;
+      min-width: 36px;
+      transition: all 0.2s;
+      outline-style: none;
+      background-color: rgba(0, 0, 0, 0);
+      border-color: rgba(0, 0, 0, 0);
+      margin-left: calc(-8px);
+      align-items: center;
+      text-align: center;
+      line-height: 20px;
+      font-weight: 700;
+      flex-direction: row;
+      justify-content: center;
+      color: rgb(15, 20, 25);
+      &:hover {
+        background-color: rgba(15, 20, 25, 0.1);
+      }
     }
   }
   .header-next {

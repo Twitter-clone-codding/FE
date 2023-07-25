@@ -8,10 +8,31 @@ import {
 import { Icon } from "@/utils";
 
 const MainCenterListItem: React.FC<Tweet> = (props) => {
-  const { content, createdAt, hashtag, hearts, imgList, views } = props;
+  const { content, createdAt, hashtag, hearts, imgList, views, TweetId, heartCheck, user } = props;
   const detailNavigateHandler = () => {
     console.log("imgList", imgList);
   };
+
+  console.log(
+    "content: ",
+    content,
+    "createdAt: ",
+    createdAt,
+    "hashtag: ",
+    hashtag,
+    "hearts: ",
+    hearts,
+    "imgList: ",
+    imgList,
+    "views: ",
+    views,
+    "TweetId: ",
+    TweetId,
+    "heartCheck: ",
+    heartCheck,
+    "user: ",
+    user
+  );
   console.log("imgList", imgList[0]);
   const {} = props;
   return (
@@ -24,14 +45,11 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
           <div className="main-header-span">
             <span>orign</span>
             <span className="hashtag">{hashtag}</span>
+            <span>{user?.nickname}</span>
+            <span className="hashtag">@{user?.nickname}</span>
             <span>·jul 22</span>
           </div>
-          <Icon
-            color={"rgb(83, 100, 113)"}
-            height={18.75}
-            width={18.75}
-            path={threedot}
-          />
+          <Icon color={"rgb(83, 100, 113)"} height={18.75} width={18.75} path={threedot} />
         </div>
         <div className="main-contnet">
           <div className="main-contnet-comment">
@@ -47,12 +65,7 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
               return (
                 <div className="footer-item">
                   <div className="footer-item-icon">
-                    <Icon
-                      path={path}
-                      color={"rgb(83, 100, 113)"}
-                      height={18.75}
-                      width={18.75}
-                    />
+                    <Icon path={path} color={"rgb(83, 100, 113)"} height={18.75} width={18.75} />
                   </div>
 
                   {isPath && <span>000</span>}

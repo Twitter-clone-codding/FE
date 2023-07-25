@@ -11,19 +11,9 @@ const MainHeaderProfile: React.FC<MainHeaderProfileProps> = (props) => {
   const { type, size } = props;
   const sideClickItem =
     type === "profile" ? (
-      <Icon
-        color="rgb(15, 20, 25)"
-        height={18.75}
-        width={18.75}
-        path={threedot}
-      />
+      <Icon color="rgb(15, 20, 25)" height={18.75} width={18.75} path={threedot} />
     ) : (
-      <Button
-        backgroundColor="black"
-        color="white"
-        size="follow"
-        title={<span>Follow</span>}
-      />
+      <Button backgroundColor="black" color="white" size="follow" title={<span>Follow</span>} />
     );
 
   return (
