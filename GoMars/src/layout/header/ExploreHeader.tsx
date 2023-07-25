@@ -1,3 +1,4 @@
+import useInput from "@/hooks/useInput";
 import { Input } from "@/utils";
 import styled from "styled-components";
 
@@ -9,9 +10,17 @@ const ExploreHeaderContainor = styled.div`
   padding: 0 16px;
 `;
 const ExploreHeader = () => {
+  const [searchValue, onChangesearchDataHandler] = useInput({
+    searchValue: "",
+  });
   return (
     <ExploreHeaderContainor>
-      <Input placeholder="Search Twitter" size="large" />
+      <Input
+        placeholder="Search Twitter"
+        size="large"
+        value={searchValue["seasearchValuerchData"]}
+        handleInputChange={onChangesearchDataHandler}
+      />
     </ExploreHeaderContainor>
   );
 };

@@ -1,4 +1,4 @@
-import { ChangeEventHandler, HTMLInputTypeAttribute, useRef } from "react";
+import { ChangeEvent } from "react";
 import styled, { css } from "styled-components";
 import Icon from "./Icon";
 import { explore } from "@/assets/svg";
@@ -19,6 +19,7 @@ const sizeStyles = {
 };
 
 const InputContainor = styled.div<InputStyleProps>`
+  position: relative;
   .input-wrapper {
     display: flex;
     flex-direction: row;
@@ -32,7 +33,7 @@ const InputContainor = styled.div<InputStyleProps>`
     border: 1px solid rgb(29, 155, 240);
     background-color: white;
   }
-  .customInput {
+  .searchValue {
     width: 100%;
     background-color: transparent;
     border: none;
@@ -53,14 +54,37 @@ const InputContainor = styled.div<InputStyleProps>`
     height: 42px;
   }
 `;
+
+const AutoSearchContainor = styled.div`
+  width: 502px;
+  min-height: 100px;
+  max-height: calc(80vh - 53px);
+  position: absolute;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  font-size: 15px;
+  overflow-y: auto;
+  box-shadow:
+    rgba(101, 119, 134, 0.2) 0px 0px 15px,
+    rgba(101, 119, 134, 0.15) 0px 0px;
+
+  .auto-search-placeholder {
+    display: flex;
+    flex-grow: 1;
+    color: #536471;
+    padding: 20px 12px 12px 12px;
+    justify-content: center;
+  }
+`;
 export interface InputProps extends InputStyleProps {
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+  handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   className?: string;
+  value: string;
 }
 
 const Input: React.FC<InputProps> = (props) => {
-  const { placeholder, size } = props;
+  const { placeholder, size, value, handleInputChange } = props;
   return (
     <>
       {" "}
@@ -74,7 +98,19 @@ const Input: React.FC<InputProps> = (props) => {
               color="rgb(83, 100, 113)"
             />
           </div>
-          <input className="customInput" placeholder={placeholder} />
+          <input
+            className="searchValue"
+            placeholder={placeholder}
+            value={value}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <AutoSearchContainor>
+            <div className="auto-search-placeholder">
+              Try searching for people, topics, or keywords
+            </div>
+          </AutoSearchContainor>
         </div>
       </InputContainor>
     </>

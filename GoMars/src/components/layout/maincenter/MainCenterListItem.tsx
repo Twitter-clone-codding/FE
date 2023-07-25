@@ -38,6 +38,7 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
           <div className="main-contnet-comment">
             <span>{content}</span>
           </div>
+
           {imgList[0] && (
             <MainImgBox image={imgList[0]}>
               <div className="image-box"></div>
