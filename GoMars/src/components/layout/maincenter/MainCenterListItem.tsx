@@ -1,5 +1,10 @@
-import { centerFooterArray, refresh, threedot } from "@/assets/svg";
-import { Wrapper } from "@/styles/maincenter/maincenter";
+import { centerFooterArray, refresh, share, threedot } from "@/assets/svg";
+import {
+  MainCenterListItemAvartar,
+  MainCenterListItemContainor,
+  MainCenterListItemContent,
+  MainImgBox,
+} from "@/styles/maincenter/maincenter";
 import { Icon } from "@/utils";
 
 const MainCenterListItem: React.FC<Tweet> = (props) => {
@@ -7,45 +12,57 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
   const detailNavigateHandler = () => {
     console.log("imgList", imgList);
   };
-  console.log("imgList", imgList);
+  console.log("imgList", imgList[0]);
   const {} = props;
   return (
-    <Wrapper>
-      <div className="avartar-wrapper">
+    <MainCenterListItemContainor>
+      <MainCenterListItemAvartar>
         <div className="avartar" />
-      </div>
-      <div className="main">
+      </MainCenterListItemAvartar>
+      <MainCenterListItemContent>
         <div className="main-header">
           <div className="main-header-span">
             <span>orign</span>
-            <span className="hashtag">@helloworld</span>
+            <span className="hashtag">{hashtag}</span>
             <span>·jul 22</span>
           </div>
-          <Icon color={"rgb(83, 100, 113)"} height={18.75} width={18.75} path={threedot} />
+          <Icon
+            color={"rgb(83, 100, 113)"}
+            height={18.75}
+            width={18.75}
+            path={threedot}
+          />
         </div>
         <div className="main-contnet">
           <div className="main-contnet-comment">
-            <span>
-              여기에 가지가지 얘기다 전부 다 담길 예정인데여기에 가지가지 얘기다 전부 다 담길
-              예정인데여기에 가지가지 얘기다 전부 다 담길 예정인데여기에 가지가지 얘기다 전부 다
-              담길 예정인데여기에 가지가지 얘기다 전부 다 담길 예정인데여기에 가지가지 얘기다 전부
-              다 담길 예정인데
-            </span>
+            <span>{content}</span>
           </div>
-          <div className="main-content-item" />
+          <MainImgBox imgUrl={imgList[0]} />
+          {/* 여기예요 은석님 */}
         </div>
         <div className="footer">
           <div className="footer-box">
-            {centerFooterArray.map((path) => (
-              <div className="footer-item">
-                <Icon path={path} color={"rgb(83, 100, 113)"} height={18.75} width={18.75} />
-                <span>000</span>
-              </div>
-            ))}
+            {centerFooterArray.map((path) => {
+              const isPath = path === share ? false : true;
+              return (
+                <div className="footer-item">
+                  <div className="footer-item-icon">
+                    <Icon
+                      path={path}
+                      color={"rgb(83, 100, 113)"}
+                      height={18.75}
+                      width={18.75}
+                    />
+                  </div>
+
+                  {isPath && <span>000</span>}
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
-    </Wrapper>
+      </MainCenterListItemContent>
+    </MainCenterListItemContainor>
   );
 };
 

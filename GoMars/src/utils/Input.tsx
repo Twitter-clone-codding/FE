@@ -3,114 +3,82 @@ import styled, { css } from "styled-components";
 import Icon from "./Icon";
 import { explore } from "@/assets/svg";
 
-interface StyledInputProps {
-  size: "large" | "medium" | "small";
-  type: "search" | "insult";
+interface InputStyleProps {
+  size: "large" | "medium";
 }
 
 const sizeStyles = {
   large: css`
-    width: 446px;
+    width: 502px;
     height: 44px;
   `,
   medium: css`
-    width: 404px;
-    height: 56px;
+    width: 350px;
+    height: 42px;
   `,
-  small: css``,
 };
 
-const typeStyles = {
-  search: css`
-    .icon-box {
-      display: flex;
-      height: 44px;
-      width: 44px;
-      justify-content: center;
-      align-items: center;
-    }
-    border-radius: 9999px;
+const InputContainor = styled.div<InputStyleProps>`
+  .input-wrapper {
+    display: flex;
+    flex-direction: row;
     background-color: rgb(239, 243, 244);
-    > input {
-      border: 1px solid rgba(0, 0, 0, 0);
-      background-color: transparent;
-      border-radius: 9999px;
-      padding: 12px;
-    }
-  `,
-  insult: css`
-    position: relative;
-  `,
-};
 
-const InputContainor = styled.div<StyledInputProps>`
-  display: flex;
-  font-size: inherit;
-  > input {
+    ${(props) => sizeStyles[props.size]}
+    border-radius: 9999px;
+    border: 1px solid rgba(0, 0, 0, 0);
+  }
+  .input-wrapper:focus-within {
+    border: 1px solid rgb(29, 155, 240);
+    background-color: white;
+  }
+  .customInput {
     width: 100%;
-    height: 100%;
+    background-color: transparent;
+    border: none;
     outline: none;
-    color: blue;
-  }
-  label {
-    position: absolute;
-    font-size: 12px;
-    transition: all 0.2s ease;
-    top: 30%;
-    left: 3%;
-  }
-
-  .input:focus {
-    .label {
-      color: blue;
-    }
-    color: red;
-  }
-
-  > input:focus {
-    label {
-      font-size: 18px;
-      color: rgb(29, 155, 240);
-      margin: 8px 8px;
+    padding: 12px;
+    font-size: 16px;
+    ::placeholder {
+      font-size: 15px;
+      color: rgb(83, 100, 113);
     }
   }
-  ${(props) => sizeStyles[props.size]};
-  ${(props) => typeStyles[props.type]};
+  .icon-box {
+    padding-left: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 42px;
+  }
 `;
-export interface InputProps extends StyledInputProps {
+export interface InputProps extends InputStyleProps {
   onChange?: ChangeEventHandler<HTMLInputElement>;
-  labelValue?: string;
-  placeholder?: string;
+  placeholder: string;
   className?: string;
-  insultAlert?: string;
 }
 
 const Input: React.FC<InputProps> = (props) => {
-  const { size, type, placeholder } = props;
-  const addContent =
-    type === "search" ? (
-      <>
-        <InputContainor size={size} type={type}>
+  const { placeholder, size } = props;
+  return (
+    <>
+      {" "}
+      <InputContainor size={size}>
+        <div className="input-wrapper">
           <div className="icon-box">
             <Icon
               path={explore}
-              width={15.59}
-              height={15.59}
+              width={20}
+              height={20}
               color="rgb(83, 100, 113)"
             />
           </div>
-          <input placeholder={placeholder} />
-        </InputContainor>
-        <div className="search-input"></div>
-      </>
-
-    ) : (
-      <InputContainor size={size} type={type}>
-        <label className="label">이름</label>
-        <input className="input" />
+          <input className="customInput" placeholder={placeholder} />
+        </div>
       </InputContainor>
-    );
-  return <>{addContent}</>;
+    </>
+  );
 };
 
 export default Input;

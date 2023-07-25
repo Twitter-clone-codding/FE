@@ -1,48 +1,11 @@
-import styled, { css } from "styled-components";
-
 import { threedot } from "@/assets/svg";
 import Button from "@/utils/Button";
 import { Icon } from "@/utils";
+import { ProfileContainor } from "@/styles/header/MainheaderStyle";
 interface MainHeaderProfileProps {
   size?: "large" | "medium" | "small";
   type: "follow" | "profile";
 }
-const sizeStyles = {
-  large: css``,
-  medium: css``,
-  small: css``,
-};
-
-const ProfileContainor = styled.div`
-  display: flex;
-  margin: 12px 0;
-  /* width: 259px; */
-  justify-content: space-between;
-  width: 100%;
-  height: 64.06px;
-  border-radius: 9999px;
-  padding: 12px;
-  align-items: center;
-
-  .main-info {
-    display: flex;
-    flex-direction: row;
-  }
-  .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 9999px;
-    background-color: red;
-  }
-  .info {
-    margin: 0 12px;
-    width: 159.5px;
-  }
-
-  .side-item {
-    width: 35.5px;
-  }
-`;
 
 const MainHeaderProfile: React.FC<MainHeaderProfileProps> = (props) => {
   const { type, size } = props;
@@ -65,14 +28,18 @@ const MainHeaderProfile: React.FC<MainHeaderProfileProps> = (props) => {
 
   return (
     <ProfileContainor>
-      <div className="main-info">
-        <div className="avatar"></div>
-        <div className="info">
-          <div className="info-name">강신범</div>
-          <div className="info-tag-name">@kaning</div>
+      <div className="profile-wrapper">
+        <div className="main-info">
+          <div className="avatar"></div>
+          <div className="info">
+            <div className="info-name">강신범</div>
+            <div className="info-tag-name">@kaning</div>
+          </div>
+        </div>
+        <div className={type === "profile" ? "icon-box" : "side-item"}>
+          {sideClickItem}
         </div>
       </div>
-      <div className="side-item">{sideClickItem}</div>
     </ProfileContainor>
   );
 };

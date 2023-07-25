@@ -9,10 +9,9 @@ const Home = () => {
     const fetch = async () => {
       const respoense = await getTweets({ limit: 10, page: 0 });
       setfirst(respoense);
-      console.log(respoense);
       // first.result.tweet.content;
     };
-    // fetch();
+    fetch();
   }, []);
 
   return (
@@ -21,7 +20,7 @@ const Home = () => {
         .map((e) => {
           return { ...e, key: uuidv4() };
         })
-        .map((tweet) => <MainCenterListItem {...tweet} />)}
+        .map((tweet, idx) => <MainCenterListItem key={idx} {...tweet} />)}
     </div>
   );
 };

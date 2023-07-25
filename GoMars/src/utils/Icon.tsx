@@ -14,6 +14,7 @@ const Containor = styled.div<PathStyleProps>`
   display: flex;
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
+
   .path {
     pointer-events: auto; //svg 전용
     list-style: none;
@@ -38,9 +39,6 @@ const IconOutline = styled.div`
   height: 34.75px;
   border-radius: 9999px;
   transition: all 0.3s ease;
-  &:hover {
-    background-color: rgba(29, 155, 240, 0.1);
-  }
 `;
 const Icon: React.FC<IconProps> = (props) => {
   const { path, width, height, color, isgoogle = false } = props;
@@ -54,7 +52,12 @@ const Icon: React.FC<IconProps> = (props) => {
           </g>
         </svg>
       ) : (
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="icon">
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 48 48"
+          className="icon"
+        >
           <g>
             <path
               fill="#EA4335"
