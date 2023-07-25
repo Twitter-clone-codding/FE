@@ -38,7 +38,7 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
             <span>{content}</span>
           </div>
           <MainImgBox imgUrl={imgList[0]} />
-          {/* 여기예요 은석님 */}
+          {/* 여기예요 은석님 string으로 못준다고 하는데 살짝 헷갈려서 일단 적어놉니다.. ㄷㄷ*/}
         </div>
         <div className="footer">
           <div className="footer-box">

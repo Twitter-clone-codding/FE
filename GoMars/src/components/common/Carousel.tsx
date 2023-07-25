@@ -26,6 +26,8 @@ const Carousel: React.FC<CarouselProps> = (props) => {
   }, [position]);
   return (
     <>
+      <button onClick={prevPage}></button>
+      <button onClick={nextPage}></button>
       <CarouselContainor ref={slideRef}>
         <CarouselItem />
         <CarouselItem />
