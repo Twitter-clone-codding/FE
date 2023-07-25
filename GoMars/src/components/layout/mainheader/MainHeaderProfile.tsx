@@ -1,5 +1,3 @@
-import styled, { css } from "styled-components";
-
 import { threedot } from "@/assets/svg";
 import Button from "@/utils/Button";
 import { Icon } from "@/utils";
@@ -20,14 +18,18 @@ const MainHeaderProfile: React.FC<MainHeaderProfileProps> = (props) => {
 
   return (
     <ProfileContainor>
-      <div className="main-info">
-        <div className="avatar"></div>
-        <div className="info">
-          <div className="info-name">강신범</div>
-          <div className="info-tag-name">@kaning</div>
+      <div className="profile-wrapper">
+        <div className="main-info">
+          <div className="avatar"></div>
+          <div className="info">
+            <div className="info-name">강신범</div>
+            <div className="info-tag-name">@kaning</div>
+          </div>
+        </div>
+        <div className={type === "profile" ? "icon-box" : "side-item"}>
+          {sideClickItem}
         </div>
       </div>
-      <div className="side-item">{sideClickItem}</div>
     </ProfileContainor>
   );
 };

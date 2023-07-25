@@ -1,37 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const ProfileContainor = styled.div`
-  display: flex;
-  margin: 12px 0;
-  /* width: 259px; */
-  justify-content: space-between;
-  width: 100%;
-  height: 64.06px;
-  border-radius: 9999px;
-  padding: 12px;
-  align-items: center;
-
-  .main-info {
-    display: flex;
-    flex-direction: row;
-  }
-  .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 9999px;
-    background-color: red;
-  }
-  .info {
-    margin: 0 12px;
-    width: 159.5px;
-  }
-
-  .side-item {
-    width: 35.5px;
-  }
-`;
-
 const LinkContainer = styled(Link)`
   display: flex;
   width: 236.78px;
@@ -66,7 +35,7 @@ const LinkContainer = styled(Link)`
   }
 `;
 
-const Container = styled.div`
+const MainHeaderListContainer = styled.div`
   .bird-icon-wrapper {
     width: 50.22px;
     height: 50.22px;
@@ -82,6 +51,55 @@ const Container = styled.div`
       background-color: (15, 20, 25, 0.1);
     }
   }
+  .button-box {
+    margin: 4px 0;
+  }
 `;
 
-export { ProfileContainor, LinkContainer, Container };
+const ProfileContainor = styled.div`
+  margin: 12px 0;
+  /* width: 259px; */
+
+  width: 100%;
+  height: 64.06px;
+  border-radius: 9999px;
+  padding: 12px;
+  align-items: center;
+  .profile-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  .main-info {
+    display: flex;
+    flex-direction: row;
+  }
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    background-color: red;
+  }
+  .info {
+    margin: 0 12px;
+  }
+  .info-name {
+    font-weight: 600;
+  }
+  .info-tag-name {
+    color: rgb(83, 100, 113);
+  }
+  .side-item {
+    display: flex;
+    align-items: center;
+  }
+  .icon-box {
+    width: 34.75px;
+    height: 34.75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+  }
+`;
+export { ProfileContainor, LinkContainer, MainHeaderListContainer, Container };

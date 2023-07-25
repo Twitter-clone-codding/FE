@@ -1,12 +1,9 @@
 import TrendItem from "@/components/layout/maintrend/TrendItem";
+import ExploreHeader from "@/layout/header/ExploreHeader";
+import TrendItem from "@/components/layout/maintrend/TrendItem";
 import styled from "styled-components";
 
 const ExploreContainer = styled.div`
-  .header {
-    width: 598px;
-    height: 53px;
-    background-color: red;
-  }
   .main-title {
     height: 48px;
     padding: 12px 16px;
@@ -22,23 +19,24 @@ const ExploreContainer = styled.div`
 
 const Explore = () => {
   return (
-    <ExploreContainer>
-      <div className="header"></div>
-      <div className="main">
-        <div className="main-title">
-          <span>Trend for you</span>{" "}
+    <>
+      <ExploreContainer>
+        <div className="main">
+          <div className="main-title">
+            <span>Trends for you</span>{" "}
+          </div>
+          <div className="main-ternd-box">
+            <TrendItem />
+          </div>
+          <div className="show-more">
+            <span>Show more</span>
+          </div>
+          <div className="main-title">
+            <span>What's happening</span>{" "}
+          </div>
         </div>
-        <div className="main-ternd-box">
-          <TrendItem />
-        </div>
-        <div className="show-more">
-          <span>Show more</span>
-        </div>
-        <div className="main-title">
-          <span>What's happening</span>{" "}
-        </div>
-      </div>
-    </ExploreContainer>
+      </ExploreContainer>
+    </>
   );
 };
 export default Explore;

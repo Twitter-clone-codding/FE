@@ -30,6 +30,18 @@ const TrendItemContainer = styled.div`
     width: 100%;
     margin-top: 4px;
   }
+  .icon-box {
+    width: 34.75px;
+    height: 34.75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: rgba(29, 155, 240, 0.1);
+    }
+  }
 `;
 const TrendItem = (props) => {
   return (
@@ -40,7 +52,7 @@ const TrendItem = (props) => {
           <div className="main-info-name">계속 보는 누나</div>
           <div className="main-total-tweets">5,409 Tweets</div>
         </div>
-        <div>
+        <div className="icon-box">
           <Icon
             color="rgb(15, 20, 25)"
             height={18.75}
