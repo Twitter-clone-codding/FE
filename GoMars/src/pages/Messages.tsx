@@ -1,4 +1,6 @@
+import Chat from "@/components/message/websocket";
+
 const Messages = () => {
-  return <div>Messages</div>;
+  return <Chat />;
 };
 export default Messages;

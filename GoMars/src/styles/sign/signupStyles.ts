@@ -99,6 +99,8 @@ const NextStepFourthButtonDiv = styled.div`
   margin-top: 315px;
 `;
 const ButtonTitleStyleNextButton = styled(ButtonTitleStyle)`
+  display: flex;
+  justify-content: center;
   font-size: 17px;
 `;
 const InputContainer = styled.div`

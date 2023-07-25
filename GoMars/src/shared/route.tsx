@@ -12,7 +12,7 @@ const Nav = () => {
       {/* NotAuth */}
       <Route path={"/*"} element={<ErrorPage />} />
 
-      <Route element={<NotAuthRoutes user={true} />}>
+      <Route element={<NotAuthRoutes user={user} />}>
         <Route path="/" element={<Main />}>
           <Route path="/login" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
@@ -21,7 +21,7 @@ const Nav = () => {
       </Route>
 
       {/* YesAuth */}
-      <Route element={<ProtectedRoutes user={true} />}>
+      <Route element={<ProtectedRoutes user={user} />}>
         <Route element={<Authlayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/explore" element={<Explore />} />

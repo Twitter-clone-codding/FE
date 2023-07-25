@@ -4,15 +4,12 @@ interface ButtonProps extends MyButtonProps {
   onClick?: () => void;
   title: JSX.Element;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 interface MyButtonProps {
   color: "white" | "blue" | "hoverBlue" | "hoverBlack" | "lightBlack" | "black";
   backgroundColor: "white" | "blue" | "lightBlack" | "black";
-  hoverColor?:
-    | "hoverBlue"
-    | "hoverBlack"
-    | "hoverLightBlue"
-    | "hoverLightBlack";
+  hoverColor?: "hoverBlue" | "hoverBlack" | "hoverLightBlue" | "hoverLightBlack";
   size:
     | "tweet1"
     | "tweet2"
@@ -115,16 +112,8 @@ const MyButton = styled.button<MyButtonProps>`
 `;
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const {
-    onClick,
-    title,
-    type,
-    color,
-    size,
-    backgroundColor,
-    hoverColor,
-    borderColor,
-  } = props;
+  const { onClick, title, type, color, size, backgroundColor, hoverColor, borderColor, disabled } =
+    props;
   return (
     <MyButton
       type={type}
@@ -134,6 +123,7 @@ const Button: React.FC<ButtonProps> = (props) => {
       hoverColor={hoverColor}
       borderColor={borderColor}
       onClick={onClick}
+      disabled={disabled}
     >
       {title}
     </MyButton>
