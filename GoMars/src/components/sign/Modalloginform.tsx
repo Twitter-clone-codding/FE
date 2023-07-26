@@ -1,18 +1,18 @@
-import { login } from "@/api/post";
 import { apple } from "@/assets/svg";
-import useInput from "@/hooks/useInput";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { updateLoginData } from "@/store/slice/formSlice";
-import { userSet } from "@/store/slice/userSlice";
 import {
   ButtonDivModalStyle,
   ButtonTitleStyleApple,
   GubunSunModalStyleDiv,
 } from "@/styles/main/mainstyles";
-import { ModalLoginForm, QuestionRegisterContainer } from "@/styles/sign/signstyles";
+import {
+  ModalLoginForm,
+  QuestionRegisterContainer,
+} from "@/styles/sign/signstyles";
 import { Button, Icon, Spinner } from "@/utils";
 import DynamicInput from "@/utils/dynamicInput";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface nextStep {
@@ -54,10 +54,21 @@ const Modalloginform: FC<nextStep> = (props) => {
           title={
             <ButtonTitleStyleApple>
               {loginLoading ? (
-                <Spinner spinColor="#5585E8" borderSize={3} color="gray" size={20} />
+                <Spinner
+                  spinColor="#5585E8"
+                  borderSize={3}
+                  color="gray"
+                  size={20}
+                />
               ) : (
                 <>
-                  <Icon color="" isgoogle={true} width={18} height={18} path="" />
+                  <Icon
+                    color=""
+                    isgoogle={true}
+                    width={18}
+                    height={18}
+                    path=""
+                  />
                   <span className="google-span">Google 계정으로 로그인</span>
                 </>
               )}
@@ -116,7 +127,11 @@ const Modalloginform: FC<nextStep> = (props) => {
           color="lightBlack"
           borderColor="gray"
           backgroundColor="white"
-          title={<ButtonTitleStyleApple>비밀번호를 잊으셨나요?</ButtonTitleStyleApple>}
+          title={
+            <ButtonTitleStyleApple>
+              비밀번호를 잊으셨나요?
+            </ButtonTitleStyleApple>
+          }
         />
       </ButtonDivModalStyle>
       <QuestionRegisterContainer>
