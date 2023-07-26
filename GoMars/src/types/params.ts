@@ -46,9 +46,9 @@ interface OAuthLoginParams {
 interface RegisterParams {
   email: string;
   password: string;
-  name: string;
+  nickname: string;
   birthday: string;
-  successKey?: string;
+  successKey: string;
 }
 interface EmailSendParams {
   email: string;

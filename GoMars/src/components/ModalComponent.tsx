@@ -2,11 +2,31 @@ import { close, twitter } from "@/assets/svg";
 import { Icon } from "@/utils";
 import { useLocation, useNavigate } from "react-router-dom";
 import SignComponent from "./SignComponent";
-import { SignInFormContainer, SigninBox } from "@/styles/sign/signstyles";
+import { SignInFormContainer, SignInWrraper, SigninBox } from "@/styles/sign/signstyles";
+import { useState } from "react";
+import SignInFirst from "./signupstep/SignInFirst";
 
 const MainComponent = () => {
   const navigate = useNavigate();
-
+  const [SignStep, setSignStep] = useState(0);
+  const nextStep = () => setSignStep(SignStep + 1);
+  const prevStep = () => setSignStep(SignStep - 1);
+  const StepSignUp = () => {
+    switch (SignStep) {
+      case 1:
+        return (
+          <SignInWrraper>
+            <SignInFirst />
+          </SignInWrraper>
+        );
+      default:
+        return (
+          <SigninBox>
+            <SignComponent nextStep={nextStep} ismain={false} />
+          </SigninBox>
+        );
+    }
+  };
   return (
     <SignInFormContainer>
       {/* 헤더 */}
@@ -23,9 +43,7 @@ const MainComponent = () => {
         </div>
         <div className="header-navigate"></div>
       </div>
-      <SigninBox>
-        <SignComponent ismain={false} />
-      </SigninBox>
+      <StepSignUp />
     </SignInFormContainer>
   );
 };

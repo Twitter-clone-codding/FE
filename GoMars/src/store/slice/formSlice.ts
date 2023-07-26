@@ -9,11 +9,18 @@ interface SelectData {
 interface FormData {
   nickname: string;
   email: string;
+  password: string;
+  successKey: string;
+}
+interface LoginFormData {
+  email: string;
+  password: string;
 }
 
 interface FormState {
   selectData: SelectData;
   formData: FormData;
+  loginData: LoginFormData;
 }
 
 const initialState: FormState = {
@@ -25,6 +32,12 @@ const initialState: FormState = {
   formData: {
     nickname: "",
     email: "",
+    password: "",
+    successKey: "",
+  },
+  loginData: {
+    email: "",
+    password: "",
   },
 };
 
@@ -38,9 +51,12 @@ export const formSlice = createSlice({
     updateFormData: (state, action: PayloadAction<FormData>) => {
       state.formData = action.payload;
     },
+    updateLoginData: (state, action: PayloadAction<LoginFormData>) => {
+      state.loginData = action.payload;
+    },
   },
 });
 
-export const { updateSelectData, updateFormData } = formSlice.actions;
+export const { updateSelectData, updateFormData, updateLoginData } = formSlice.actions;
 
 export default formSlice.reducer;

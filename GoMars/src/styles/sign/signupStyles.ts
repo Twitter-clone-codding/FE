@@ -9,6 +9,7 @@ const SignfirstContainer = styled.div`
   max-width: 600px;
   padding-right: 80px;
   flex-grow: 1;
+  margin: 0;
   .title {
     display: flex;
     position: relative;
@@ -33,7 +34,7 @@ const SignfirstContainer = styled.div`
     }
   }
 `;
-
+const SignInContainer = styled(SignfirstContainer)``;
 const BirthContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -365,6 +366,7 @@ const SignFourthContainer = styled(SignThirdContainer)`
   }
 `;
 export {
+  SignInContainer,
   NextStepFourthButtonDiv,
   SignFourthContainer,
   NextStepThirdButtonDiv,

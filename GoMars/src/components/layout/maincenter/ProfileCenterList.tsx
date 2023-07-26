@@ -11,15 +11,15 @@ import axios from "axios";
 
 const ProfileCenterList = () => {
   const [profile, setProfile] = useState<Profile>();
-  useEffect(() => {
-    const fetch = async () => {
-      const response = await getProfile();
-      console.log(response);
-      setProfile(response.result);
-    };
-    ``;
-    fetch();
-  }, [profile]);
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const response = await getProfile();
+  //     console.log(response);
+  //     setProfile(response.result);
+  //   };
+  //   ``;
+  //   fetch();
+  // }, [profile]);
 
   return (
     <Containor>
@@ -45,12 +45,7 @@ const ProfileCenterList = () => {
           </div>
           <div className="main-profile-create">
             <div className="main-profile-create-icon">
-              <Icon
-                color="rgb(83, 100, 113)"
-                path={calendar}
-                height={18.75}
-                width={18.75}
-              />
+              <Icon color="rgb(83, 100, 113)" path={calendar} height={18.75} width={18.75} />
             </div>
             <div>Joined July 2023</div>
           </div>

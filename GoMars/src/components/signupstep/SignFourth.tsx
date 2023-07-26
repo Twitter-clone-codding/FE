@@ -1,6 +1,7 @@
-import { register } from "@/api/post";
+import { register, verifyEmail } from "@/api/post";
 import useInput from "@/hooks/useInput";
-import { useAppSelector } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { updateFormData } from "@/store/slice/formSlice";
 import {
   ButtonTitleStyleNextButton,
   NextStepFourthButtonDiv,
@@ -8,43 +9,41 @@ import {
   SignFourthContainer,
 } from "@/styles/sign/signupStyles";
 import { Button, DynamicInput, Spinner } from "@/utils";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { FC, useState } from "react";
+interface SignFirstProps {
+  nextStep: () => void;
+}
 
-const SignFourth = () => {
+const SignFourth: FC<SignFirstProps> = (props) => {
+  const { nextStep } = props;
   const { formData } = useAppSelector((state) => state.root.form);
-  const { selectData } = useAppSelector((state) => state.root.form);
-  const [value, onchange] = useInput({ code: "" });
-  const [registerLoading, setRegisterLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const registerHandler = async () => {
-    setRegisterLoading(true);
-    console.log({
-      birthday: `${selectData.year}-${selectData.month}-${selectData.day}`,
-      email: formData.email,
-      password: formData.email,
-      name: formData.nickname,
-    });
-    await register({
-      birthday: `${selectData.year}-${selectData.month}-${selectData.day}`,
-      email: formData.email,
-      password: formData.email,
-      name: formData.nickname,
-    })
+  const [Loading, setLoading] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+
+  const emailverifyHandelr = async () => {
+    setLoading(true);
+    await verifyEmail({ email: formData.email, successKey: formData.successKey })
       .then((res) => {
-        alert(res.msg);
-        navigate("/");
+        console.log(res.result);
+        nextStep();
       })
-      .catch((err) => console.log(err))
-      .finally(() => setRegisterLoading(false));
+      .catch((err) => {
+        alert(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const SpinnerContent = registerLoading ? (
+  const SpinnerContent = Loading ? (
     <Spinner borderSize={3} color="#5585E8" size={18} spinColor="gray" />
   ) : (
-    <span>가입</span>
+    <span>다음</span>
   );
-
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { className, value } = event.target;
+    dispatch(updateFormData({ ...formData, [className]: value }));
+  };
   return (
     <SignFourthContainer>
       <div className="title">
@@ -58,9 +57,9 @@ const SignFourth = () => {
       </div>
       <DynamicInput
         placeholder="인증 코드"
-        value={value["code"]}
-        handleInputChange={onchange}
-        className="code"
+        value={formData.successKey}
+        handleInputChange={handleInputChange}
+        className="successKey"
       />
       <div className="email-question">
         <div>
@@ -73,7 +72,7 @@ const SignFourth = () => {
           color="white"
           hoverColor="hoverBlack"
           size="register"
-          onClick={registerHandler}
+          onClick={emailverifyHandelr}
           title={<ButtonTitleStyleNextButton>{SpinnerContent}</ButtonTitleStyleNextButton>}
         />
       </NextStepFourthButtonDiv>

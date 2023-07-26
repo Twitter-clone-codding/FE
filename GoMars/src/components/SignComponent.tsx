@@ -6,12 +6,14 @@ import RegisterComponent from "./RegisterComponent";
 
 interface SignProps {
   ismain?: boolean;
+  nextStep: () => void;
 }
 
 const SignComponent: React.FC<SignProps> = (props) => {
+  const { nextStep = () => {} } = props;
   const location = useLocation();
   const maincontent = <MainLoginForm />;
-  const modalcontent = <Modalloginform />;
+  const modalcontent = <Modalloginform nextStep={nextStep} />;
   const modalsignup = <RegisterComponent />;
 
   switch (location.pathname) {
