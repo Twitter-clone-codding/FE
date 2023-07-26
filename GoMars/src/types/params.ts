@@ -21,7 +21,6 @@ interface TweetDeleteParams {
 }
 interface TweetGetParams {
   page: number;
-  limit: number;
 }
 
 interface VerifyEmailParams {

@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, Dispatch } from "react";
 
 export interface FormState {
   [key: string]: string;
@@ -6,10 +6,16 @@ export interface FormState {
 
 const useInput = (
   initialState: FormState
-): [FormState, (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void] => {
+): [
+  FormState,
+  (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void,
+  Dispatch<React.SetStateAction<FormState>>,
+] => {
   const [form, setForm] = useState<FormState>(initialState);
 
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const onChangeHandler = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { className, value } = event.target;
     const newForm = {
       ...form,
@@ -18,7 +24,7 @@ const useInput = (
     setForm(newForm);
   };
 
-  return [form, onChangeHandler];
+  return [form, onChangeHandler, setForm];
 };
 
 export default useInput;

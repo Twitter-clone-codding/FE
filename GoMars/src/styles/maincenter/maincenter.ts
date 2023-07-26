@@ -86,6 +86,7 @@ const MainImgBox = styled.div<ImageProps>`
     position: absolute;
     width: 100%;
     height: 100%;
+
     background-color: rgba(0, 0, 0, 0);
     background-position: center center;
     background-repeat: no-repeat;
@@ -100,6 +101,7 @@ const MainImgBox = styled.div<ImageProps>`
     left: 0;
     bottom: 0;
     width: 100%;
+    max-width: 520px;
     height: 100%;
     object-position: center;
     height: auto;
@@ -332,6 +334,43 @@ const MainCenterListItemContent = styled.div`
     border-radius: 16px;
     margin-top: 12px;
   }
+`;
+const MainCenterListItemContainor = styled.div`
+  padding: 0 16px;
+  padding-top: 12px;
+  width: 598px;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgb(239, 243, 244);
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+  .footer {
+    width: 100%;
+    padding-top: 12px;
+  }
+  .footer-box {
+    display: flex;
+    padding-bottom: 6px;
+    justify-content: space-between;
+  }
+`;
+interface iconBoxProps {
+  hoverBgColors: string;
+}
+
+const IconBox = styled.div<iconBoxProps>`
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  > span {
+    padding: 0 12px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .footer-item-icon {
     width: 34.75px;
     height: 34.75px;
@@ -340,37 +379,14 @@ const MainCenterListItemContent = styled.div`
     justify-content: center;
     border-radius: 9999px;
     transition: all 0.3s ease;
-  }
-`;
-const MainCenterListItemContainor = styled.div`
-  padding: 0 16px;
-  padding-top: 12px;
-  width: 598px;
-  padding-bottom: 12px;
-  display: flex;
-  flex-direction: row;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.03);
-  }
-  .footer {
-    width: 100%;
-    padding-top: 12px;
-    height: 32px;
-  }
-  .footer-box {
-    display: flex;
-
-    justify-content: space-between;
-  }
-  .footer-item {
-    display: flex;
-    flex-direction: row;
-    > span {
-      padding: 0 12px;
+    cursor: pointer;
+    &:hover {
+      background-color: ${(props) => props.hoverBgColors};
     }
   }
 `;
 export {
+  IconBox,
   Wrapper,
   Containor,
   HomeHeaderBottomLeft,

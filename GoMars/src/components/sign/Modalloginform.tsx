@@ -22,8 +22,8 @@ const Modalloginform = () => {
   const authLoginHandler = async () => {
     setLoginLoading(true);
     await login({
-      email: "trgf456a@aaa.co.krasd",
-      password: "trgf456a@aaa.co.krasd",
+      email: loginValue["loginValue"],
+      password: loginValue["loginValue"],
     })
       .then((res) => {
         console.log(res);

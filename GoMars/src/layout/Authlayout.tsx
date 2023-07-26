@@ -43,6 +43,7 @@ const SidebarContainer = styled.div`
         padding: 0 8px;
         width: 275px;
         height: 100%;
+        gap: 8px;
         justify-content: space-between;
         flex-direction: column;
         overflow-y: auto;
