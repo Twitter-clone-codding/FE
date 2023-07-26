@@ -12,9 +12,8 @@ const GlobalStyle = createGlobalStyle<ThemeProps>`
     overflow: auto scroll;
     overscroll-behavior-y: none;
     font-size: 15px;
-    ::-webkit-scrollbar {
-    display: none;
-}
+    
+
   }
   body {
     height :764px;

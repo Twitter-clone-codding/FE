@@ -21,8 +21,8 @@ interface SignFirstProps {
 const Signfirst: React.FC<SignFirstProps> = (props) => {
   const { nextStep } = props;
 
-  const formData = useAppSelector((state) => state.form.formData);
-  const selectData = useAppSelector((state) => state.form.selectData);
+  const formData = useAppSelector((state) => state.root.form.formData);
+  const selectData = useAppSelector((state) => state.root.form.selectData);
   const dispatch = useAppDispatch();
   const a = "";
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

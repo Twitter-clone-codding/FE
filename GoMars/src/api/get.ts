@@ -10,9 +10,19 @@ export const search = async (params: SearchParams): Promise<SearchResponse> => {
   return response.data;
 };
 
+export const postLike = async (tweetId: number): Promise<TweetPostResponse> => {
+  const response = await server.get(`/api/tweets/heart/${tweetId}`);
+  return response.data;
+};
+
 // GET /api/tweets/posts
 export const getTweets = async (params: TweetGetParams): Promise<TweetGetResponse> => {
-  const response = await server.get("/api/tweets/posts", { params });
+  const response = await server.get("/api/tweets/posts", {
+    params: {
+      page: params.page,
+      limit: 10,
+    },
+  });
   return response.data;
 };
 

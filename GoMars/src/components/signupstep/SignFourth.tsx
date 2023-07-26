@@ -9,12 +9,14 @@ import {
 } from "@/styles/sign/signupStyles";
 import { Button, DynamicInput, Spinner } from "@/utils";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignFourth = () => {
-  const { formData } = useAppSelector((state) => state.form);
-  const { selectData } = useAppSelector((state) => state.form);
+  const { formData } = useAppSelector((state) => state.root.form);
+  const { selectData } = useAppSelector((state) => state.root.form);
   const [value, onchange] = useInput({ code: "" });
   const [registerLoading, setRegisterLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
   const registerHandler = async () => {
     setRegisterLoading(true);
     console.log({
@@ -25,11 +27,14 @@ const SignFourth = () => {
     });
     await register({
       birthday: `${selectData.year}-${selectData.month}-${selectData.day}`,
-      email: formData.email + "asd",
-      password: formData.email + "asd",
+      email: formData.email,
+      password: formData.email,
       name: formData.nickname,
     })
-      .then((res) => alert(res.msg))
+      .then((res) => {
+        alert(res.msg);
+        navigate("/");
+      })
       .catch((err) => console.log(err))
       .finally(() => setRegisterLoading(false));
   };

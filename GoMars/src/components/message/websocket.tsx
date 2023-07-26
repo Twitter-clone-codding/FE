@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Client, Stomp } from "@stomp/stompjs";
+import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import StompJs from "stompjs";
 
@@ -26,11 +26,9 @@ const Chat: React.FC = () => {
         stomp.subscribe(`/sub`, (data: any) => {
           // 구독할때 룸네임 넣어서 sub 하고
           const newMessage = JSON.parse(data.body);
-
           // Imposters 값을 state에 저장
           if (newMessage.imposters) {
           }
-
           // 새로운 메시지가 imposter 정보를 담고 있다면 imposters state를 업데이트
           if (newMessage.imposter) {
           }
@@ -42,7 +40,6 @@ const Chat: React.FC = () => {
           {},
           JSON.stringify({
             type: "ENTER",
-
             message: "",
           })
         );
@@ -54,7 +51,6 @@ const Chat: React.FC = () => {
   };
   useEffect(() => {
     connect();
-
     // 컴포넌트에서 unmount 될때 서버로 "LEAVE" 메세지를 보냄
     return () => {
       if (stompClientRef.current) {

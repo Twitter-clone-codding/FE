@@ -14,8 +14,8 @@ interface SignFirstProps {
 
 const SignThird: React.FC<SignFirstProps> = (props) => {
   const { nextStep } = props;
-  const { formData } = useAppSelector((state) => state.form);
-  const { selectData } = useAppSelector((state) => state.form);
+  const { formData } = useAppSelector((state) => state.root.form);
+  const { selectData } = useAppSelector((state) => state.root.form);
   return (
     <SignThirdContainer>
       <div className="title">

@@ -8,7 +8,6 @@ import {
 } from "@/styles/sign/signupStyles";
 import { Button, Icon } from "@/utils";
 import { Dispatch } from "react";
-import styled from "styled-components";
 
 interface SignSecondProps extends SignSecondStyleProp {
   nextStep: () => void;

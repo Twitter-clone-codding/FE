@@ -38,10 +38,11 @@ export const verifyEmail = async (params: VerifyEmailParams): Promise<VerifyEmai
 };
 
 // POST /api/tweets/posts
-export const postTweet = async (
-  headers: FormdataHeader,
-  params: TweetPostParams
-): Promise<TweetPostResponse> => {
-  const response = await server.post("/api/tweets/posts", params, { headers });
+export const postTweet = async (params): Promise<TweetPostResponse> => {
+  const response = await server.post("/api/tweets/posts", params, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return response.data;
 };
