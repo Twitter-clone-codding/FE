@@ -30,9 +30,9 @@ interface TweetPost {
   mainTweetId: number;
   tweet: {
     content: string;
-    hashtag: string;
+    hashtag?: string;
   };
-  img: string;
+  img: FormData;
 }
 
 interface Profile {
@@ -90,7 +90,7 @@ interface SearchResponse {
 
 interface TweetPostResponse {
   msg: string;
-  result: string;
+  result: Tweet;
 }
 
 interface TweetDeleteResponse {

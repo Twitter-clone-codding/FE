@@ -15,7 +15,7 @@ import Authlayout from "@/layout/Authlayout";
 import { ErrorPage, NotAuthRoutes, SocialAuth } from ".";
 
 const Nav = () => {
-  const user = useAppSelector((state) => Boolean(state.user.user.token));
+  const user = useAppSelector((state) => Boolean(state.user.token));
   return (
     <Routes>
       {/* NotAuth */}
@@ -27,7 +27,6 @@ const Nav = () => {
         </Route>
         <Route path="/oauth/google" element={<SocialAuth />} />
       </Route>
-
       {/* YesAuth */}
       <Route element={<ProtectedRoutes user={user} />}>
         <Route element={<Authlayout />}>
@@ -36,10 +35,10 @@ const Nav = () => {
           <Route path="/messages" element={<Messages />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/:profileName" element={<Profile />} />
         </Route>
         <Route path="/*" element={<ErrorPage />} />
       </Route>
-
       {/* 404 handler */}
     </Routes>
   );

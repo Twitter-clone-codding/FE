@@ -7,25 +7,54 @@ import {
   MainImgBox,
 } from "@/styles/maincenter/maincenter";
 import { Icon } from "@/utils";
+import { forwardRef } from "react";
+import MainCenterListItemIcon from "./MainCenterListItemIcon";
 
-const MainCenterListItem: React.FC<Tweet> = (props) => {
-  const {
-    content,
-    createdAt,
-    hashtag,
-    hearts,
-    imgList,
-    views,
-    id,
-    heartCheck,
-    user,
-  } = props;
+
+const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
+  const { content, createdAt, hashtag, hearts, imgList, views, id, heartCheck, user } = props;
+
   const detailNavigateHandler = () => {
     console.log("imgList", imgList);
   };
-  const array = [0, 0, hearts, views, 0];
-  const {} = props;
-  return (
+  const convertToJSDate = (javaDate: string): Date => {
+    const date = new Date(javaDate);
+    date.setHours(date.getHours() + 9);
+    return date;
+  };
+
+  const getTimeAgo = (javaDate: string): string => {
+    const date = convertToJSDate(javaDate);
+    const now = new Date();
+
+    const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) {
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      return `${monthNames[date.getMonth()]} ${date.getDate()}`;
+    }
+    if (hours > 0) return `${hours} hours ago`;
+    if (minutes > 0) return `${minutes} minutes ago`;
+    return `${seconds} seconds ago`;
+  };
+
+  const ItemContents = (
     <MainCenterListItemContainor>
       <MainCenterListItemAvartar
         userProfileImage={user.profileImageUrl ? user.profileImageUrl : normal}
@@ -39,11 +68,11 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
       <MainCenterListItemContent>
         <div className="main-header">
           <div className="main-header-span">
-            <span>orign</span>
+            <span>{user?.nickname}</span>
             <span className="hashtag">{hashtag}</span>
             <span>{user?.nickname}</span>
             <span className="hashtag">@{user?.nickname}</span>
-            <span>·jul 22</span>
+            <span>·{getTimeAgo(createdAt)}</span>
           </div>
           <Icon
             color={"rgb(83, 100, 113)"}
@@ -65,28 +94,14 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
         </div>
         <div className="footer">
           <div className="footer-box">
-            {centerFooterArray.map((path, i) => {
-              const isPath = path === share ? false : true;
-              return (
-                <div className="footer-item" key={path}>
-                  <div className="footer-item-icon">
-                    <Icon
-                      path={path}
-                      color={"rgb(83, 100, 113)"}
-                      height={18.75}
-                      width={18.75}
-                    />
-                  </div>
-
-                  {isPath && array[i] !== 0 && <span>{array[i]}</span>}
-                </div>
-              );
-            })}
+            <MainCenterListItemIcon {...props} />
           </div>
         </div>
       </MainCenterListItemContent>
     </MainCenterListItemContainor>
   );
-};
+  const isLastItem = ref ? <div ref={ref}>{ItemContents}</div> : <div>{ItemContents}</div>;
+  return isLastItem;
+});
 
 export default MainCenterListItem;

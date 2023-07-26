@@ -2,6 +2,8 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slice/userSlice";
 import formReducer from "./slice/formSlice";
 import inputReducer from "./slice/inputSlice";
+import myTweetReducer from "./slice/myTweetSlice";
+
 import {
   FLUSH,
   PAUSE,
@@ -16,7 +18,8 @@ import storage from "redux-persist/lib/storage";
 
 // ...
 const rootReducer = combineReducers({
-  user: userReducer,
+  form: formReducer,
+  myTweet: myTweetReducer,
 });
 
 const formPersistConfig = {
@@ -24,13 +27,14 @@ const formPersistConfig = {
   storage,
 };
 
-const persistedFormReducer = persistReducer(formPersistConfig, formReducer);
+const persistedFormReducer = persistReducer(formPersistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
-    user: rootReducer,
     form: persistedFormReducer,
     input: inputReducer,
+    user: persistedFormReducer,
+    root: rootReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
