@@ -59,15 +59,19 @@ const MainCenterHeartIcon: FC<IconWrapperProps> = ({
       <Icon path={path} color={color} height={18.75} width={18.75} />
     );
   return (
-    <IconBox
-      hoverBgColors={hoverBgColors[index]}
-      onMouseEnter={() => setColor(hoverColor)}
-      onMouseLeave={() => setColor(defaultColor)}
-      onClick={index === 2 && !isLoading ? likeHandler : () => {}}
-    >
-      <div className="footer-item-icon">{iconElement}</div>
-      {count !== 0 && <span>{count}</span>}
-    </IconBox>
+    <>
+      <IconBox
+        hoverBgColors={hoverBgColors[index]}
+        onMouseEnter={() => setColor(hoverColor)}
+        onMouseLeave={() => setColor(defaultColor)}
+        onClick={index === 2 && !isLoading ? likeHandler : () => {}}
+      >
+        <div className="footer-item-icon">{iconElement}</div>
+        {count !== 0 && <span>{count}</span>}
+      </IconBox>
+
+      {/* 모달 */}
+    </>
   );
 };
 export default MainCenterHeartIcon;

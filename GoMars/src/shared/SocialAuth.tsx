@@ -1,9 +1,5 @@
-import { oauthLogin } from "@/api/post";
-import { socialhandler } from "@/components/main/Loginform";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { UserState, userSet } from "@/store/slice/userSlice";
-import axios from "axios";
-import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const SocialAuth = () => {
@@ -52,19 +48,19 @@ const SocialAuth = () => {
     }
   };
 
-  useEffect(() => {
-    const socialfecth = async () => {
-      const codes = code ? code : token;
-      await oauthLogin({ code: codes })
-        .then((res) => {
-          // dispatch(userSet(dataset(res)));
-          localStorage.setItem("accessToken", res.msg);
-          console.log(res);
-        })
-        .catch((err) => console.log("에러발생", err));
-    };
-    socialfecth();
-  }, []);
+  // useEffect(() => {
+  //   const socialfecth = async () => {
+  //     const codes = code ? code : token;
+  //     await oauthLogin({ code: codes })
+  //       .then((res) => {
+  //         // dispatch(userSet(dataset(res)));
+  //         localStorage.setItem("accessToken", res.msg);
+  //         console.log(res);
+  //       })
+  //       .catch((err) => console.log("에러발생", err));
+  //   };
+  //   socialfecth();
+  // }, []);
 
   return <div>로딩중</div>;
 };

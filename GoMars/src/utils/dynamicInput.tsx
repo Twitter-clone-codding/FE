@@ -14,6 +14,7 @@ const InputLabel = styled.label<disable>`
   border-radius: 4px;
   flex-direction: row;
   background-color: ${(props) => props.disabled && "rgb(239, 243, 244)"};
+
   &.active {
     border-color: rgb(29, 155, 240);
   }
@@ -49,7 +50,8 @@ const InputLabelWrraper = styled.div<disable>`
     padding-top 150ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
   color: rgb(83, 100, 113);
   &.focused {
-    color: ${(props) => (props.disabled ? "rgb(239, 243, 244)" : "rgb(29, 155, 240)")};
+    color: ${(props) => (props.disabled ? "rgb(83, 100, 113)" : "rgb(29, 155, 240)")};
+
     font-size: small;
     padding-top: 8px;
     transition:
@@ -61,7 +63,7 @@ const InputLabelWrraper = styled.div<disable>`
     line-height: 16px;
   }
   span {
-    color: ${(props) => (props.disabled ? "rgb(239, 243, 244)" : "rgb(29, 155, 240)")};
+    color: inherit;
     font: inherit;
     white-space: inherit;
     word-wrap: break-word;
@@ -84,7 +86,8 @@ const InputBox = styled.div<disable>`
     width: 100%;
     font-size: 17px;
     line-height: 24px;
-    color: rgb(15, 20, 25);
+
+    color: ${(props) => (props.disabled ? "rgb(83, 100, 113)" : "rgb(15, 20, 25)")};
   }
   input {
     white-space: pre-wrap;
@@ -113,6 +116,7 @@ interface InputProps extends disable {
   handleInputChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   className?: string;
+
   type?: HTMLInputTypeAttribute;
 }
 
@@ -131,7 +135,10 @@ const DynamicInput: React.FC<InputProps> = (props) => {
     <InputDivContainer>
       <InputLabel disabled={disabled} className={active ? "active" : ""}>
         <InputLabelContainer>
-          <InputLabelWrraper className={value.length >= 1 || active ? "focused" : ""}>
+          <InputLabelWrraper
+            disabled={disabled}
+            className={value.length >= 1 || active ? "focused" : ""}
+          >
             <span>{placeholder}</span>
           </InputLabelWrraper>
         </InputLabelContainer>

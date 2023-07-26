@@ -5,6 +5,7 @@ import { Icon } from "@/utils";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { userLogOut } from "@/store/slice/userSlice";
 import styled, { css } from "styled-components";
+import { logout } from "@/api/post";
 
 interface MainHeaderProfileProps {
   type: "follow" | "profile" | "search";
@@ -81,41 +82,30 @@ const MainHeaderProfile: React.FC<MainHeaderProfileProps> = (props) => {
   switch (type) {
     case "follow":
       sideClickItem = (
-        <Button
-          backgroundColor="black"
-          color="white"
-          size="follow"
-          title={<span>Follow</span>}
-        />
+        <Button backgroundColor="black" color="white" size="follow" title={<span>Follow</span>} />
       );
       break;
     case "profile":
-      sideClickItem = (
-        <Icon
-          color="rgb(15, 20, 25)"
-          height={18.75}
-          width={18.75}
-          path={threedot}
-        />
-      );
+      sideClickItem = <Icon color="rgb(15, 20, 25)" height={18.75} width={18.75} path={threedot} />;
       break;
     case "search":
-      sideClickItem = (
-        <Icon
-          color="rgb(15, 20, 25)"
-          height={18.75}
-          width={18.75}
-          path={cancel}
-        />
-      );
+      sideClickItem = <Icon color="rgb(15, 20, 25)" height={18.75} width={18.75} path={cancel} />;
       break;
   }
 
+  const logoutHandelr = async () => {
+    await logout()
+      .then((res) => {
+        alert(res.msg);
+      })
+      .catch((err) => console.log(err));
+    dispatch(userLogOut());
+  };
   return (
     <ProfileContainor type={type}>
       <div className="profile-wrapper">
         <div className="main-info">
-          <div className="avatar" onClick={() => dispatch(userLogOut())}></div>
+          <div className="avatar" onClick={logoutHandelr}></div>
           <div className="info">
             <div className="info-name">강신범</div>
             <div className="info-tag-name">@kaning</div>

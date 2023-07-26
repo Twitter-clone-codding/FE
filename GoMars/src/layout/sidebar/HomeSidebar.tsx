@@ -23,7 +23,7 @@ const HomeSidebar = (props) => {
         <SidebarTrendList />
       </div>
       <div className="sidebar-who to follow"></div>
-      <div className="sidebar-links"></div>;
+      <div className="sidebar-links"></div>
     </>
   );
 };

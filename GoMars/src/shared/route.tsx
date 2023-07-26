@@ -1,16 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "./protectRoute";
 import { useAppSelector } from "@/hooks/useRedux";
-import {
-  Explore,
-  Home,
-  Main,
-  Messages,
-  Notifications,
-  Profile,
-  Signin,
-  Signup,
-} from "@/pages";
+import { Explore, Home, Main, Messages, Notifications, Profile, Signin, Signup } from "@/pages";
 import Authlayout from "@/layout/Authlayout";
 import { ErrorPage, NotAuthRoutes, SocialAuth } from ".";
 
