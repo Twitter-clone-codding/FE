@@ -6,10 +6,15 @@ export interface FormState {
 
 const useInput = (
   initialState: FormState
-): [FormState, (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void] => {
+): [
+  FormState,
+  (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+] => {
   const [form, setForm] = useState<FormState>(initialState);
 
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const onChangeHandler = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { className, value } = event.target;
     const newForm = {
       ...form,

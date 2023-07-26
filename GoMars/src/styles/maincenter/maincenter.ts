@@ -69,6 +69,7 @@ interface ImageProps {
 }
 
 const MainImgBox = styled.div<ImageProps>`
+  border: 1px solid rgb(207, 217, 222);
   position: relative;
   border-radius: 16px;
   margin-top: 12px;

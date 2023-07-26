@@ -1,32 +1,37 @@
-import { threedot } from "@/assets/svg";
+import { threedot, cancel } from "@/assets/svg";
 import Button from "@/utils/Button";
 
 import { Icon } from "@/utils";
-import { ProfileContainor } from "@/styles/header/MainheaderStyle";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { userLogOut } from "@/store/slice/userSlice";
+import styled, { css } from "styled-components";
+
 interface MainHeaderProfileProps {
-  size?: "large" | "medium" | "small";
-  type: "follow" | "profile";
+  type: "follow" | "profile" | "search";
   onClick?: () => void;
 }
-
 const typeStyles = {
-  profile: css`
+  follow: css`
     border-radius: 9999px;
-    transition: all 0.2s ease;
-    &:hover {
-      background-color: rgba(15, 20, 25, 0.1);
-    }
+    padding: 12px;
+  `,
+  profile: css`
+    padding: 12px 16px;
+  `,
+  search: css`
+    padding: 12px 16px;
   `,
 };
 const ProfileContainor = styled.div<MainHeaderProfileProps>`
+  ${(props) => typeStyles[props.type]}
   margin: 12px 0;
-  ${(props) => typeStyles[props.type]};
   width: 100%;
-  height: 64.06px;
-  border-radius: 9999px;
-  padding: 12px;
+  height: 65.06px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(247, 249, 249);
+  }
+
   align-items: center;
   .profile-wrapper {
     display: flex;
@@ -36,21 +41,11 @@ const ProfileContainor = styled.div<MainHeaderProfileProps>`
     display: flex;
     flex-direction: row;
   }
-
-  .avatar1 {
+  .avatar {
     width: 40px;
     height: 40px;
     border-radius: 9999px;
     background-color: red;
-  }
-  .avatar2 {
-    width: 40px;
-    height: 40px;
-    border-radius: 9999px;
-    background-color: red;
-    &:hover {
-      opacity: 0.5;
-    }
   }
   .info {
     margin: 0 12px;
@@ -61,11 +56,15 @@ const ProfileContainor = styled.div<MainHeaderProfileProps>`
   .info-tag-name {
     color: rgb(83, 100, 113);
   }
-  .side-item {
+  .follow {
     display: flex;
     align-items: center;
   }
-  .icon-box {
+  .search {
+    display: flex;
+    align-items: center;
+  }
+  .profile {
     width: 34.75px;
     height: 34.75px;
     display: flex;
@@ -75,48 +74,45 @@ const ProfileContainor = styled.div<MainHeaderProfileProps>`
     transition: all 0.3s ease;
   }
 `;
-const ProfileModalContainor = styled.div`
-  position: fixed;
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 16px;
-  width: 300px;
-  height: 113px;
-  bottom: 86.75px;
-  left: 290px;
-  pointer-events: auto;
-  backface-visibility: hidden;
-  font-size: 15px;
-  flex-shrink: 1;
-  align-self: stretch;
-  box-shadow:
-    rgba(101, 119, 134, 0.2) 0px 0px 15px,
-    rgba(101, 119, 134, 0.15) 0px 0px;
-`;
-
-const ProfileModalItemWrapper = styled.div`
-  padding: 12px 0;
-  .profile-modal-item {
-    width: 300px;
-    height: 44px;
-    padding: 12px 16px;
-    font-size: inherit;
-    font-weight: 700;
-    cursor: pointer;
-  }
-`;
 const MainHeaderProfile: React.FC<MainHeaderProfileProps> = (props) => {
-  const { type, size } = props;
-
+  const { type } = props;
   const dispatch = useAppDispatch();
-  const sideClickItem =
-    type === "profile" ? (
-      <Icon color="rgb(15, 20, 25)" height={18.75} width={18.75} path={threedot} />
-    ) : (
-      <Button backgroundColor="black" color="white" size="follow" title={<span>Follow</span>} />
-    );
+  let sideClickItem;
+  switch (type) {
+    case "follow":
+      sideClickItem = (
+        <Button
+          backgroundColor="black"
+          color="white"
+          size="follow"
+          title={<span>Follow</span>}
+        />
+      );
+      break;
+    case "profile":
+      sideClickItem = (
+        <Icon
+          color="rgb(15, 20, 25)"
+          height={18.75}
+          width={18.75}
+          path={threedot}
+        />
+      );
+      break;
+    case "search":
+      sideClickItem = (
+        <Icon
+          color="rgb(15, 20, 25)"
+          height={18.75}
+          width={18.75}
+          path={cancel}
+        />
+      );
+      break;
+  }
 
   return (
-    <ProfileContainor>
+    <ProfileContainor type={type}>
       <div className="profile-wrapper">
         <div className="main-info">
           <div className="avatar" onClick={() => dispatch(userLogOut())}></div>
@@ -125,7 +121,7 @@ const MainHeaderProfile: React.FC<MainHeaderProfileProps> = (props) => {
             <div className="info-tag-name">@kaning</div>
           </div>
         </div>
-        <div className={type === "profile" ? "icon-box" : "side-item"}>{sideClickItem}</div>
+        <div className={type}>{sideClickItem}</div>
       </div>
     </ProfileContainor>
   );

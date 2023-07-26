@@ -23,7 +23,7 @@ interface Tweet {
 }
 
 interface SearchResults {
-  userList: User[];
+  tweetsList: Tweet[];
 }
 
 interface TweetPost {
@@ -131,4 +131,14 @@ interface ProfileUpdateResponse {
 interface NoticeGetResponse {
   msg: string;
   result: Tweet[];
+}
+
+interface TrandGetResponse {
+  mag: string;
+  result: Trend[];
+}
+
+interface Trend {
+  hashTag: string;
+  total: number;
 }

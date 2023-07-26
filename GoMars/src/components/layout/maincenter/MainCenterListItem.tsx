@@ -9,7 +9,17 @@ import {
 import { Icon } from "@/utils";
 
 const MainCenterListItem: React.FC<Tweet> = (props) => {
-  const { content, createdAt, hashtag, hearts, imgList, views, id, heartCheck, user } = props;
+  const {
+    content,
+    createdAt,
+    hashtag,
+    hearts,
+    imgList,
+    views,
+    id,
+    heartCheck,
+    user,
+  } = props;
   const detailNavigateHandler = () => {
     console.log("imgList", imgList);
   };
@@ -21,7 +31,10 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
         userProfileImage={user.profileImageUrl ? user.profileImageUrl : normal}
       >
         <div className="avartar"></div>
-        <img src={user.profileImageUrl ? user.profileImageUrl : normal} alt="asd" />
+        <img
+          src={user.profileImageUrl ? user.profileImageUrl : normal}
+          alt="asd"
+        />
       </MainCenterListItemAvartar>
       <MainCenterListItemContent>
         <div className="main-header">
@@ -32,20 +45,23 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
             <span className="hashtag">@{user?.nickname}</span>
             <span>·jul 22</span>
           </div>
-          <Icon color={"rgb(83, 100, 113)"} height={18.75} width={18.75} path={threedot} />
+          <Icon
+            color={"rgb(83, 100, 113)"}
+            height={18.75}
+            width={18.75}
+            path={threedot}
+          />
         </div>
         <div className="main-contnet">
           <div className="main-contnet-comment">
             <span>{content}</span>
           </div>
-
           {imgList[0] && (
             <MainImgBox image={imgList[0]}>
               <div className="image-box"></div>
               <img src={imgList[0]} alt="" />
             </MainImgBox>
           )}
-          {/* 여기예요 은석님 */}
         </div>
         <div className="footer">
           <div className="footer-box">
@@ -54,7 +70,12 @@ const MainCenterListItem: React.FC<Tweet> = (props) => {
               return (
                 <div className="footer-item" key={path}>
                   <div className="footer-item-icon">
-                    <Icon path={path} color={"rgb(83, 100, 113)"} height={18.75} width={18.75} />
+                    <Icon
+                      path={path}
+                      color={"rgb(83, 100, 113)"}
+                      height={18.75}
+                      width={18.75}
+                    />
                   </div>
 
                   {isPath && array[i] !== 0 && <span>{array[i]}</span>}

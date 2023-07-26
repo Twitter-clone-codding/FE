@@ -16,7 +16,7 @@ const Home = () => {
     const fetch = async () => {
       const respoense = await getTweets({ limit: 10, page: 0 });
       setfirst(respoense);
-      console.log(respoense);
+      console.log(respoense.result);
     };
     fetch();
   }, []);
@@ -32,7 +32,9 @@ const Home = () => {
         </div>
         <div className="content-container"></div>
       </PostContainer>
-      {first?.result?.tweetsList.map((tweet) => <MainCenterListItem {...tweet} key={tweet.id} />)}
+      {first?.result?.tweetsList.map((tweet) => (
+        <MainCenterListItem {...tweet} key={tweet.id} />
+      ))}
     </HomeContainer>
   );
 };

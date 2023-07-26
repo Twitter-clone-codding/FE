@@ -2,10 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { threedot } from "@/assets/svg";
 import { Icon } from "@/utils";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { inputSet } from "@/store/slice/inputSlice";
 const TrendItemContainer = styled.div`
+  cursor: pointer;
   height: 82px;
   width: 100%;
   padding: 12px 16px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
   .wrapper {
     display: flex;
     flex-direction: row;
@@ -43,14 +50,24 @@ const TrendItemContainer = styled.div`
     }
   }
 `;
-const TrendItem = () => {
+interface TrendItemProps {
+  hashTag: string;
+  total: number;
+}
+const TrendItem: React.FC<TrendItemProps> = (props) => {
+  const { hashTag, total } = props;
+  const dispatch = useAppDispatch();
+  const nevigate = useNavigate();
+  const moveNavigateHandler = () => {
+    dispatch(inputSet({ inputValue: hashTag }));
+  };
   return (
-    <TrendItemContainer>
+    <TrendItemContainer onClick={moveNavigateHandler}>
       <div className="wrapper">
         <div className="main">
           <div className="main-place">Trending in South Korea</div>
-          <div className="main-info-name">계속 보는 누나</div>
-          <div className="main-total-tweets">5,409 Tweets</div>
+          <div className="main-info-name">{hashTag}</div>
+          <div className="main-total-tweets">{total} Tweets</div>
         </div>
         <div className="icon-box">
           <Icon

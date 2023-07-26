@@ -30,7 +30,9 @@ interface VerifyEmailParams {
 }
 
 interface SearchParams {
-  name: string;
+  search: string;
+  page: number;
+  limit: number;
 }
 
 interface LoginParams {

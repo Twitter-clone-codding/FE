@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slice/userSlice";
 import formReducer from "./slice/formSlice";
+import inputReducer from "./slice/inputSlice";
 import {
   FLUSH,
   PAUSE,
@@ -29,6 +30,7 @@ export const store = configureStore({
   reducer: {
     user: rootReducer,
     form: persistedFormReducer,
+    input: inputReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

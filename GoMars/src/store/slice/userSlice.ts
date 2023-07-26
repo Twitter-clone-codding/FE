@@ -5,6 +5,7 @@ export interface UserState {
   nickname: string | null;
   token: string | null; // 우리 서버
   picture?: string | null;
+  email?: string | null;
   tokens?: {
     kakao?: string | null; // 카카오
     google?: string | null; //구글
