@@ -11,13 +11,17 @@ export const search = async (params: SearchParams): Promise<SearchResponse> => {
 };
 
 // GET /api/tweets/posts
-export const getTweets = async (params: TweetGetParams): Promise<TweetGetResponse> => {
+export const getTweets = async (
+  params: TweetGetParams
+): Promise<TweetGetResponse> => {
   const response = await server.get("/api/tweets/posts", { params });
   return response.data;
 };
 
 // GET /api/tweets/{MainTweetid}
-export const getMainTweet = async (MainTweetid: string): Promise<MainTweetGetResponse> => {
+export const getMainTweet = async (
+  MainTweetid: string
+): Promise<MainTweetGetResponse> => {
   const response = await server.get(`/api/tweets/${MainTweetid}`);
   return response.data;
 };
@@ -31,14 +35,24 @@ export const getRetweets = async (
   return response.data;
 };
 
-// GET /api/profile
-export const getProfile = async (): Promise<ProfileGetResponse> => {
-  const response = await server.get("/api/profile");
+// GET /api/profile//{MainTweetid}
+export const getProfile = async (
+  MainTweetid: string
+): Promise<ProfileGetResponse> => {
+  const response = await server.get(`/api/profile/${MainTweetid}`);
   return response.data;
 };
 
 // GET /api/notice
-export const getNotices = async (params: NoticeGetParams): Promise<NoticeGetResponse> => {
+export const getNotices = async (
+  params: NoticeGetParams
+): Promise<NoticeGetResponse> => {
   const response = await server.get("/api/notice", { params });
+  return response.data;
+};
+
+// /api/api/hashtag/rank
+export const getTrands = async (): Promise<TrandGetResponse> => {
+  const response = await server.get("/api/hashtag/rank");
   return response.data;
 };

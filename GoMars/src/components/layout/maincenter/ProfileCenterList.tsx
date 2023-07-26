@@ -4,11 +4,22 @@ import { Button, Icon } from "@/utils";
 import HomeHeaderBottom from "./HomeHeaderBottom";
 import MainHeaderProfile from "../mainheader/MainHeaderProfile";
 import { Containor } from "@/styles/maincenter/maincenter";
+import { useState, useEffect } from "react";
+import { useAppSelector } from "@/hooks/useRedux";
+import { getProfile } from "@/api/get";
+import axios from "axios";
 
 const ProfileCenterList = () => {
-  // 가시용
-  const SelectorArray = ["Tweets", "Replies", "Highlights", "Media", "Likes"];
-  const followArray = ["one", "two", "three"];
+  const [profile, setProfile] = useState<Profile>();
+  useEffect(() => {
+    const fetch = async () => {
+      const response = await getProfile();
+      console.log(response);
+      setProfile(response.result);
+    };
+    ``;
+    fetch();
+  }, [profile]);
 
   return (
     <Containor>
@@ -34,7 +45,12 @@ const ProfileCenterList = () => {
           </div>
           <div className="main-profile-create">
             <div className="main-profile-create-icon">
-              <Icon color="rgb(83, 100, 113)" path={calendar} height={18.75} width={18.75} />
+              <Icon
+                color="rgb(83, 100, 113)"
+                path={calendar}
+                height={18.75}
+                width={18.75}
+              />
             </div>
             <div>Joined July 2023</div>
           </div>
@@ -54,9 +70,9 @@ const ProfileCenterList = () => {
         </div>
       </div>
       <div className="selector">
-        {SelectorArray.map((title) => (
+        {/* {SelectorArray.map((title) => (
           <HomeHeaderBottom key={title} title={<span>{title}</span>} />
-        ))}
+        ))} */}
       </div>
       <div className="more-info">
         <div className="more-info-title">
@@ -69,9 +85,9 @@ const ProfileCenterList = () => {
           <span>Who to follow</span>{" "}
         </div>
         <div className="more-info-follow">
-          {followArray.map((data) => (
+          {/* {followArray.map((data) => (
             <MainHeaderProfile key={data} type="follow" />
-          ))}
+          ))} */}
         </div>
       </div>
     </Containor>
