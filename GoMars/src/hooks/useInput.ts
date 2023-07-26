@@ -8,11 +8,11 @@ const useInput = (
   initialState: FormState
 ): [
   FormState,
+
   (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void,
   Dispatch<React.SetStateAction<FormState>>,
 ] => {
   const [form, setForm] = useState<FormState>(initialState);
-
   const onChangeHandler = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {

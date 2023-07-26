@@ -10,8 +10,10 @@ import { Icon } from "@/utils";
 import { forwardRef } from "react";
 import MainCenterListItemIcon from "./MainCenterListItemIcon";
 
+
 const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
   const { content, createdAt, hashtag, hearts, imgList, views, id, heartCheck, user } = props;
+
   const detailNavigateHandler = () => {
     console.log("imgList", imgList);
   };
@@ -58,7 +60,10 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
         userProfileImage={user.profileImageUrl ? user.profileImageUrl : normal}
       >
         <div className="avartar"></div>
-        <img src={user.profileImageUrl ? user.profileImageUrl : normal} alt="asd" />
+        <img
+          src={user.profileImageUrl ? user.profileImageUrl : normal}
+          alt="asd"
+        />
       </MainCenterListItemAvartar>
       <MainCenterListItemContent>
         <div className="main-header">
@@ -69,20 +74,23 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
             <span className="hashtag">@{user?.nickname}</span>
             <span>·{getTimeAgo(createdAt)}</span>
           </div>
-          <Icon color={"rgb(83, 100, 113)"} height={18.75} width={18.75} path={threedot} />
+          <Icon
+            color={"rgb(83, 100, 113)"}
+            height={18.75}
+            width={18.75}
+            path={threedot}
+          />
         </div>
         <div className="main-contnet">
           <div className="main-contnet-comment">
             <span>{content}</span>
           </div>
-
           {imgList[0] && (
             <MainImgBox image={imgList[0]}>
               <div className="image-box"></div>
               <img src={imgList[0]} alt="" />
             </MainImgBox>
           )}
-          {/* 여기예요 은석님 */}
         </div>
         <div className="footer">
           <div className="footer-box">

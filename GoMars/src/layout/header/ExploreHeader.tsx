@@ -1,4 +1,6 @@
 import useInput from "@/hooks/useInput";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { inputSet } from "@/store/slice/inputSlice";
 import { Input } from "@/utils";
 import styled from "styled-components";
 
@@ -13,6 +15,12 @@ const ExploreHeader = () => {
   const [searchValue, onChangesearchDataHandler] = useInput({
     searchValue: "",
   });
+  const dispatch = useAppDispatch();
+  const onSubmitSearchDataHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(inputSet({ inputValue: searchValue.searchValue }));
+  };
+
   return (
     <ExploreHeaderContainor>
       <Input
@@ -20,6 +28,7 @@ const ExploreHeader = () => {
         size="large"
         value={searchValue["seasearchValuerchData"]}
         handleInputChange={onChangesearchDataHandler}
+        handleInputSubmit={onSubmitSearchDataHandler}
       />
     </ExploreHeaderContainor>
   );

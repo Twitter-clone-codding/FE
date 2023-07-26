@@ -4,6 +4,11 @@ import Header from "./Header";
 import { Outlet } from "react-router-dom";
 import MainHeaderList from "@/components/layout/mainheader/MainHeaderList";
 import MainHeaderProfile from "@/components/layout/mainheader/MainHeaderProfile";
+import SidebarTrendList from "@/components/layout/sidebar/SidebarTrendList";
+import { Button, Input } from "@/utils";
+import { spawn } from "child_process";
+import Sidebar from "./Sidebar";
+
 interface AuthLoyOutContainerProps {
   widowHeight: number;
 }
@@ -108,6 +113,24 @@ const RightContentBoardContainer = styled.div`
   backface-visibility: hidden;
   margin-right: 10px;
   width: 350px;
+
+  .sidebar-input {
+    display: flex;
+    height: 53px;
+    margin-bottom: 12px;
+    align-items: end;
+  }
+  .sidebar-verified {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    gap: 10px;
+    padding: 12px 16px;
+    background-color: rgb(247, 249, 249);
+    margin-bottom: 16px;
+  }
+  .sidebar-trends {
+  }
 `;
 const Authlayout = () => {
   const widowHeight = useWindowHeight();
@@ -132,7 +155,9 @@ const Authlayout = () => {
                 <Outlet />
               </div>
             </MainContentsBoardContainer>
-            <RightContentBoardContainer></RightContentBoardContainer>
+            <RightContentBoardContainer>
+              <Sidebar />
+            </RightContentBoardContainer>
           </div>
         </div>
       </MainContentContainer>

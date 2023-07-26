@@ -1,10 +1,10 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 import styled, { css } from "styled-components";
 import Icon from "./Icon";
 import { explore } from "@/assets/svg";
-
 interface InputStyleProps {
-  size: "large" | "medium";
+  size?: "large" | "medium";
+  show?: boolean;
 }
 
 const sizeStyles = {
@@ -44,6 +44,8 @@ const InputContainor = styled.div<InputStyleProps>`
       font-size: 15px;
       color: rgb(83, 100, 113);
     }
+    &:focus {
+    }
   }
   .icon-box {
     padding-left: 12px;
@@ -55,41 +57,23 @@ const InputContainor = styled.div<InputStyleProps>`
   }
 `;
 
-const AutoSearchContainor = styled.div`
-  width: 502px;
-  min-height: 100px;
-  max-height: calc(80vh - 53px);
-  position: absolute;
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 8px;
-  font-size: 15px;
-  overflow-y: auto;
-  box-shadow:
-    rgba(101, 119, 134, 0.2) 0px 0px 15px,
-    rgba(101, 119, 134, 0.15) 0px 0px;
-
-  .auto-search-placeholder {
-    display: flex;
-    flex-grow: 1;
-    color: #536471;
-    padding: 20px 12px 12px 12px;
-    justify-content: center;
-  }
-`;
 export interface InputProps extends InputStyleProps {
-  handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
+  handleInputChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleInputSubmit?: (event: FormEvent<HTMLFormElement>) => void;
+  placeholder?: string;
   className?: string;
-  value: string;
+  value?: string;
 }
 
 const Input: React.FC<InputProps> = (props) => {
-  const { placeholder, size, value, handleInputChange } = props;
+  const { placeholder, size, value, handleInputChange, handleInputSubmit } =
+    props;
+
   return (
     <>
       {" "}
       <InputContainor size={size}>
-        <div className="input-wrapper">
+        <form className="input-wrapper" onSubmit={handleInputSubmit}>
           <div className="icon-box">
             <Icon
               path={explore}
@@ -104,14 +88,7 @@ const Input: React.FC<InputProps> = (props) => {
             value={value}
             onChange={handleInputChange}
           />
-        </div>
-        <div>
-          <AutoSearchContainor>
-            <div className="auto-search-placeholder">
-              Try searching for people, topics, or keywords
-            </div>
-          </AutoSearchContainor>
-        </div>
+        </form>
       </InputContainor>
     </>
   );

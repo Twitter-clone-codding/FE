@@ -13,6 +13,7 @@ const HomeContainer = styled.div`
   width: 100%;
 `;
 const Home = () => {
+
   const myTweet = useAppSelector((state) => state.root.myTweet.tweets);
   const { fetchNextPage, hasNextPage, isFetchingNextPage, data, status, error, isLoading } =
     useInfiniteQuery<TweetGetResponse, Error>(
