@@ -1,6 +1,7 @@
 import { search } from "@/api/get";
 import MainCenterListItem from "@/components/layout/maincenter/MainCenterListItem";
 import TrendItem from "@/components/layout/maintrend/TrendItem";
+import SidebarTrendList from "@/components/layout/sidebar/SidebarTrendList";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import ExploreHeader from "@/layout/header/ExploreHeader";
 import { inputSet } from "@/store/slice/inputSlice";
@@ -138,23 +139,26 @@ const Explore = () => {
       });
       setData(response.result.tweetsList);
     };
-    fetch(inputValue);
+    if (inputValue) {
+      fetch(inputValue);
+    } else {
+      console.log("없다 이새끼야");
+    }
 
+    console.log("sideEffect");
     return () => {
       dispatch(inputSet({ inputValue: null }));
+      console.log("clean up");
     };
     // 이건 알아봐야 왜 이럻게 되는지
-  }, [inputValue, dispatch]);
+  }, [dispatch, inputValue]);
   return (
     <>
       {!data && (
         <NonSearchContainer>
           <div className="main">
-            <div className="main-title">
-              <span>Trends for you</span>{" "}
-            </div>
             <div className="main-ternd-box">
-              <TrendItem />
+              <SidebarTrendList />
             </div>
             <div className="show-more">
               <span>Show more</span>

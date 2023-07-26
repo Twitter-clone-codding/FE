@@ -32,9 +32,10 @@ const MainCenterListItemIcon: React.FC<Tweet> = (props) => {
       setIsLoading(false);
     });
   };
-
+  const retweetHandler = () => {};
   return (
     <>
+      ``
       {centerFooterArray.map((path, i) => (
         <MainCenterHeartIcon
           isLike={isLiked}

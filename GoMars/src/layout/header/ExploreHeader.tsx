@@ -1,7 +1,8 @@
 import useInput from "@/hooks/useInput";
-import { useAppDispatch } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { inputSet } from "@/store/slice/inputSlice";
 import { Input } from "@/utils";
+import { useEffect } from "react";
 import styled from "styled-components";
 
 const ExploreHeaderContainor = styled.div`
@@ -12,9 +13,11 @@ const ExploreHeaderContainor = styled.div`
   padding: 0 16px;
 `;
 const ExploreHeader = () => {
+  const newSearchValue = useAppSelector((state) => state.input);
   const [searchValue, onChangesearchDataHandler] = useInput({
     searchValue: "",
   });
+
   const dispatch = useAppDispatch();
   const onSubmitSearchDataHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

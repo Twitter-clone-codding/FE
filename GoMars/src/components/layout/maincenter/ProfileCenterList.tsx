@@ -1,6 +1,6 @@
 import { calendar } from "@/assets/svg";
 import Carousel from "@/components/common/Carousel";
-import { Button, Icon } from "@/utils";
+import { Button, Icon, Modal } from "@/utils";
 import HomeHeaderBottom from "./HomeHeaderBottom";
 import MainHeaderProfile from "../mainheader/MainHeaderProfile";
 import { Containor } from "@/styles/maincenter/maincenter";
@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import { useAppSelector } from "@/hooks/useRedux";
 import { getProfile } from "@/api/get";
 import axios from "axios";
+import { spawn } from "child_process";
+import { useNavigate } from "react-router-dom";
 
 const ProfileCenterList = () => {
   const [profile, setProfile] = useState<Profile>();
@@ -21,6 +23,10 @@ const ProfileCenterList = () => {
   //   fetch();
   // }, [profile]);
 
+  const navigate = useNavigate();
+  const onClickHandler = () => {
+    navigate("/profile/retweet");
+  };
   return (
     <Containor>
       <div className="main">
@@ -36,6 +42,7 @@ const ProfileCenterList = () => {
                 size="editProfile"
                 borderColor="gray"
                 title={<span>Edit profile</span>}
+                onClick={onClickHandler}
               />
             </div>
           </div>
@@ -45,7 +52,12 @@ const ProfileCenterList = () => {
           </div>
           <div className="main-profile-create">
             <div className="main-profile-create-icon">
-              <Icon color="rgb(83, 100, 113)" path={calendar} height={18.75} width={18.75} />
+              <Icon
+                color="rgb(83, 100, 113)"
+                path={calendar}
+                height={18.75}
+                width={18.75}
+              />
             </div>
             <div>Joined July 2023</div>
           </div>

@@ -1,9 +1,10 @@
 import { FillHeart } from "@/assets/svg";
 import { IconBox } from "@/styles/maincenter/maincenter";
-import { Icon } from "@/utils";
+import { Icon, Modal } from "@/utils";
 import { FC, useState } from "react";
 import heartlottietwo from "@/assets/lottie/hearttwo.json";
 import LottieAnimation from "lottie-react";
+import SmallModal from "@/utils/SmallModal";
 interface IconWrapperProps {
   path: string;
   count: number;
@@ -51,23 +52,37 @@ const MainCenterHeartIcon: FC<IconWrapperProps> = ({
           }}
         />
       ) : isLike ? (
-        <Icon path={FillHeart} color={"rgb(249, 24, 128)"} height={18.75} width={18.75} />
+        <Icon
+          path={FillHeart}
+          color={"rgb(249, 24, 128)"}
+          height={18.75}
+          width={18.75}
+        />
       ) : (
         <Icon path={path} color={color} height={18.75} width={18.75} />
       )
     ) : (
       <Icon path={path} color={color} height={18.75} width={18.75} />
     );
+
+  const [toggleModal, setToggleModal] = useState<boolean>(false);
+  const onClickIconHandler = () => {
+    setToggleModal((prev) => !prev);
+  };
   return (
-    <IconBox
-      hoverBgColors={hoverBgColors[index]}
-      onMouseEnter={() => setColor(hoverColor)}
-      onMouseLeave={() => setColor(defaultColor)}
-      onClick={index === 2 && !isLoading ? likeHandler : () => {}}
-    >
-      <div className="footer-item-icon">{iconElement}</div>
-      {count !== 0 && <span>{count}</span>}
-    </IconBox>
+    <>
+      <IconBox
+        hoverBgColors={hoverBgColors[index]}
+        onMouseEnter={() => setColor(hoverColor)}
+        onMouseLeave={() => setColor(defaultColor)}
+        // onClick={index === 2 && !isLoading ? likeHandler : () => {}}
+        onClick={onClickIconHandler}
+      >
+        <div className="footer-item-icon">{iconElement}</div>
+        {count !== 0 && <span>{count}</span>}
+      </IconBox>
+      {toggleModal && <SmallModal onClick={onClickIconHandler} />}
+    </>
   );
 };
 export default MainCenterHeartIcon;
