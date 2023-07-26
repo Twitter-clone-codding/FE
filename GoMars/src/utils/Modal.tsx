@@ -10,8 +10,8 @@ const ModalContainer = styled.div<{ width: string; height: string }>`
   left: 50%;
   transform: translate(-50%, -50%);
   // 크기
-  /* width: ${(props) => props.width}px; */
-  /* height: ${(props) => props.height}px; */
+  width: ${(props) => props.width}px;
+  height: ${(props) => props.height}px;
 
   max-height: 90vh;
   height: auto;
@@ -45,14 +45,23 @@ interface ModalProps {
   height?: string;
   element: JSX.Element;
   setModal?: Dispatch<SetStateAction<boolean>>;
+  onClick?: () => void;
 }
 
-const Modal = ({ width, height, element, setModal, type = "default" }: ModalProps) => {
+const Modal = ({
+  width,
+  height,
+  element,
+  setModal,
+  type = "default",
+  onClick,
+}: ModalProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   return (
     <>
       <ModalContainer ref={ref} width={width} height={height}>
+        <button onClick={onClick}>닫기</button>
         <Wrapper>{element}</Wrapper>
       </ModalContainer>
       <ModalBackGround />

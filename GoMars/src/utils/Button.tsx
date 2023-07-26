@@ -9,7 +9,11 @@ interface ButtonProps extends MyButtonProps {
 interface MyButtonProps {
   color: "white" | "blue" | "hoverBlue" | "hoverBlack" | "lightBlack" | "black";
   backgroundColor: "white" | "blue" | "lightBlack" | "black";
-  hoverColor?: "hoverBlue" | "hoverBlack" | "hoverLightBlue" | "hoverLightBlack";
+  hoverColor?:
+    | "hoverBlue"
+    | "hoverBlack"
+    | "hoverLightBlue"
+    | "hoverLightBlack";
   size:
     | "tweet1"
     | "tweet2"
@@ -39,7 +43,7 @@ const colorStyles = {
 
 const sizeStyles = {
   tweet1: css`
-    width: 90%; //210.59px
+    width: 90%;
     height: 52px;
     padding: 0 32px;
     font-size: 17px;
@@ -102,6 +106,7 @@ const MyButton = styled.button<MyButtonProps>`
   outline-style: none;
   transition-duration: 0.2s;
   font-size: inherit;
+  font-weight: 700;
   border-color: ${(props) => colorStyles[props.borderColor]};
   background-color: ${(props) => colorStyles[props.backgroundColor]};
   color: ${(props) => colorStyles[props.color]};
@@ -112,8 +117,17 @@ const MyButton = styled.button<MyButtonProps>`
 `;
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const { onClick, title, type, color, size, backgroundColor, hoverColor, borderColor, disabled } =
-    props;
+  const {
+    onClick,
+    title,
+    type,
+    color,
+    size,
+    backgroundColor,
+    hoverColor,
+    borderColor,
+    disabled,
+  } = props;
   return (
     <MyButton
       type={type}

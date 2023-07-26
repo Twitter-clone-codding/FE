@@ -1,17 +1,7 @@
-import styled from "styled-components";
 import TrendItem from "../maintrend/TrendItem";
 import { useEffect, useState } from "react";
 import { getTrands } from "@/api/get";
-
-const SidebarTrendListContainer = styled.div`
-  background-color: rgb(247, 249, 249);
-  .sideber-ternds-title {
-    height: 48px;
-    padding: 12px 16px;
-    font-size: 21.5px;
-    font-weight: 700;
-  }
-`;
+import { SidebarTrendListContainer } from "@/styles/sidebar/sidebarStyle";
 
 const SidebarTrendList = () => {
   const [trendData, setTrendData] = useState<Trend[]>();
@@ -26,7 +16,7 @@ const SidebarTrendList = () => {
   return (
     <>
       <SidebarTrendListContainer>
-        <div className="sideber-ternds-title">Trends for you</div>
+        <div className="profile-sideber-title">Trends for you</div>
         {trendData?.map((data, idx) => (
           <TrendItem
             key={`${idx}+ ${data.hashTag}`}
