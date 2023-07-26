@@ -10,7 +10,6 @@ import { Icon } from "@/utils";
 import { forwardRef } from "react";
 import MainCenterListItemIcon from "./MainCenterListItemIcon";
 
-
 const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
   const { content, createdAt, hashtag, hearts, imgList, views, id, heartCheck, user } = props;
 
@@ -49,9 +48,9 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
       ];
       return `${monthNames[date.getMonth()]} ${date.getDate()}`;
     }
-    if (hours > 0) return `${hours} hours ago`;
-    if (minutes > 0) return `${minutes} minutes ago`;
-    return `${seconds} seconds ago`;
+    if (hours > 0) return `${hours}h`;
+    if (minutes > 0) return `${minutes}m`;
+    return `${seconds}s`;
   };
 
   const ItemContents = (
@@ -60,10 +59,7 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
         userProfileImage={user.profileImageUrl ? user.profileImageUrl : normal}
       >
         <div className="avartar"></div>
-        <img
-          src={user.profileImageUrl ? user.profileImageUrl : normal}
-          alt="asd"
-        />
+        <img src={user.profileImageUrl ? user.profileImageUrl : normal} alt="asd" />
       </MainCenterListItemAvartar>
       <MainCenterListItemContent>
         <div className="main-header">
@@ -72,14 +68,9 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
             <span className="hashtag">{hashtag}</span>
             <span>{user?.nickname}</span>
             <span className="hashtag">@{user?.nickname}</span>
-            <span>·{getTimeAgo(createdAt)}</span>
+            <span className="date">·{getTimeAgo(createdAt)}</span>
           </div>
-          <Icon
-            color={"rgb(83, 100, 113)"}
-            height={18.75}
-            width={18.75}
-            path={threedot}
-          />
+          <Icon color={"rgb(83, 100, 113)"} height={18.75} width={18.75} path={threedot} />
         </div>
         <div className="main-contnet">
           <div className="main-contnet-comment">

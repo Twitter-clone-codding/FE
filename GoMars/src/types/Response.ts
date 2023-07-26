@@ -137,6 +137,10 @@ interface TrandGetResponse {
   mag: string;
   result: Trend[];
 }
+interface logoutResponse {
+  msg: string;
+  result: string | null;
+}
 
 interface Trend {
   hashTag: string;

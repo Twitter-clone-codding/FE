@@ -3,6 +3,7 @@ import svgArray, { boldSvgArray } from "@/assets/svg";
 import Button from "@/utils/Button";
 import { useLocation } from "react-router-dom";
 import { MainHeaderListContainer } from "@/styles/header/MainheaderStyle";
+import useSSE from "@/hooks/useSSE";
 
 const MainHeaderList = () => {
   const color = "rgb(29, 155, 240)";

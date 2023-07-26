@@ -48,11 +48,20 @@ export const formSlice = createSlice({
     updateSelectData: (state, action: PayloadAction<SelectData>) => {
       state.selectData = action.payload;
     },
+    resetSelectData: (state, action: PayloadAction<SelectData>) => {
+      state.selectData = initialState.selectData;
+    },
     updateFormData: (state, action: PayloadAction<FormData>) => {
       state.formData = action.payload;
     },
+    resetFormData: (state, action: PayloadAction<FormData>) => {
+      state.formData = initialState.formData;
+    },
     updateLoginData: (state, action: PayloadAction<LoginFormData>) => {
       state.loginData = action.payload;
+    },
+    resetLoginData: (state, action: PayloadAction<LoginFormData>) => {
+      state.loginData = initialState.loginData;
     },
   },
 });

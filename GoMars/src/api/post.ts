@@ -46,3 +46,7 @@ export const postTweet = async (params): Promise<TweetPostResponse> => {
   });
   return response.data;
 };
+export const logout = async (): Promise<logoutResponse> => {
+  const response = await server.post("/api/logout");
+  return response.data;
+};

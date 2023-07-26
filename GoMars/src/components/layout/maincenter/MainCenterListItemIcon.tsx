@@ -21,7 +21,6 @@ const MainCenterListItemIcon: React.FC<Tweet> = (props) => {
 
   const [playAnimation, setPlayAnimation] = useState(false);
   const [isLiked, setIsLiked] = useState(heartCheck);
-  console.log(props);
   const likeHandler = async () => {
     if (isLoading) return;
     setIsLoading(true);

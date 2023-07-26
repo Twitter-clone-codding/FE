@@ -69,7 +69,6 @@ interface ImageProps {
 }
 
 const MainImgBox = styled.div<ImageProps>`
-  border: 1px solid rgb(207, 217, 222);
   position: relative;
   border-radius: 16px;
   margin-top: 12px;
@@ -87,7 +86,8 @@ const MainImgBox = styled.div<ImageProps>`
     position: absolute;
     width: 100%;
     height: 100%;
-
+    border: none;
+    outline: none;
     background-color: rgba(0, 0, 0, 0);
     background-position: center center;
     background-repeat: no-repeat;
@@ -106,6 +106,8 @@ const MainImgBox = styled.div<ImageProps>`
     height: 100%;
     object-position: center;
     height: auto;
+    border: none;
+    outline: none;
   }
 `;
 
@@ -324,6 +326,9 @@ const MainCenterListItemContent = styled.div`
   .main-header-span {
     > span:first-child {
       font-weight: 700;
+    }
+    .date {
+      color: rgb(83, 100, 113);
     }
   }
 
