@@ -16,7 +16,7 @@ interface Tweet {
   content: string;
   hashtag: string;
   hearts: number;
-  heartCheck: boolean;
+  heartCheck: boolean | false;
   views: number;
   imgList: string[];
   createdAt: string;

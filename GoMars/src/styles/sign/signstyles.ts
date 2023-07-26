@@ -208,6 +208,7 @@ const SignUpFormContainer = styled(SignInFormContainer)`
     }
   }
 `;
+
 const SigninBox = styled(SignInStyleDiv)`
   display: flex;
   flex-direction: column;
@@ -217,7 +218,15 @@ const SigninBox = styled(SignInStyleDiv)`
   min-width: 364px;
   padding-bottom: 48px;
 `;
+const SignInWrraper = styled(SigninBox)`
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  max-width: 600px;
+  min-width: 364px;
+`;
 export {
+  SignInWrraper,
   QuestionRegisterContainer,
   ModalLoginForm,
   InformationContainerSignup,

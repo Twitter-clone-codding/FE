@@ -6,6 +6,7 @@ import { close, prev, twitter } from "@/assets/svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import ModalSignupform from "./sign/ModalSignupform";
 import useInput from "@/hooks/useInput";
+import SignFive from "./signupstep/SignFive";
 
 interface initailStateProp {
   state?: number;
@@ -28,7 +29,9 @@ const RegisterComponent = ({ state = 1 }: initailStateProp) => {
       case 3:
         return <SignThird nextStep={nextStep} />;
       case 4:
-        return <SignFourth />;
+        return <SignFourth nextStep={nextStep} />;
+      case 5:
+        return <SignFive />;
       default:
         return null;
     }

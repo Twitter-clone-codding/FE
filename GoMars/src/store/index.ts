@@ -31,7 +31,7 @@ const persistedFormReducer = persistReducer(formPersistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
-    form: persistedFormReducer,
+    form: rootReducer,
     input: inputReducer,
     user: persistedFormReducer,
     root: rootReducer,

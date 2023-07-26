@@ -1,7 +1,8 @@
 import { login } from "@/api/post";
 import { apple } from "@/assets/svg";
 import useInput from "@/hooks/useInput";
-import { useAppDispatch } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { updateLoginData } from "@/store/slice/formSlice";
 import { userSet } from "@/store/slice/userSlice";
 import {
   ButtonDivModalStyle,
@@ -11,30 +12,29 @@ import {
 import { ModalLoginForm, QuestionRegisterContainer } from "@/styles/sign/signstyles";
 import { Button, Icon, Spinner } from "@/utils";
 import DynamicInput from "@/utils/dynamicInput";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Modalloginform = () => {
-  const [loginValue, onChangeLoginValue] = useInput({ loginValue: "" });
+interface nextStep {
+  nextStep?: () => void;
+}
+
+const Modalloginform: FC<nextStep> = (props) => {
+  const { nextStep } = props;
+  const loginData = useAppSelector((state) => state.form.form.loginData);
   const navigate = useNavigate();
   const [loginLoading, setLoginLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const authLoginHandler = async () => {
-    setLoginLoading(true);
-    await login({
-      email: loginValue["loginValue"],
-      password: loginValue["loginValue"],
-    })
-      .then((res) => {
-        console.log(res);
-        dispatch(userSet({ id: "trgf456a@aaa.co.krasd", nickname: "최은석", token: "ㅁㄴㅇ" }));
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { className, value } = event.target;
+    dispatch(
+      updateLoginData({
+        ...loginData,
+        [className]: value,
       })
-      .catch((err) => console.log(err))
-      .finally(() => setLoginLoading(false));
+    );
   };
-  useEffect(() => {
-    console.log(loginValue);
-  }, [loginValue]);
 
   return (
     <ModalLoginForm>
@@ -94,10 +94,10 @@ const Modalloginform = () => {
         </div>
       </GubunSunModalStyleDiv>
       <DynamicInput
-        handleInputChange={onChangeLoginValue}
-        value={loginValue["loginValue"]}
+        handleInputChange={handleInputChange}
+        value={loginData.email}
         placeholder="휴대폰 번호, 이메일 주소 또는 사용자 아이디"
-        className="loginValue"
+        className={"email"}
       />
       <ButtonDivModalStyle>
         <Button
@@ -105,7 +105,7 @@ const Modalloginform = () => {
           size="login2"
           color="white"
           backgroundColor="black"
-          onClick={authLoginHandler}
+          onClick={nextStep}
           title={<ButtonTitleStyleApple>다음</ButtonTitleStyleApple>}
         />
       </ButtonDivModalStyle>

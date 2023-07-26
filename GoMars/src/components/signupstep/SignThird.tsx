@@ -1,3 +1,4 @@
+import { sendEmail } from "@/api/post";
 import { FormState } from "@/hooks/useInput";
 import { useAppSelector } from "@/hooks/useRedux";
 import {
@@ -6,7 +7,8 @@ import {
   NextStepThirdButtonDiv,
   SignThirdContainer,
 } from "@/styles/sign/signupStyles";
-import { Button, DynamicInput } from "@/utils";
+import { Button, DynamicInput, Spinner } from "@/utils";
+import { useState } from "react";
 
 interface SignFirstProps {
   nextStep: () => void;
@@ -16,6 +18,21 @@ const SignThird: React.FC<SignFirstProps> = (props) => {
   const { nextStep } = props;
   const { formData } = useAppSelector((state) => state.root.form);
   const { selectData } = useAppSelector((state) => state.root.form);
+  const [Loading, setLoading] = useState(false);
+  const sendemailHandler = async () => {
+    setLoading(true);
+    await sendEmail({ email: formData.email })
+      .then(() => {
+        nextStep();
+      })
+      .catch((err) => alert("실패하셨습니다."))
+      .finally(() => setLoading(false));
+  };
+  const SpinnerContent = Loading ? (
+    <Spinner borderSize={3} color="#5585E8" size={18} spinColor="gray" />
+  ) : (
+    <span>다음</span>
+  );
   return (
     <SignThirdContainer>
       <div className="title">
@@ -108,12 +125,8 @@ const SignThird: React.FC<SignFirstProps> = (props) => {
           hoverColor="hoverBlue"
           size="register"
           // onClick={nextStep}
-          onClick={nextStep}
-          title={
-            <ButtonTitleStyleNextButton>
-              <span>가입</span>
-            </ButtonTitleStyleNextButton>
-          }
+          onClick={sendemailHandler}
+          title={<ButtonTitleStyleNextButton>{SpinnerContent}</ButtonTitleStyleNextButton>}
         />
       </NextStepThirdButtonDiv>
     </SignThirdContainer>
