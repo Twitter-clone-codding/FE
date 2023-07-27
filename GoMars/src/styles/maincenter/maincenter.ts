@@ -283,6 +283,7 @@ const MainCenterListItemAvartar = styled.div<userProfileImage>`
   position: relative;
   width: 40px;
   height: 40px;
+  flex-basis: 45px;
   margin-right: 12px;
   overflow: hidden;
   border-radius: 9999px;

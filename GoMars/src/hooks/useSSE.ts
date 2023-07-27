@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { addNotification } from "@/store/slice/noticeSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+// 필요한 경로로 수정하세요.
 
 function useSSE(url, eventTypes) {
-  const [serverData, setServerData] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const eventSource = new EventSource(url, {
-      withCredentials: true,
-    });
+    const eventSource = new EventSource(url, { withCredentials: true });
 
     eventSource.onopen = (event) => console.log("SSE 연결 완료");
     eventSource.onerror = (error) => {
@@ -17,13 +18,13 @@ function useSSE(url, eventTypes) {
     };
     eventSource.onmessage = (event) => {
       console.log("서버에서 메세지", event.data);
-      setServerData(event.data);
+      dispatch(addNotification()); // 서버에서 메세지를 받으면 알림 추가
     };
 
     eventTypes.forEach((type) => {
       eventSource.addEventListener(type, (event) => {
-        setServerData(event.data);
         console.log(`${type} from server`, event.data);
+        dispatch(addNotification()); // 서버에서 특정 이벤트를 받으면 알림 추가
       });
     });
 
@@ -31,9 +32,7 @@ function useSSE(url, eventTypes) {
       eventSource.close();
       console.log("서버 닫힘");
     };
-  }, [url, eventTypes]);
-
-  return serverData;
+  }, [url, eventTypes, dispatch]);
 }
 
 export default useSSE;

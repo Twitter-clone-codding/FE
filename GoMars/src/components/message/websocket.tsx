@@ -2,13 +2,17 @@ import React, { useState, useEffect, useRef } from "react";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import StompJs from "stompjs";
+import { ChatContainer, Message, InputArea, MessageInput } from "@/styles/message/chatstyle";
+import { MessagesContainer } from "@/styles/message/messageStyle";
+import { Input } from "@/utils";
 
 interface ChatMessage {
-  from: string;
+  from: number;
   message: string;
 }
+
 let stomp: any;
-const Chat: React.FC = () => {
+const Chat: React.FC<User> = (user) => {
   const stompClientRef = useRef<any>(null);
 
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -23,7 +27,7 @@ const Chat: React.FC = () => {
       () => {
         stomp.debug = null;
         stompClientRef.current = stomp;
-        stomp.subscribe(`/sub`, (data: any) => {
+        stomp.subscribe(`/sub/${user.userId}`, (data: any) => {
           // 구독할때 룸네임 넣어서 sub 하고
           const newMessage = JSON.parse(data.body);
           // Imposters 값을 state에 저장
@@ -51,7 +55,6 @@ const Chat: React.FC = () => {
   };
   useEffect(() => {
     connect();
-    // 컴포넌트에서 unmount 될때 서버로 "LEAVE" 메세지를 보냄
     return () => {
       if (stompClientRef.current) {
         stompClientRef.current.send(
@@ -59,13 +62,13 @@ const Chat: React.FC = () => {
           {},
           JSON.stringify({
             type: "LEAVE",
-
+            roomId: user.userId, // 현재의 사용자 ID를 사용해서 방을 나갑니다.
             message: "",
           })
         );
       }
     };
-  }, []);
+  }, [user.userId]);
   const sendMessage = () => {
     if (client) {
       client.publish({
@@ -83,22 +86,25 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        value={currentMessage}
-        onChange={(e) => setCurrentMessage(e.target.value)}
-      />
-      <button onClick={sendMessage}>Send</button>
-
-      <ul>
+    <ChatContainer>
+      <MessagesContainer>
         {messages.map((msg, i) => (
-          <li key={i}>
-            <strong>{msg.from}:</strong> {msg.message}
-          </li>
+          <Message key={i} byCurrentUser={msg.from === user.userId}>
+            <strong>{msg.from === user.userId ? "You" : "Them"}:</strong>
+            {msg.message}
+          </Message>
         ))}
-      </ul>
-    </div>
+      </MessagesContainer>
+      <InputArea>
+        <Input
+          value={currentMessage}
+          handleInputChange={(e) => setCurrentMessage(e.target.value)}
+          placeholder="Start a new message"
+          size="large"
+        />
+        <button onClick={sendMessage}>Send</button>
+      </InputArea>
+    </ChatContainer>
   );
 };
 

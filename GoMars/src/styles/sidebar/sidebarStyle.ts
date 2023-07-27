@@ -64,7 +64,11 @@ const NotificationSidebarContainer = styled.div`
 `;
 
 const SidebarTrendListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   background-color: rgb(247, 249, 249);
+
   .profile-sideber-title {
     height: 48px;
     padding: 12px 16px;

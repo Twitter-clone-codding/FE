@@ -82,6 +82,10 @@ interface VerifyEmailResponse {
   msg: string;
   result: string;
 }
+interface MessageSearchResponse {
+  msg: string;
+  result: User[];
+}
 
 interface SearchResponse {
   msg: string;
@@ -130,7 +134,10 @@ interface ProfileUpdateResponse {
 
 interface NoticeGetResponse {
   msg: string;
-  result: Tweet[];
+  result: {
+    totalPage: number;
+    tweetsList: Tweet[];
+  };
 }
 
 interface TrandGetResponse {

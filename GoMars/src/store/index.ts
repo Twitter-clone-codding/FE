@@ -3,6 +3,7 @@ import userReducer from "./slice/userSlice";
 import formReducer from "./slice/formSlice";
 import inputReducer from "./slice/inputSlice";
 import myTweetReducer from "./slice/myTweetSlice";
+import notificationReducer from "./slice/noticeSlice";
 
 import {
   FLUSH,
@@ -31,6 +32,7 @@ const persistedFormReducer = persistReducer(formPersistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
+    notice: notificationReducer,
     form: rootReducer,
     input: inputReducer,
     user: persistedFormReducer,
