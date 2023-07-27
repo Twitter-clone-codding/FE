@@ -35,6 +35,9 @@ const LinkContainer = styled(Link)`
 `;
 
 const MainHeaderListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
   .bird-icon-wrapper {
     width: 50.22px;
     height: 50.22px;

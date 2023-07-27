@@ -55,16 +55,17 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
   };
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const onClickMoveHandler = () => {
+  const onClickMoveHandler = (e) => {
     navigate(`/profile/${user.tagName}`);
     dispatch(profileSet({ tagName: user.tagName }));
+    e.stopPropagation();
   };
 
   // const profileImage = user
   const ItemContents = (
     <MainCenterListItemContainor
       onClick={() => {
-        navigate(`${id}`);
+        navigate(`/${id}`);
       }}
     >
       <MainCenterListItemAvartar

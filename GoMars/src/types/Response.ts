@@ -123,7 +123,10 @@ interface MainTweetGetResponse {
 
 interface RetweetGetResponse {
   msg: string;
-  result: Tweet[];
+  result: {
+    totalPage: number;
+    tweetsList: Tweet[];
+  };
 }
 
 interface ProfileGetResponse {
