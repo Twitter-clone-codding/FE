@@ -10,6 +10,8 @@ import { Icon } from "@/utils";
 import { forwardRef } from "react";
 import MainCenterListItemIcon from "./MainCenterListItemIcon";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { profileSet } from "@/store/slice/profileSlice";
 
 const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
   const {
@@ -85,7 +87,7 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
       <MainCenterListItemContent>
         <div className="main-header">
           <div className="main-header-span">
-            <span onClick={onClickMoveProfileHandler}>{user?.nickname}</span>
+            <span onClick={onClickMoveHandler}>{user?.nickname}</span>
             <span className="hashtag">{hashtag}</span>
             <span>{user?.nickname}</span>
             <span className="hashtag">@{user?.nickname}</span>
