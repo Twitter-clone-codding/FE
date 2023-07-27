@@ -10,43 +10,43 @@ const SocialAuth = () => {
   const dispatch = useAppDispatch();
   const hasToken = useAppSelector((state) => Boolean(state.user.token));
 
-  const dataset = (res: any): UserState => {
-    const { data, Accesstoken, token } = res.data;
-    const { name, email, kakao_account, picture, given_name, profile_image, nickname } = data;
-    switch (state) {
-      case "naver":
-        return {
-          id: nickname,
-          nickname: email || "",
-          token: token,
-          tokens: { naver: Accesstoken },
-          picture: profile_image,
-        };
-      case "kakao":
-        return {
-          id: kakao_account.profile.nickname,
-          nickname: kakao_account.email || "",
-          token: token,
-          picture: kakao_account.profile.profile_image_url,
-          tokens: { kakao: Accesstoken },
-        };
-      case "google":
-        return {
-          id: given_name,
-          nickname: email || "",
-          token: token,
-          picture: picture,
-          tokens: { google: Accesstoken },
-        };
+  // const dataset = (res: any): UserState => {
+  //   const { data, Accesstoken, token } = res.data;
+  //   const { name, email, kakao_account, picture, given_name, profile_image, nickname } = data;
+  //   switch (state) {
+  //     case "naver":
+  //       return {
+  //         id: nickname,
+  //         nickname: email || "",
+  //         token: token,
+  //         tokens: { naver: Accesstoken },
+  //         picture: profile_image,
+  //       };
+  //     case "kakao":
+  //       return {
+  //         id: kakao_account.profile.nickname,
+  //         nickname: kakao_account.email || "",
+  //         token: token,
+  //         picture: kakao_account.profile.profile_image_url,
+  //         tokens: { kakao: Accesstoken },
+  //       };
+  //     case "google":
+  //       return {
+  //         id: given_name,
+  //         nickname: email || "",
+  //         token: token,
+  //         picture: picture,
+  //         tokens: { google: Accesstoken },
+  //       };
 
-      default:
-        return {
-          id: name || "",
-          nickname: email || "",
-          token: token || null,
-        };
-    }
-  };
+  //     default:
+  //       return {
+  //         id: name || "",
+  //         nickname: email || "",
+  //         token: token || null,
+  //       };
+  //   }
+  // };
 
   // useEffect(() => {
   //   const socialfecth = async () => {
