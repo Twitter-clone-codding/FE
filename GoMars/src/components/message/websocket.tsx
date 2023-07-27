@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, FormEvent } from "react";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import StompJs from "stompjs";
 import { ChatContainer, Message, InputArea, MessageInput } from "@/styles/message/chatstyle";
-import { MessagesContainer } from "@/styles/message/messageStyle";
 import { Input } from "@/utils";
-import { disconnect } from "process";
+import styled from "styled-components";
 import { useAppSelector } from "@/hooks/useRedux";
 
 interface ChatMessage {
@@ -16,7 +15,7 @@ interface ChatMessage {
 let stomp: any;
 const Chat: React.FC<ChatRooms> = (room) => {
   const stompClientRef = useRef<any>(null);
-
+  const user = useAppSelector((state) => state.user);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [client, setClient] = useState<Client | null>(null);
   const [currentMessage, setCurrentMessage] = useState<string>("");
@@ -48,8 +47,8 @@ const Chat: React.FC<ChatRooms> = (room) => {
           {},
           JSON.stringify({
             roomKey: room.roomKey,
-            nickname: room.nickname,
-            msg: `${room.nickname} : 님이 입장하셨습니다.`,
+            nickname: user.nickname,
+            msg: ` 님이 입장하셨습니다.`,
           })
         );
       },
@@ -82,7 +81,7 @@ const Chat: React.FC<ChatRooms> = (room) => {
         {},
         JSON.stringify({
           roomKey: room.roomKey,
-          nickname: room.nickname,
+          nickname: user.nickname,
           msg: currentMessage,
         })
       );
@@ -92,20 +91,24 @@ const Chat: React.FC<ChatRooms> = (room) => {
 
   return (
     <ChatContainer>
-      <MessagesContainer>
+      <MessagesChatContainer>
         {messages.map((msg, i) => (
-          <Message key={i} byCurrentUser={msg.nickname === room.nickname}>
+          <Message key={i} byCurrentUser={msg.nickname !== room.nickname}>
             <strong>{msg.nickname}</strong>
             {msg.msg}
           </Message>
         ))}
-      </MessagesContainer>
+      </MessagesChatContainer>
       <InputArea>
         <Input
           value={currentMessage}
           handleInputChange={(e) => setCurrentMessage(e.target.value)}
           placeholder="Start a new message"
           size="large"
+          handleInputSubmit={(e: FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            sendMessage();
+          }}
         />
         <button onClick={() => sendMessage()}>Send</button>
       </InputArea>
@@ -114,3 +117,13 @@ const Chat: React.FC<ChatRooms> = (room) => {
 };
 
 export default Chat;
+
+const MessagesChatContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: rgba(255, 255, 255, 1);
+  flex-grow: 1;
+  flex-direction: column;
+`;

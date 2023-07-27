@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "./protectRoute";
 import { useAppSelector } from "@/hooks/useRedux";
 import {
+  Detail,
   Explore,
   Home,
   Main,
@@ -31,6 +32,7 @@ const Nav = () => {
       <Route element={<ProtectedRoutes user={user} />}>
         <Route element={<Authlayout />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/:detail" element={<Detail />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/notifications" element={<Notifications />} />

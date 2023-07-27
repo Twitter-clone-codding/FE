@@ -42,11 +42,13 @@ export const getMainTweet = async (MainTweetid: string): Promise<MainTweetGetRes
 };
 
 // GET /api/retweets/{MainTweetid}
-export const getRetweets = async (
-  MainTweetid: string,
-  params: RetweetGetParams
-): Promise<RetweetGetResponse> => {
-  const response = await server.get(`/api/retweets/${MainTweetid}`, { params });
+export const getRetweets = async (params: RetweetGetParams): Promise<RetweetGetResponse> => {
+  const response = await server.get(`/api/retweets/${params.MainTweetid}`, {
+    params: {
+      limit: 10,
+      page: params.page,
+    },
+  });
   return response.data;
 };
 

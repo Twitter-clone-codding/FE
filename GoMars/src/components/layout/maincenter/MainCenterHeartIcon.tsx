@@ -73,8 +73,8 @@ const MainCenterHeartIcon: FC<IconWrapperProps> = ({
         hoverBgColors={hoverBgColors[index]}
         onMouseEnter={() => setColor(hoverColor)}
         onMouseLeave={() => setColor(defaultColor)}
-        // onClick={index === 2 && !isLoading ? likeHandler : () => {}}
-        onClick={onClickIconHandler}
+        onClick={index === 2 && !isLoading ? likeHandler : () => {}}
+        // onClick={onClickIconHandler}
       >
         <div className="footer-item-icon">{iconElement}</div>
         {count !== 0 && <span>{count}</span>}
