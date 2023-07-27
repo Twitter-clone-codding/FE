@@ -5,17 +5,19 @@ import { Containor } from "@/styles/maincenter/maincenter";
 import { Button, Icon } from "@/utils";
 import Carousel from "@/components/common/Carousel";
 import { calendar } from "@/assets/svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MainCenterListItem from "@/components/layout/maincenter/MainCenterListItem";
 import HomeHeaderBottom from "@/components/layout/maincenter/HomeHeaderBottom";
 const Profile = () => {
   const [profileData, setProfileData] = useState<Profile>();
-  const tagname = useAppSelector((state) => state.user.tagname);
+  const tagName = useAppSelector((state) => state.profile.tagName);
+  console.log(tagName);
   const navigate = useNavigate();
+  const param = useParams();
   const SelectorArray = ["Tweets", "Replies", "Media", "Likes"];
   useEffect(() => {
     const fetch = async () => {
-      const response = await getProfile(tagname);
+      const response = await getProfile(tagName);
       setProfileData(response.result);
       console.log("response", response.result);
     };
@@ -35,24 +37,26 @@ const Profile = () => {
               <div className="main-profile-circle"></div>
               <div className="main-profile-button">
                 <div className="button">
-                  <Button
-                    backgroundColor="white"
-                    color="black"
-                    hoverColor="hoverLightBlack"
-                    size="editProfile"
-                    borderColor="gray"
-                    title={<span>Edit profile</span>}
-                    onClick={onClickHandler}
-                  />
-
-                  <Button
-                    backgroundColor="black"
-                    color="white"
-                    hoverColor="hoverBlack"
-                    size="follow"
-                    title={<span>follow</span>}
-                    onClick={onClickHandler}
-                  />
+                  {profileData.tagName === tagName ? (
+                    <Button
+                      backgroundColor="white"
+                      color="black"
+                      hoverColor="hoverLightBlack"
+                      size="editProfile"
+                      borderColor="gray"
+                      title={<span>Edit profile</span>}
+                      onClick={onClickHandler}
+                    />
+                  ) : (
+                    <Button
+                      backgroundColor="black"
+                      color="white"
+                      hoverColor="hoverBlack"
+                      size="follow"
+                      title={<span>follow</span>}
+                      onClick={onClickHandler}
+                    />
+                  )}
                 </div>
               </div>
               <div className="main-profile-name">

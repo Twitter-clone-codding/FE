@@ -9,24 +9,14 @@ import {
 import { Icon } from "@/utils";
 import { forwardRef } from "react";
 import MainCenterListItemIcon from "./MainCenterListItemIcon";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { userSet } from "@/store/slice/userSlice";
+import { profileSet } from "@/store/slice/profileSlice";
 
 const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
-  const {
-    content,
-    createdAt,
-    hashtag,
-    hearts,
-    imgList,
-    views,
-    id,
-    heartCheck,
-    user,
-  } = props;
+  const { content, createdAt, hashtag, hearts, imgList, views, id, heartCheck, user } = props;
 
-  const detailNavigateHandler = () => {
-    console.log("imgList", imgList);
-  };
   const convertToJSDate = (javaDate: string): Date => {
     const date = new Date(javaDate);
     date.setHours(date.getHours() + 9);
@@ -64,36 +54,35 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
     return `${seconds}s`;
   };
   const navigate = useNavigate();
-  const onClickMoveProfileHandler = () => {
-    navigate(`/${hashtag}`);
+  const dispatch = useAppDispatch();
+  const onClickMoveHandler = () => {
+    navigate(`/profile/${user.tagName}`);
+    dispatch(profileSet({ tagName: user.tagName }));
   };
+
   // const profileImage = user
   const ItemContents = (
-    <MainCenterListItemContainor>
+    <MainCenterListItemContainor
+      onClick={() => {
+        navigate(`${id}`);
+      }}
+    >
       <MainCenterListItemAvartar
         userProfileImage={user.profileImageUrl ? user.profileImageUrl : normal}
       >
         <div className="avartar"></div>
-        <img
-          src={user.profileImageUrl ? user.profileImageUrl : normal}
-          alt="asd"
-        />
+        <img src={user.profileImageUrl ? user.profileImageUrl : normal} alt="asd" />
       </MainCenterListItemAvartar>
       <MainCenterListItemContent>
         <div className="main-header">
           <div className="main-header-span">
-            <span onClick={onClickMoveProfileHandler}>{user?.nickname}</span>
+            <span onClick={onClickMoveHandler}>{user?.nickname}</span>
             <span className="hashtag">{hashtag}</span>
             <span>{user?.nickname}</span>
             <span className="hashtag">@{user?.nickname}</span>
             <span className="date">·{getTimeAgo(createdAt)}</span>
           </div>
-          <Icon
-            color={"rgb(83, 100, 113)"}
-            height={18.75}
-            width={18.75}
-            path={threedot}
-          />
+          <Icon color={"rgb(83, 100, 113)"} height={18.75} width={18.75} path={threedot} />
         </div>
         <div className="main-contnet">
           <div className="main-contnet-comment">
@@ -114,11 +103,7 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
       </MainCenterListItemContent>
     </MainCenterListItemContainor>
   );
-  const isLastItem = ref ? (
-    <div ref={ref}>{ItemContents}</div>
-  ) : (
-    <div>{ItemContents}</div>
-  );
+  const isLastItem = ref ? <div ref={ref}>{ItemContents}</div> : <div>{ItemContents}</div>;
   return isLastItem;
 });
 

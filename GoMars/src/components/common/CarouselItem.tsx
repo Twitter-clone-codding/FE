@@ -17,14 +17,14 @@ const CarouselItemContainor = styled.div`
   .content {
     width: 156px;
     height: 96px;
-    background-color: red;
+    background-color: lightgray;
     border-radius: inherit;
   }
   .title {
     width: 156px;
     height: 16px;
     margin-top: 12px;
-    background-color: blue;
+    background-color: lightgray;
   }
 `;
 
