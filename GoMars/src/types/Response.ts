@@ -11,7 +11,7 @@ interface Image {
 }
 
 interface Tweet {
-  user?: User;
+  user: User;
   id: number;
   content: string;
   hashtag: string;
