@@ -4,6 +4,9 @@ import formReducer from "./slice/formSlice";
 import inputReducer from "./slice/inputSlice";
 import myTweetReducer from "./slice/myTweetSlice";
 import modalReducer from "./slice/modalSlice";
+import notificationReducer from "./slice/noticeSlice";
+
+
 import {
   FLUSH,
   PAUSE,
@@ -31,6 +34,7 @@ const persistedFormReducer = persistReducer(formPersistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
+    notice: notificationReducer,
     form: rootReducer,
     input: inputReducer,
     user: persistedFormReducer,

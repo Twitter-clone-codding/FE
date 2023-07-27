@@ -20,7 +20,6 @@ const Nav = () => {
   return (
     <Routes>
       {/* NotAuth */}
-      <Route path={"/*"} element={<ErrorPage />} />
       <Route element={<NotAuthRoutes user={user} />}>
         <Route path="/" element={<Main />}>
           <Route path="/login" element={<Signin />} />
@@ -36,11 +35,13 @@ const Nav = () => {
           <Route path="/messages" element={<Messages />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/:tagname" element={<Profile />} />
+          <Route path="/:profileName" element={<Profile />} />
+          <Route path="/*" element={<ErrorPage />} />
         </Route>
-        <Route path="/*" element={<ErrorPage />} />
       </Route>
       {/* 404 handler */}
+
+      <Route path={"/*"} element={<ErrorPage />} />
     </Routes>
   );
 };

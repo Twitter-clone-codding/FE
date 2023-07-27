@@ -34,7 +34,6 @@ const MainCenterListItemIcon: React.FC<Tweet> = (props) => {
   const retweetHandler = () => {};
   return (
     <>
-      ``
       {centerFooterArray.map((path, i) => (
         <MainCenterHeartIcon
           isLike={isLiked}

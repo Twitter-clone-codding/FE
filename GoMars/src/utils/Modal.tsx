@@ -48,13 +48,7 @@ interface ModalProps {
   onClick?: () => void;
 }
 
-const Modal = ({
-  width,
-  height,
-  element,
-  setModal,
-  type = "default",
-}: ModalProps) => {
+const Modal = ({ width, height, element, setModal, type = "default", onClick }: ModalProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   return (

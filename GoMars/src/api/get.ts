@@ -9,6 +9,14 @@ export const search = async (params: SearchParams): Promise<SearchResponse> => {
   const response = await server.get("/api/search", { params });
   return response.data;
 };
+export const messageSearch = async (search: string): Promise<MessageSearchResponse> => {
+  const response = await server.get("/api/search/profile", {
+    params: {
+      search,
+    },
+  });
+  return response.data;
+};
 
 export const postLike = async (tweetId: number): Promise<TweetPostResponse> => {
   const response = await server.get(`/api/tweets/heart/${tweetId}`);
@@ -16,9 +24,7 @@ export const postLike = async (tweetId: number): Promise<TweetPostResponse> => {
 };
 
 // GET /api/tweets/posts
-export const getTweets = async (
-  params: TweetGetParams
-): Promise<TweetGetResponse> => {
+export const getTweets = async (params: TweetGetParams): Promise<TweetGetResponse> => {
   const response = await server.get("/api/tweets/posts", {
     params: {
       page: params.page,
@@ -48,10 +54,12 @@ export const getRetweets = async (
 
 // GET /api/profile//{MainTweetid}
 
+
 export const getProfile = async (
   tagname: string
 ): Promise<ProfileGetResponse> => {
   const response = await server.get(`/api/profile/${tagname}`);
+
   return response.data;
 };
 
