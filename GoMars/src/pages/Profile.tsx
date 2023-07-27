@@ -11,6 +11,7 @@ import HomeHeaderBottom from "@/components/layout/maincenter/HomeHeaderBottom";
 const Profile = () => {
   const [profileData, setProfileData] = useState<Profile>();
   const tagName = useAppSelector((state) => state.profile.tagName);
+  const myName = useAppSelector((state) => state.user.tagname);
   console.log(tagName);
   const navigate = useNavigate();
   const param = useParams();
@@ -23,9 +24,6 @@ const Profile = () => {
     };
     fetch();
   }, []);
-  const onClickHandler = () => {
-    navigate("/profile/retweet");
-  };
 
   return (
     <>
@@ -37,7 +35,7 @@ const Profile = () => {
               <div className="main-profile-circle"></div>
               <div className="main-profile-button">
                 <div className="button">
-                  {profileData.tagName === tagName ? (
+                  {profileData.tagName === myName ? (
                     <Button
                       backgroundColor="white"
                       color="black"
@@ -45,7 +43,6 @@ const Profile = () => {
                       size="editProfile"
                       borderColor="gray"
                       title={<span>Edit profile</span>}
-                      onClick={onClickHandler}
                     />
                   ) : (
                     <Button
@@ -54,7 +51,6 @@ const Profile = () => {
                       hoverColor="hoverBlack"
                       size="follow"
                       title={<span>follow</span>}
-                      onClick={onClickHandler}
                     />
                   )}
                 </div>

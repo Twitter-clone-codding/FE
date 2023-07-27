@@ -54,7 +54,12 @@ const MainCenterHeartIcon: FC<IconWrapperProps> = ({
           }}
         />
       ) : isLike ? (
-        <Icon path={FillHeart} color={"rgb(249, 24, 128)"} height={18.75} width={18.75} />
+        <Icon
+          path={FillHeart}
+          color={"rgb(249, 24, 128)"}
+          height={18.75}
+          width={18.75}
+        />
       ) : (
         <Icon path={path} color={color} height={18.75} width={18.75} />
       )
@@ -65,7 +70,7 @@ const MainCenterHeartIcon: FC<IconWrapperProps> = ({
   const modalChecked = useAppSelector((state) => state.modal.modalChecked);
   const dispatch = useAppDispatch();
   const onClickIconHandler = () => {
-    dispatch(toggleModal({ modalChecked }));
+    dispatch(toggleModal());
   };
   return (
     <>
@@ -73,8 +78,13 @@ const MainCenterHeartIcon: FC<IconWrapperProps> = ({
         hoverBgColors={hoverBgColors[index]}
         onMouseEnter={() => setColor(hoverColor)}
         onMouseLeave={() => setColor(defaultColor)}
-        onClick={index === 2 && !isLoading ? likeHandler : () => {}}
-        // onClick={onClickIconHandler}
+        onClick={
+          index === 2 && !isLoading
+            ? likeHandler
+            : index === 0 && !isLoading
+            ? onClickIconHandler
+            : () => {}
+        }
       >
         <div className="footer-item-icon">{iconElement}</div>
         {count !== 0 && <span>{count}</span>}
