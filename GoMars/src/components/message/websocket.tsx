@@ -5,6 +5,7 @@ import StompJs from "stompjs";
 import { ChatContainer, Message, InputArea, MessageInput } from "@/styles/message/chatstyle";
 import { MessagesContainer } from "@/styles/message/messageStyle";
 import { Input } from "@/utils";
+import { getChatRoomJoin } from "@/api/post";
 
 interface ChatMessage {
   from: number;
@@ -27,7 +28,7 @@ const Chat: React.FC<User> = (user) => {
       () => {
         stomp.debug = null;
         stompClientRef.current = stomp;
-        stomp.subscribe(`/sub/${user.userId}`, (data: any) => {
+        stomp.subscribe(`/sub`, (data: any) => {
           // 구독할때 룸네임 넣어서 sub 하고
           const newMessage = JSON.parse(data.body);
           // Imposters 값을 state에 저장
@@ -62,21 +63,21 @@ const Chat: React.FC<User> = (user) => {
           {},
           JSON.stringify({
             type: "LEAVE",
-            roomId: user.userId, // 현재의 사용자 ID를 사용해서 방을 나갑니다.
+            roomId: user.id, // 현재의 사용자 ID를 사용해서 방을 나갑니다.
             message: "",
           })
         );
       }
     };
-  }, [user.userId]);
-  const sendMessage = () => {
+  }, [user.id]);
+  const sendMessage = (id: number) => {
     if (client) {
       client.publish({
         destination: "/pub/send/message",
         body: JSON.stringify({
           from: "User",
           message: {
-            userId: 1,
+            userId: id,
             msg: "test",
           },
         }),
@@ -89,8 +90,8 @@ const Chat: React.FC<User> = (user) => {
     <ChatContainer>
       <MessagesContainer>
         {messages.map((msg, i) => (
-          <Message key={i} byCurrentUser={msg.from === user.userId}>
-            <strong>{msg.from === user.userId ? "You" : "Them"}:</strong>
+          <Message key={i} byCurrentUser={msg.from === user.id}>
+            <strong>{msg.from === user.id ? "You" : "Them"}:</strong>
             {msg.message}
           </Message>
         ))}
@@ -102,7 +103,7 @@ const Chat: React.FC<User> = (user) => {
           placeholder="Start a new message"
           size="large"
         />
-        <button onClick={sendMessage}>Send</button>
+        <button onClick={() => sendMessage(user.id)}>Send</button>
       </InputArea>
     </ChatContainer>
   );
