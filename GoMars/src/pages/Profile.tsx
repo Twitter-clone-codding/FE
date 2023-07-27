@@ -11,7 +11,6 @@ import HomeHeaderBottom from "@/components/layout/maincenter/HomeHeaderBottom";
 const Profile = () => {
   const [profileData, setProfileData] = useState<Profile>();
   const tagName = useAppSelector((state) => state.profile.tagName);
-  console.log(tagName);
   const navigate = useNavigate();
   const param = useParams();
   const SelectorArray = ["Tweets", "Replies", "Media", "Likes"];
@@ -60,21 +59,12 @@ const Profile = () => {
                 </div>
               </div>
               <div className="main-profile-name">
-                <div className="main-profile-name-username">
-                  {profileData.nickname}
-                </div>
-                <div className="main-profile-name-hashtag">
-                  {profileData.tagName}
-                </div>
+                <div className="main-profile-name-username">{profileData.nickname}</div>
+                <div className="main-profile-name-hashtag">{profileData.tagName}</div>
               </div>
               <div className="main-profile-create">
                 <div className="main-profile-create-icon">
-                  <Icon
-                    color="rgb(83, 100, 113)"
-                    path={calendar}
-                    height={18.75}
-                    width={18.75}
-                  />
+                  <Icon color="rgb(83, 100, 113)" path={calendar} height={18.75} width={18.75} />
                 </div>
                 <div>Joined {profileData.createdAt}</div>
               </div>
@@ -106,9 +96,7 @@ const Profile = () => {
               <Carousel />
             </div>
             <div className="more-info-tweet">
-              {profileData.myList?.map((tweet) => (
-                <MainCenterListItem key={tweet.id} {...tweet} />
-              ))}
+              {profileData.myList?.map((tweet) => <MainCenterListItem key={tweet.id} {...tweet} />)}
             </div>
             <div className="more-info-follow">
               {/* {followArray.map((data) => (
