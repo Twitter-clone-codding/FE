@@ -5,15 +5,16 @@ import StompJs from "stompjs";
 import { ChatContainer, Message, InputArea, MessageInput } from "@/styles/message/chatstyle";
 import { MessagesContainer } from "@/styles/message/messageStyle";
 import { Input } from "@/utils";
-import { getChatRoomJoin } from "@/api/post";
+import { disconnect } from "process";
+import { useAppSelector } from "@/hooks/useRedux";
 
 interface ChatMessage {
-  from: number;
-  message: string;
+  nickname: string;
+  msg: string;
 }
 
 let stomp: any;
-const Chat: React.FC<User> = (user) => {
+const Chat: React.FC<ChatRooms> = (room) => {
   const stompClientRef = useRef<any>(null);
 
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -22,30 +23,33 @@ const Chat: React.FC<User> = (user) => {
 
   const connect = () => {
     const sock = new SockJS(`https://pink-love.shop:8080/chat`);
+    // const user = useAppSelector(state=> state.user.nickname)
     stomp = StompJs.over(sock);
     stomp.connect(
       {},
       () => {
         stomp.debug = null;
         stompClientRef.current = stomp;
-        stomp.subscribe(`/sub`, (data: any) => {
+        stomp.subscribe(`/sub/${room.roomKey}`, ({ body }) => {
+          console.log(JSON.parse(body));
           // 구독할때 룸네임 넣어서 sub 하고
-          const newMessage = JSON.parse(data.body);
+          // const newMessage = data.msg;
           // Imposters 값을 state에 저장
-          if (newMessage.imposters) {
-          }
-          // 새로운 메시지가 imposter 정보를 담고 있다면 imposters state를 업데이트
-          if (newMessage.imposter) {
-          }
+          // if (newMessage.imposters) {
+          // }
+          // // 새로운 메시지가 imposter 정보를 담고 있다면 imposters state를 업데이트
+          // if (newMessage.imposter) {
+          // }
           // 과거의 메세지와 현재 메세지 추가
-          setMessages((prevMessages) => [...prevMessages, newMessage]);
+          setMessages((prevMessages) => [...prevMessages, JSON.parse(body)]);
         });
         stomp.send(
-          "/pub/chat/message",
+          "/pub/send/message",
           {},
           JSON.stringify({
-            type: "ENTER",
-            message: "",
+            roomKey: room.roomKey,
+            nickname: room.nickname,
+            msg: `${room.nickname} : 님이 입장하셨습니다.`,
           })
         );
       },
@@ -59,29 +63,29 @@ const Chat: React.FC<User> = (user) => {
     return () => {
       if (stompClientRef.current) {
         stompClientRef.current.send(
-          "/pub/chat/message",
+          "/pub/send/message",
           {},
           JSON.stringify({
-            type: "LEAVE",
-            roomId: user.id, // 현재의 사용자 ID를 사용해서 방을 나갑니다.
-            message: "",
+            roomKey: room.roomKey,
+            nickname: room.nickname,
+            msg: `${room.nickname} : 님이 나가셨습니다.`,
           })
         );
       }
     };
-  }, [user.id]);
-  const sendMessage = (id: number) => {
-    if (client) {
-      client.publish({
-        destination: "/pub/send/message",
-        body: JSON.stringify({
-          from: "User",
-          message: {
-            userId: id,
-            msg: "test",
-          },
-        }),
-      });
+  }, [room.roomKey]);
+
+  const sendMessage = () => {
+    if (stompClientRef.current) {
+      stompClientRef.current.send(
+        "/pub/send/message",
+        {},
+        JSON.stringify({
+          roomKey: room.roomKey,
+          nickname: room.nickname,
+          msg: currentMessage,
+        })
+      );
       setCurrentMessage("");
     }
   };
@@ -90,9 +94,9 @@ const Chat: React.FC<User> = (user) => {
     <ChatContainer>
       <MessagesContainer>
         {messages.map((msg, i) => (
-          <Message key={i} byCurrentUser={msg.from === user.id}>
-            <strong>{msg.from === user.id ? "You" : "Them"}:</strong>
-            {msg.message}
+          <Message key={i} byCurrentUser={msg.nickname === room.nickname}>
+            <strong>{msg.nickname}</strong>
+            {msg.msg}
           </Message>
         ))}
       </MessagesContainer>
@@ -103,7 +107,7 @@ const Chat: React.FC<User> = (user) => {
           placeholder="Start a new message"
           size="large"
         />
-        <button onClick={() => sendMessage(user.id)}>Send</button>
+        <button onClick={() => sendMessage()}>Send</button>
       </InputArea>
     </ChatContainer>
   );

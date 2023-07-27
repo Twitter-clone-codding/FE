@@ -17,6 +17,7 @@ const Messages = () => {
   const [value, onChangeHandler] = useInput({ searchValue: "" });
   const [messageList, setMessageList] = useState<User[]>();
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [selectedRoom, setSelectedRoom] = useState<ChatRooms | null>(null);
   const messageSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await messageSearch(value["searchValue"])
@@ -29,10 +30,10 @@ const Messages = () => {
   useOutsideClick(ref, () => {
     setFocus(false);
   });
-  const handleRoomClick = (roomKey: number) => {
+  const handleRoomClick = (room: ChatRooms) => {
+    setSelectedRoom(room);
     // 여기에서 방 입장 로직을 구현합니다.
     // 예를 들면, 다른 페이지로 리다이렉트하거나 모달을 표시하는 등의 동작을 수행할 수 있습니다.
-    console.log(`Room ${roomKey} was clicked!`);
   };
 
   const handleUserClick = async (user: User) => {
@@ -97,13 +98,13 @@ const Messages = () => {
         {List &&
           List.map((room, i) => (
             <ChatingRoomItem
-              handleRoomClick={() => handleRoomClick(room.id)}
-              key={room.id + i * 4}
+              handleRoomClick={() => handleRoomClick(room)}
+              key={room.id}
               {...room}
             />
           ))}
       </MessageRoom>
-      <ChatingRoom>{selectedUser && <Chat {...selectedUser} />}</ChatingRoom>
+      <ChatingRoom>{selectedRoom && <Chat {...selectedRoom} />}</ChatingRoom>
     </MessagesContainer>
   );
 };

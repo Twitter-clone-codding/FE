@@ -2,14 +2,16 @@ import { threedot, cancel } from "@/assets/svg";
 import Button from "@/utils/Button";
 
 import { Icon } from "@/utils";
-import { useAppDispatch } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { userLogOut } from "@/store/slice/userSlice";
 import styled, { css } from "styled-components";
 import { logout } from "@/api/post";
+import { normal } from "@/assets/img";
 
 interface MainHeaderProfileProps {
   type: "follow" | "profile" | "search";
   onClick?: () => void;
+  img?: string;
 }
 const typeStyles = {
   follow: css`
@@ -42,11 +44,48 @@ const ProfileContainor = styled.div<MainHeaderProfileProps>`
     display: flex;
     flex-direction: row;
   }
-  .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 9999px;
-    background-color: red;
+  .avatar-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-right: 12px;
+    flex-basis: 47px;
+    .avatar-wrraper {
+      pointer-events: auto;
+      flex-direction: column;
+      position: relative;
+      z-index: 0;
+      height: 40px;
+      bottom: 0px;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      border-radius: 9999px;
+      overflow: hidden;
+      .avatar-box {
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+        background-image: url(${(props) => props.img});
+      }
+      img {
+        inset: 0px;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+      }
+    }
   }
   .info {
     margin: 0 12px;
@@ -78,6 +117,7 @@ const ProfileContainor = styled.div<MainHeaderProfileProps>`
 const MainHeaderProfile: React.FC<MainHeaderProfileProps> = (props) => {
   const { type } = props;
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
   let sideClickItem;
   switch (type) {
     case "follow":
@@ -101,14 +141,22 @@ const MainHeaderProfile: React.FC<MainHeaderProfileProps> = (props) => {
       .catch((err) => console.log(err));
     dispatch(userLogOut());
   };
+
+  const Profileimg = user.picture ?? normal;
+
   return (
-    <ProfileContainor type={type}>
-      <div className="profile-wrapper">
+    <ProfileContainor type={type} img={Profileimg}>
+      <div className="profile-wrapper" onClick={logoutHandelr}>
         <div className="main-info">
-          <div className="avatar" onClick={logoutHandelr}></div>
+          <div className="avatar-container">
+            <div className="avatar-wrraper">
+              <div className="avatar-box"></div>
+              <img alt="" src={Profileimg} />
+            </div>
+          </div>
           <div className="info">
-            <div className="info-name">강신범</div>
-            <div className="info-tag-name">@kaning</div>
+            <div className="info-name">{user.nickname}</div>
+            <div className="info-tag-name">{user.tagname}</div>
           </div>
         </div>
         <div className={type}>{sideClickItem}</div>
