@@ -66,8 +66,8 @@ const Signfirst: React.FC<SignFirstProps> = (props) => {
         <div className="birth-title">생년월일</div>
         <div className="information">
           <span>
-            이 정보는 공개적으로 표시되지 않습니다. 비즈니스, 반려동물 등 계정 주제에 상관없이 나의
-            연령을 확인하세요.
+            이 정보는 공개적으로 표시되지 않습니다. 비즈니스, 반려동물 등 계정
+            주제에 상관없이 나의 연령을 확인하세요.
           </span>
         </div>
         <SelectContainer>

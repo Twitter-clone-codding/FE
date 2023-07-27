@@ -18,7 +18,9 @@ const SignInFirst = () => {
   const dispatch = useAppDispatch();
   const [Lodoing, setLoginLoading] = useState(false);
 
-  const handleLoginInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLoginInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { className, value } = event.target;
     dispatch(updateLoginData({ ...loginData, [className]: value }));
   };
@@ -32,7 +34,15 @@ const SignInFirst = () => {
     })
       .then((res) => {
         console.log(res);
-        dispatch(userSet({ id: "trgf456a@aaa.co.krasd", nickname: "최은석", token: "ㅁㄴㅇ" }));
+        dispatch(
+          userSet({
+            email: loginData.email,
+            picture: res.result.profileImageUrl,
+            nickname: res.result.nickname,
+            token: res.result.token,
+            tagname: res.result.tagName,
+          })
+        );
       })
       .catch((err) => console.log(err))
       .finally(() => setLoginLoading(false));
@@ -76,7 +86,11 @@ const SignInFirst = () => {
           size="register"
           // onClick={nextStep}
           onClick={authLoginHandler}
-          title={<ButtonTitleStyleNextButton>{SpinnerContent}</ButtonTitleStyleNextButton>}
+          title={
+            <ButtonTitleStyleNextButton>
+              {SpinnerContent}
+            </ButtonTitleStyleNextButton>
+          }
         />
       </NextStepButtonDiv>
     </SignInContainer>

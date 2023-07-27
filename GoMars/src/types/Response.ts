@@ -1,8 +1,8 @@
 interface User {
-  userId: number;
+  id: number;
   nickname: string;
   tagName: string;
-  profileImageUrl: string;
+  profileImageUrl: string | null;
 }
 
 interface Image {
@@ -11,7 +11,7 @@ interface Image {
 }
 
 interface Tweet {
-  user: User;
+  user?: User;
   id: number;
   content: string;
   hashtag: string;
@@ -38,12 +38,12 @@ interface TweetPost {
 interface Profile {
   nickname: string;
   tagName: string;
-  profileImageUrl: string;
-  profileBackgroundUrl: string;
-  content: string;
-  url: string;
+  profileImageUrl: string | null;
+  profileBackgroundImageUrl: string | null;
+  content: string | null;
+  url: string | null;
   createdAt: string;
-  myTweets: Tweet[];
+  myList: Tweet[];
 }
 
 interface ProfileUpdate {
@@ -56,7 +56,11 @@ interface ProfileUpdate {
 
 interface LoginResponse {
   msg: string;
-  result: any;
+  result: LoginUserResponse;
+}
+
+interface LoginUserResponse extends User {
+  token: string;
 }
 
 interface LoginFailure {

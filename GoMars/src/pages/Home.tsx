@@ -59,7 +59,7 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <PostTweet />
+      <PostTweet type="tweet" comment="What is happening?!" />
       {myTweet &&
         myTweet?.map((tweet) => (
           <MainCenterListItem key={tweet.id} {...tweet} />

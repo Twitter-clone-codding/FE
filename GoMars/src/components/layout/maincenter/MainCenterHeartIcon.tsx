@@ -4,7 +4,9 @@ import { Icon, Modal } from "@/utils";
 import { FC, useState } from "react";
 import heartlottietwo from "@/assets/lottie/hearttwo.json";
 import LottieAnimation from "lottie-react";
-import SmallModal from "@/utils/SmallModal";
+import TweetComponent from "./TweetComponent";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { toggleModal } from "@/store/slice/modalSlice";
 interface IconWrapperProps {
   path: string;
   count: number;
@@ -65,9 +67,10 @@ const MainCenterHeartIcon: FC<IconWrapperProps> = ({
       <Icon path={path} color={color} height={18.75} width={18.75} />
     );
 
-  const [toggleModal, setToggleModal] = useState<boolean>(false);
+  const modalChecked = useAppSelector((state) => state.modal.modalChecked);
+  const dispatch = useAppDispatch();
   const onClickIconHandler = () => {
-    setToggleModal((prev) => !prev);
+    dispatch(toggleModal({ modalChecked }));
   };
   return (
     <>
@@ -75,13 +78,15 @@ const MainCenterHeartIcon: FC<IconWrapperProps> = ({
         hoverBgColors={hoverBgColors[index]}
         onMouseEnter={() => setColor(hoverColor)}
         onMouseLeave={() => setColor(defaultColor)}
-        onClick={index === 2 && !isLoading ? likeHandler : () => {}}
-
+        // onClick={index === 2 && !isLoading ? likeHandler : () => {}}
+        onClick={onClickIconHandler}
       >
         <div className="footer-item-icon">{iconElement}</div>
         {count !== 0 && <span>{count}</span>}
       </IconBox>
-
+      {modalChecked && (
+        <Modal element={<TweetComponent />} height="346" width="600" />
+      )}
     </>
   );
 };

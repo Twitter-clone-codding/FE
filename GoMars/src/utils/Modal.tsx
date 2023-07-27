@@ -54,14 +54,12 @@ const Modal = ({
   element,
   setModal,
   type = "default",
-  onClick,
 }: ModalProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   return (
     <>
       <ModalContainer ref={ref} width={width} height={height}>
-        <button onClick={onClick}>닫기</button>
         <Wrapper>{element}</Wrapper>
       </ModalContainer>
       <ModalBackGround />

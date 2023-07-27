@@ -204,6 +204,9 @@ const Containor = styled.div`
   .more-info-more-info-caruosel {
     height: 172px;
   }
+  .more-info-tweet {
+    padding-top: 12px;
+  }
 `;
 const HomeHeaderDiv = styled.div`
   position: relative;
