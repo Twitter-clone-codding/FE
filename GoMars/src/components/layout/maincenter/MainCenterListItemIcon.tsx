@@ -4,6 +4,8 @@ import { IconBox } from "@/styles/maincenter/maincenter";
 import { Icon } from "@/utils";
 import { useState } from "react";
 import MainCenterHeartIcon from "./MainCenterHeartIcon";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { toggleModal } from "@/store/slice/modalSlice";
 
 const MainCenterListItemIcon: React.FC<Tweet> = (props) => {
   const { hearts, views, id, heartCheck } = props;
@@ -31,7 +33,6 @@ const MainCenterListItemIcon: React.FC<Tweet> = (props) => {
       setIsLoading(false);
     });
   };
-  const retweetHandler = () => {};
   return (
     <>
       {centerFooterArray.map((path, i) => (

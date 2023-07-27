@@ -13,8 +13,7 @@ export const modalSlice = createSlice({
   initialState,
   reducers: {
     toggleModal: (state, action: PayloadAction<Modalstate>) => {
-      const { modalChecked } = action.payload;
-      state.modalChecked = !modalChecked;
+      state.modalChecked = !state.modalChecked;
     },
   },
 });
