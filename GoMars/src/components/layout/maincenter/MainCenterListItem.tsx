@@ -12,21 +12,8 @@ import MainCenterListItemIcon from "./MainCenterListItemIcon";
 import { useNavigate } from "react-router-dom";
 
 const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
-  const {
-    content,
-    createdAt,
-    hashtag,
-    hearts,
-    imgList,
-    views,
-    id,
-    heartCheck,
-    user,
-  } = props;
+  const { content, createdAt, hashtag, hearts, imgList, views, id, heartCheck, user } = props;
 
-  const detailNavigateHandler = () => {
-    console.log("imgList", imgList);
-  };
   const convertToJSDate = (javaDate: string): Date => {
     const date = new Date(javaDate);
     date.setHours(date.getHours() + 9);
@@ -67,17 +54,19 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
   const onClickMoveProfileHandler = () => {
     navigate(`/${hashtag}`);
   };
+
   // const profileImage = user
   const ItemContents = (
-    <MainCenterListItemContainor>
+    <MainCenterListItemContainor
+      onClick={() => {
+        navigate(`${id}`);
+      }}
+    >
       <MainCenterListItemAvartar
         userProfileImage={user.profileImageUrl ? user.profileImageUrl : normal}
       >
         <div className="avartar"></div>
-        <img
-          src={user.profileImageUrl ? user.profileImageUrl : normal}
-          alt="asd"
-        />
+        <img src={user.profileImageUrl ? user.profileImageUrl : normal} alt="asd" />
       </MainCenterListItemAvartar>
       <MainCenterListItemContent>
         <div className="main-header">
@@ -88,12 +77,7 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
             <span className="hashtag">@{user?.nickname}</span>
             <span className="date">·{getTimeAgo(createdAt)}</span>
           </div>
-          <Icon
-            color={"rgb(83, 100, 113)"}
-            height={18.75}
-            width={18.75}
-            path={threedot}
-          />
+          <Icon color={"rgb(83, 100, 113)"} height={18.75} width={18.75} path={threedot} />
         </div>
         <div className="main-contnet">
           <div className="main-contnet-comment">
@@ -114,11 +98,7 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
       </MainCenterListItemContent>
     </MainCenterListItemContainor>
   );
-  const isLastItem = ref ? (
-    <div ref={ref}>{ItemContents}</div>
-  ) : (
-    <div>{ItemContents}</div>
-  );
+  const isLastItem = ref ? <div ref={ref}>{ItemContents}</div> : <div>{ItemContents}</div>;
   return isLastItem;
 });
 

@@ -6,3 +6,4 @@ export { default as Signup } from "./Signup";
 export { default as Notifications } from "./Notifications";
 export { default as Home } from "./Home";
 export { default as Explore } from "./Explore";
+export { default as Detail } from "./Detail";

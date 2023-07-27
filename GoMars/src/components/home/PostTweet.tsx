@@ -1,5 +1,4 @@
 import { postTweet } from "@/api/post";
-import { server } from "@/api/server";
 import { normal } from "@/assets/img";
 import { down, earth, location, picture, postArray } from "@/assets/svg";
 import useImageSelect from "@/hooks/useImageSelect";
@@ -10,7 +9,6 @@ import { PostContainer, ButtonTitle } from "@/styles/home/homeStyle";
 import { MainImgBox } from "@/styles/maincenter/maincenter";
 import { Icon, Button } from "@/utils";
 import { ChangeEvent, ChangeEventHandler, useCallback, useRef, useState } from "react";
-import { css } from "styled-components";
 
 interface PostTweetProps {
   comment: string;

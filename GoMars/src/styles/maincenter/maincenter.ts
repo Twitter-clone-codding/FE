@@ -350,6 +350,7 @@ const MainCenterListItemContainor = styled.div`
   padding-top: 12px;
   width: 598px;
   display: flex;
+  cursor: pointer;
   flex-direction: row;
   border-bottom: 1px solid rgb(239, 243, 244);
   &:hover {
