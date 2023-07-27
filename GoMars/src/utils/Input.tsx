@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FocusEventHandler, FormEvent } from "react";
 import styled, { css } from "styled-components";
 import Icon from "./Icon";
 import { explore } from "@/assets/svg";
@@ -63,11 +63,12 @@ export interface InputProps extends InputStyleProps {
   placeholder?: string;
   className?: string;
   value?: string;
+  onFocus?: FocusEventHandler<HTMLInputElement>; // 추가
+  onBlur?: FocusEventHandler<HTMLInputElement>;
 }
 
 const Input: React.FC<InputProps> = (props) => {
-  const { placeholder, size, value, handleInputChange, handleInputSubmit } =
-    props;
+  const { placeholder, size, value, handleInputChange, handleInputSubmit, onFocus, onBlur } = props;
 
   return (
     <>
@@ -75,18 +76,15 @@ const Input: React.FC<InputProps> = (props) => {
       <InputContainor size={size}>
         <form className="input-wrapper" onSubmit={handleInputSubmit}>
           <div className="icon-box">
-            <Icon
-              path={explore}
-              width={20}
-              height={20}
-              color="rgb(83, 100, 113)"
-            />
+            <Icon path={explore} width={20} height={20} color="rgb(83, 100, 113)" />
           </div>
           <input
             className="searchValue"
             placeholder={placeholder}
             value={value}
             onChange={handleInputChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
           />
         </form>
       </InputContainor>

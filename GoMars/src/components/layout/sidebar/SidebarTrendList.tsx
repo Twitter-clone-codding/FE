@@ -18,11 +18,7 @@ const SidebarTrendList = () => {
       <SidebarTrendListContainer>
         <div className="profile-sideber-title">Trends for you</div>
         {trendData?.map((data, idx) => (
-          <TrendItem
-            key={`${idx}+ ${data.hashTag}`}
-            hashTag={data.hashTag}
-            total={data.total}
-          />
+          <TrendItem key={`${idx}+ ${data.hashTag}`} hashTag={data.hashTag} total={data.total} />
         ))}
       </SidebarTrendListContainer>
     </>
