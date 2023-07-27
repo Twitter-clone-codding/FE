@@ -1,8 +1,10 @@
 import { logo } from "@/assets/img";
 import { Footer } from "@/components/main/Footer";
+import MainLoginForm from "@/components/main/Loginform";
 import useWindowHeight from "@/hooks/useWindowHeight";
 import { MainLeftContainer, MainRightContainer } from "@/styles/main/mainstyles";
 import { ThemeProps } from "@/styles/theme";
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 interface MainContainerProps extends ThemeProps {
@@ -15,7 +17,10 @@ const MainContainer = styled.div<MainContainerProps>`
   height: 100%;
   flex-direction: column;
   min-height: ${(props) => props.windowHeight}px;
-
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
   .main-wrraper {
     position: relative;
     width: 100%;
@@ -55,18 +60,18 @@ const Main = () => {
               <img src={logo} alt="aa" />
             </div>
             <div className="main-right-title">
-              <span className="title-subtitle-font">지금 일어나고 있는 일</span>
+              <span className="title-subtitle-font">잠시 자리좀 비울게요.</span>
             </div>
             <div className="main-right-subtitle">
               <span className="title-subtitle-font">오늘 트위터에 가입하세요.</span>
             </div>
             {/* 로그인, 회원가입 컨테이너 */}
-            <div className="main-right-loginContainer"></div>
-            {/* 로그인, 회원가입 컨테이너 */}
+            <MainLoginForm />
           </div>
         </MainRightContainer>
       </div>
       <Footer />
+      <Outlet />
     </MainContainer>
   );
 };

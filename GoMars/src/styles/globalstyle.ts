@@ -12,10 +12,22 @@ const GlobalStyle = createGlobalStyle<ThemeProps>`
     overflow: auto scroll;
     overscroll-behavior-y: none;
     font-size: 15px;
+    
+
   }
   body {
     height :764px;
-    font-family: Outfit, sans-serif;
+    font-family:
+      "TwitterChirp",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
+      
+
   }
   
   li {
@@ -30,7 +42,7 @@ const GlobalStyle = createGlobalStyle<ThemeProps>`
     cursor: pointer;
   }
 
- 
+
   `;
 
 export default GlobalStyle;

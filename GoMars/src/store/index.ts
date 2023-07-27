@@ -1,5 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slice/userSlice";
+import formReducer from "./slice/formSlice";
+import inputReducer from "./slice/inputSlice";
+import myTweetReducer from "./slice/myTweetSlice";
+import modalReducer from "./slice/modalSlice";
+import notificationReducer from "./slice/noticeSlice";
+
+
 import {
   FLUSH,
   PAUSE,
@@ -14,17 +21,26 @@ import storage from "redux-persist/lib/storage";
 
 // ...
 const rootReducer = combineReducers({
-  user: userReducer,
+  form: formReducer,
+  myTweet: myTweetReducer,
 });
 
-const persistConfig = {
-  key: "root",
+const formPersistConfig = {
+  key: "form",
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedFormReducer = persistReducer(formPersistConfig, userReducer);
+
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    notice: notificationReducer,
+    form: rootReducer,
+    input: inputReducer,
+    user: persistedFormReducer,
+    root: rootReducer,
+    modal: modalReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
