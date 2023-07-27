@@ -21,28 +21,4 @@ export default defineConfig({
       "@type": "/src/type",
     },
   },
-  server: {
-    proxy: {
-      "/auth": {
-        target: "https://pink-love.shop:8080", // your server endpoint
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/auth/, ""),
-      },
-      "/oauth": {
-        target: "https://pink-love.shop:8080",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/oauth/, ""),
-      },
-      "/register": {
-        target: "https://pink-love.shop:8080",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/register/, ""),
-      },
-      "/api": {
-        target: "https://pink-love.shop:8080",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
-  },
 });
