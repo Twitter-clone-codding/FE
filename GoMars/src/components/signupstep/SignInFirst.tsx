@@ -1,6 +1,7 @@
 import { login, register } from "@/api/post";
 import { useAppSelector, useAppDispatch } from "@/hooks/useRedux";
 import { updateFormData, updateLoginData } from "@/store/slice/formSlice";
+import { profileSet } from "@/store/slice/profileSlice";
 import { userSet } from "@/store/slice/userSlice";
 import {
   SignfirstContainer,
@@ -43,6 +44,7 @@ const SignInFirst = () => {
             tagname: res.result.tagName,
           })
         );
+        dispatch(profileSet({ tagName: res.result.tagName }));
       })
       .catch((err) => console.log(err))
       .finally(() => setLoginLoading(false));

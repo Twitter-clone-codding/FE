@@ -35,13 +35,12 @@ const Nav = () => {
           <Route path="/messages" element={<Messages />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/:profileName" element={<Profile />} />
-          <Route path="/*" element={<ErrorPage />} />
+          <Route path="/profile/:profileName" element={<Profile />} />
+          <Route path="/error" element={<ErrorPage />} />
         </Route>
       </Route>
       {/* 404 handler */}
-
-      <Route path={"/*"} element={<ErrorPage />} />
+      <Route path={"/error"} element={<ErrorPage />} />
     </Routes>
   );
 };
