@@ -54,12 +54,7 @@ const MainCenterHeartIcon: FC<IconWrapperProps> = ({
           }}
         />
       ) : isLike ? (
-        <Icon
-          path={FillHeart}
-          color={"rgb(249, 24, 128)"}
-          height={18.75}
-          width={18.75}
-        />
+        <Icon path={FillHeart} color={"rgb(249, 24, 128)"} height={18.75} width={18.75} />
       ) : (
         <Icon path={path} color={color} height={18.75} width={18.75} />
       )
@@ -84,9 +79,6 @@ const MainCenterHeartIcon: FC<IconWrapperProps> = ({
         <div className="footer-item-icon">{iconElement}</div>
         {count !== 0 && <span>{count}</span>}
       </IconBox>
-      {modalChecked && (
-        <Modal element={<TweetComponent />} height="346" width="600" />
-      )}
     </>
   );
 };

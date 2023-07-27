@@ -3,13 +3,13 @@ import PostTweet from "@/components/home/PostTweet";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { toggleModal } from "@/store/slice/modalSlice";
 import { Button, Icon } from "@/utils";
-import { useState } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 import MainHeaderProfile from "../mainheader/MainHeaderProfile";
 
 const TweetComponentContainer = styled.div`
   display: flex;
-  height: 346px;
+  /* height: 346px; */
   width: 600px;
   border-radius: 16px;
   flex-direction: column;
@@ -34,10 +34,11 @@ const TweetComponentContainer = styled.div`
   }
 `;
 interface TweetComponentProps {
-  onClick: (event: Event) => void;
+  onClick?: (event: Event) => void;
+  reply?: boolean;
 }
-const TweetComponent = (props) => {
-  const { onClick } = props;
+const TweetComponent: FC<TweetComponentProps> = (props) => {
+  const { onClick, reply } = props;
   const dispatch = useAppDispatch();
   const modalChecked = useAppSelector((state) => state.modal.modalChecked);
   const onClickIconHandler = () => {
@@ -62,7 +63,7 @@ const TweetComponent = (props) => {
 
       <div className="tweet-modal-replying"></div>
       <div className="tweet-modal-retweet">
-        <PostTweet comment="Tweet your reply" type="tweet" />
+        <PostTweet reply={reply} comment="Tweet your reply" type="tweet" />
       </div>
     </TweetComponentContainer>
   );

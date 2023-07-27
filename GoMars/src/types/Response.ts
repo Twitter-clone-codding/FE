@@ -143,7 +143,17 @@ interface NoticeGetResponse {
     tweetsList: Tweet[];
   };
 }
-
+interface ChatRooms {
+  id: number;
+  nickname: string;
+  tagName: string;
+  profileImageUrl: string;
+  roomKey: string;
+}
+interface ChatingRoomResponse {
+  msg: string;
+  result: ChatRooms[];
+}
 interface TrandGetResponse {
   mag: string;
   result: Trend[];

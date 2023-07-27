@@ -3,17 +3,16 @@ import { close } from "@/assets/svg";
 import { Icon } from "@/utils";
 import { FC } from "react";
 import styled from "styled-components";
-interface props {
-  profileImageUrl?: string;
-  nickname: string;
-  tagName: string;
+
+interface RoomProps extends ChatRooms {
+  handleRoomClick: () => void;
 }
 
-const ChatingRoomItem: FC<props> = (props) => {
-  const { profileImageUrl, nickname, tagName } = props;
+const ChatingRoomItem: FC<RoomProps> = (props) => {
+  const { profileImageUrl, nickname, tagName, id, roomKey, handleRoomClick } = props;
   const profileImage = profileImageUrl ?? normal;
   return (
-    <ChatingRoomItemContaienr img={profileImage}>
+    <ChatingRoomItemContaienr img={profileImage} onClick={handleRoomClick}>
       <div className="avatar-container">
         <div className="avatar-wrraper">
           <div className="avatar-box"></div>
