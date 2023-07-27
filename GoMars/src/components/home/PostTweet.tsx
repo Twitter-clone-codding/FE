@@ -9,15 +9,33 @@ import { addTweet } from "@/store/slice/myTweetSlice";
 import { PostContainer, ButtonTitle } from "@/styles/home/homeStyle";
 import { MainImgBox } from "@/styles/maincenter/maincenter";
 import { Icon, Button } from "@/utils";
-import { ChangeEvent, ChangeEventHandler, useCallback, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
+import { css } from "styled-components";
 
-const PostTweet = () => {
+interface PostTweetProps {
+  comment: string;
+  type: "tweet" | "retweet";
+}
+
+const PostTweet: React.FC<PostTweetProps> = ({ comment, type }) => {
   const user = useAppSelector((state) => state.user);
   const [textFocus, settextFocus] = useState<boolean>(false);
   const [value, onChange, setForm] = useInput({ content: "" });
-  const { inputRef, onUploadImage, onUploadImageButtonClick, previewImage, setPreviewImage } =
-    useImageSelect();
+  const {
+    inputRef,
+    onUploadImage,
+    onUploadImageButtonClick,
+    previewImage,
+    setPreviewImage,
+  } = useImageSelect();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
   const dispatch = useAppDispatch();
 
   /// 트윗 포스트후 초기화 ///
@@ -80,7 +98,12 @@ const PostTweet = () => {
         {(textFocus || value["content"]) && (
           <div className="selcet-container">
             <span>Everyone</span>
-            <Icon height={16} path={down} width={16} color="rgb(29, 155, 240)" />
+            <Icon
+              height={16}
+              path={down}
+              width={16}
+              color="rgb(29, 155, 240)"
+            />
           </div>
         )}
         <div className="content-wrraper">
@@ -90,12 +113,17 @@ const PostTweet = () => {
             rows={1}
             value={value["content"]}
             onChange={handleOnChange}
-            placeholder={"What is Happening?!"}
+            placeholder={comment}
             onFocus={() => settextFocus(true)}
             onBlur={() => settextFocus(false)}
           />
         </div>
-        <input type="file" ref={inputRef} onChange={onUploadImage} style={{ display: "none" }} />
+        <input
+          type="file"
+          ref={inputRef}
+          onChange={onUploadImage}
+          style={{ display: "none" }}
+        />
         {previewImage && (
           <MainImgBox image={previewImage}>
             <div className="image-box"></div>
@@ -105,7 +133,12 @@ const PostTweet = () => {
         {(textFocus || value["content"]) && (
           <div className="down-container">
             <div className="everyone-container">
-              <Icon height={16} path={earth} width={16} color={"rgb(29, 155, 240)"} />
+              <Icon
+                height={16}
+                path={earth}
+                width={16}
+                color={"rgb(29, 155, 240)"}
+              />
               <span>Everyone can reply</span>
             </div>
           </div>
@@ -116,14 +149,22 @@ const PostTweet = () => {
             {postArray.map((path, i) => {
               return (
                 <div
-                  className={path === location ? "footer-item-disable" : "footer-item"}
+                  className={
+                    path === location ? "footer-item-disable" : "footer-item"
+                  }
                   key={path}
-                  onClick={path === picture ? onUploadImageButtonClick : () => {}}
+                  onClick={
+                    path === picture ? onUploadImageButtonClick : () => {}
+                  }
                 >
                   <div className="footer-item-icon">
                     <Icon
                       path={path}
-                      color={path === location ? "rgb(29, 155, 240 , 0.5)" : "rgb(29, 155, 240)"}
+                      color={
+                        path === location
+                          ? "rgb(29, 155, 240 , 0.5)"
+                          : "rgb(29, 155, 240)"
+                      }
                       height={20}
                       width={20}
                     />

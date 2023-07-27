@@ -9,9 +9,20 @@ import {
 import { Icon } from "@/utils";
 import { forwardRef } from "react";
 import MainCenterListItemIcon from "./MainCenterListItemIcon";
+import { useNavigate } from "react-router-dom";
 
 const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
-  const { content, createdAt, hashtag, hearts, imgList, views, id, heartCheck, user } = props;
+  const {
+    content,
+    createdAt,
+    hashtag,
+    hearts,
+    imgList,
+    views,
+    id,
+    heartCheck,
+    user,
+  } = props;
 
   const detailNavigateHandler = () => {
     console.log("imgList", imgList);
@@ -52,25 +63,37 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
     if (minutes > 0) return `${minutes}m`;
     return `${seconds}s`;
   };
-
+  const navigate = useNavigate();
+  const onClickMoveProfileHandler = () => {
+    navigate(`/${hashtag}`);
+  };
+  // const profileImage = user
   const ItemContents = (
     <MainCenterListItemContainor>
       <MainCenterListItemAvartar
         userProfileImage={user.profileImageUrl ? user.profileImageUrl : normal}
       >
         <div className="avartar"></div>
-        <img src={user.profileImageUrl ? user.profileImageUrl : normal} alt="asd" />
+        <img
+          src={user.profileImageUrl ? user.profileImageUrl : normal}
+          alt="asd"
+        />
       </MainCenterListItemAvartar>
       <MainCenterListItemContent>
         <div className="main-header">
           <div className="main-header-span">
-            <span>{user?.nickname}</span>
+            <span onClick={onClickMoveProfileHandler}>{user?.nickname}</span>
             <span className="hashtag">{hashtag}</span>
             <span>{user?.nickname}</span>
             <span className="hashtag">@{user?.nickname}</span>
             <span className="date">·{getTimeAgo(createdAt)}</span>
           </div>
-          <Icon color={"rgb(83, 100, 113)"} height={18.75} width={18.75} path={threedot} />
+          <Icon
+            color={"rgb(83, 100, 113)"}
+            height={18.75}
+            width={18.75}
+            path={threedot}
+          />
         </div>
         <div className="main-contnet">
           <div className="main-contnet-comment">
@@ -91,7 +114,11 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
       </MainCenterListItemContent>
     </MainCenterListItemContainor>
   );
-  const isLastItem = ref ? <div ref={ref}>{ItemContents}</div> : <div>{ItemContents}</div>;
+  const isLastItem = ref ? (
+    <div ref={ref}>{ItemContents}</div>
+  ) : (
+    <div>{ItemContents}</div>
+  );
   return isLastItem;
 });
 

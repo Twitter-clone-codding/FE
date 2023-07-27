@@ -142,7 +142,7 @@ const Explore = () => {
     if (inputValue) {
       fetch(inputValue);
     } else {
-      console.log("없다 이새끼야");
+      console.log("없다");
     }
 
     console.log("sideEffect");

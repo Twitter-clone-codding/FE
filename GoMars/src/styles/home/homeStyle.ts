@@ -15,6 +15,7 @@ const PostContainer = styled.div<ProfileImageProps>`
   padding-top: 4px;
   z-index: 1;
   border-bottom: 1px solid rgb(239, 243, 244);
+  height: 100%;
   .avatar-container {
     display: flex;
     flex-direction: column;
@@ -63,7 +64,7 @@ const PostContainer = styled.div<ProfileImageProps>`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    justify-content: center;
+    justify-content: space-between;
     padding-top: 4px;
     position: static;
     transition-duration: 0.1s;
