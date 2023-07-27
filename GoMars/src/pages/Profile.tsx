@@ -11,6 +11,7 @@ import HomeHeaderBottom from "@/components/layout/maincenter/HomeHeaderBottom";
 const Profile = () => {
   const [profileData, setProfileData] = useState<Profile>();
   const tagName = useAppSelector((state) => state.profile.tagName);
+  const myName = useAppSelector((state) => state.user.tagname);
   console.log(tagName);
   const navigate = useNavigate();
   const param = useParams();
@@ -23,9 +24,6 @@ const Profile = () => {
     };
     fetch();
   }, []);
-  const onClickHandler = () => {
-    navigate("/profile/retweet");
-  };
 
   return (
     <>
@@ -37,7 +35,7 @@ const Profile = () => {
               <div className="main-profile-circle"></div>
               <div className="main-profile-button">
                 <div className="button">
-                  {profileData.tagName === tagName ? (
+                  {profileData.tagName === myName ? (
                     <Button
                       backgroundColor="white"
                       color="black"
@@ -45,7 +43,6 @@ const Profile = () => {
                       size="editProfile"
                       borderColor="gray"
                       title={<span>Edit profile</span>}
-                      onClick={onClickHandler}
                     />
                   ) : (
                     <Button
@@ -54,27 +51,17 @@ const Profile = () => {
                       hoverColor="hoverBlack"
                       size="follow"
                       title={<span>follow</span>}
-                      onClick={onClickHandler}
                     />
                   )}
                 </div>
               </div>
               <div className="main-profile-name">
-                <div className="main-profile-name-username">
-                  {profileData.nickname}
-                </div>
-                <div className="main-profile-name-hashtag">
-                  {profileData.tagName}
-                </div>
+                <div className="main-profile-name-username">{profileData.nickname}</div>
+                <div className="main-profile-name-hashtag">{profileData.tagName}</div>
               </div>
               <div className="main-profile-create">
                 <div className="main-profile-create-icon">
-                  <Icon
-                    color="rgb(83, 100, 113)"
-                    path={calendar}
-                    height={18.75}
-                    width={18.75}
-                  />
+                  <Icon color="rgb(83, 100, 113)" path={calendar} height={18.75} width={18.75} />
                 </div>
                 <div>Joined {profileData.createdAt}</div>
               </div>
@@ -106,9 +93,7 @@ const Profile = () => {
               <Carousel />
             </div>
             <div className="more-info-tweet">
-              {profileData.myList?.map((tweet) => (
-                <MainCenterListItem key={tweet.id} {...tweet} />
-              ))}
+              {profileData.myList?.map((tweet) => <MainCenterListItem key={tweet.id} {...tweet} />)}
             </div>
             <div className="more-info-follow">
               {/* {followArray.map((data) => (

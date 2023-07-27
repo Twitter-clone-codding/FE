@@ -41,6 +41,7 @@ const ProfileContainor = styled.div<MainHeaderProfileProps>`
     justify-content: space-between;
   }
   .main-info {
+    flex-grow: 1;
     display: flex;
     flex-direction: row;
   }
@@ -49,7 +50,7 @@ const ProfileContainor = styled.div<MainHeaderProfileProps>`
     flex-direction: column;
     position: relative;
     margin-right: 12px;
-    flex-basis: 47px;
+    flex-basis: 40px;
     .avatar-wrraper {
       pointer-events: auto;
       flex-direction: column;

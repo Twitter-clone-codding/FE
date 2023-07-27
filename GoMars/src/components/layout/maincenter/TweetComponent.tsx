@@ -58,9 +58,15 @@ const TweetComponent: FC<TweetComponentProps> = (props) => {
           title={<span>Drafts</span>}
         />
       </div>
-
-      <MainHeaderProfile type="search" />
-
+      <Avartar>
+        <div className="avartar-circle-wrapper">
+          <div className="avartar-circle"></div>
+        </div>
+        <div className="avartar-comment">
+          <div className=""></div>
+          <div></div>
+        </div>
+      </Avartar>
       <div className="tweet-modal-replying"></div>
       <div className="tweet-modal-retweet">
         <PostTweet reply={reply} comment="Tweet your reply" type="tweet" />
@@ -70,3 +76,22 @@ const TweetComponent: FC<TweetComponentProps> = (props) => {
 };
 
 export default TweetComponent;
+
+const Avartar = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  .avartar-circle-wrapper {
+    padding: 0 16px;
+  }
+  .avartar-circle {
+    border-radius: 9999px;
+    height: 40px;
+    width: 40px;
+    background-color: red;
+  }
+  .avartar-comment {
+    background-color: lightgray;
+    flex-grow: 1;
+  }
+`;
