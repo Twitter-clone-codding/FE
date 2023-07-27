@@ -60,7 +60,7 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
     dispatch(profileSet({ tagName: user.tagName }));
     e.stopPropagation();
   };
-
+  const profileImg = normal;
   // const profileImage = user
   const ItemContents = (
     <MainCenterListItemContainor
@@ -68,11 +68,9 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
         navigate(`/${id}`);
       }}
     >
-      <MainCenterListItemAvartar
-        userProfileImage={user.profileImageUrl ? user.profileImageUrl : normal}
-      >
+      <MainCenterListItemAvartar userProfileImage={profileImg}>
         <div className="avartar"></div>
-        <img src={user.profileImageUrl ? user.profileImageUrl : normal} alt="asd" />
+        <img src={profileImg} alt="asd" />
       </MainCenterListItemAvartar>
       <MainCenterListItemContent>
         <div className="main-header">
