@@ -9,7 +9,10 @@ import {
 import { Icon } from "@/utils";
 import { forwardRef } from "react";
 import MainCenterListItemIcon from "./MainCenterListItemIcon";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { userSet } from "@/store/slice/userSlice";
+import { profileSet } from "@/store/slice/profileSlice";
 
 const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
   const {
@@ -64,8 +67,10 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
     return `${seconds}s`;
   };
   const navigate = useNavigate();
-  const onClickMoveProfileHandler = () => {
-    navigate(`/${hashtag}`);
+  const dispatch = useAppDispatch();
+  const onClickMoveHandler = () => {
+    navigate(`/profile/${user.tagName}`);
+    dispatch(profileSet({ tagName: user.tagName }));
   };
   // const profileImage = user
   const ItemContents = (
@@ -82,7 +87,7 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
       <MainCenterListItemContent>
         <div className="main-header">
           <div className="main-header-span">
-            <span onClick={onClickMoveProfileHandler}>{user?.nickname}</span>
+            <span onClick={onClickMoveHandler}>{user?.nickname}</span>
             <span className="hashtag">{hashtag}</span>
             <span>{user?.nickname}</span>
             <span className="hashtag">@{user?.nickname}</span>

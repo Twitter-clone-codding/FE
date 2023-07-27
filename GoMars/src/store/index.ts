@@ -5,7 +5,7 @@ import inputReducer from "./slice/inputSlice";
 import myTweetReducer from "./slice/myTweetSlice";
 import modalReducer from "./slice/modalSlice";
 import notificationReducer from "./slice/noticeSlice";
-
+import profileReducer from "./slice/profileSlice";
 
 import {
   FLUSH,
@@ -40,6 +40,7 @@ export const store = configureStore({
     user: persistedFormReducer,
     root: rootReducer,
     modal: modalReducer,
+    profile: profileReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

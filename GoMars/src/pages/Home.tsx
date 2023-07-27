@@ -7,6 +7,7 @@ import { HomeContainer, SpinnerContainer } from "@/styles/sidebar/sidebarStyle";
 import { Spinner } from "@/utils";
 import { includes } from "lodash";
 import { useInfiniteQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
   const myTweet = useAppSelector((state) => state.root.myTweet.tweets);
   const {
@@ -56,7 +57,6 @@ const Home = () => {
 
   // 에러 처리
   if (status === "error") return <div>...에러 </div>;
-
   return (
     <HomeContainer>
       <PostTweet type="tweet" comment="What is happening?!" />
