@@ -64,20 +64,23 @@ const MainCenterListItem = forwardRef<HTMLDivElement, Tweet>((props, ref) => {
     return `${seconds}s`;
   };
   const navigate = useNavigate();
-  const onClickMoveProfileHandler = () => {
-    navigate(`/profile/${hashtag}`);
+  const dispatch = useAppDispatch();
+  const onClickMoveHandler = (e) => {
+    navigate(`/profile/${user.tagName}`);
+    dispatch(profileSet({ tagName: user.tagName }));
+    e.stopPropagation();
   };
+  const profileImg = normal;
   // const profileImage = user
   const ItemContents = (
-    <MainCenterListItemContainor>
-      <MainCenterListItemAvartar
-        userProfileImage={user.profileImageUrl ? user.profileImageUrl : normal}
-      >
+    <MainCenterListItemContainor
+      onClick={() => {
+        navigate(`/${id}`);
+      }}
+    >
+      <MainCenterListItemAvartar userProfileImage={profileImg}>
         <div className="avartar"></div>
-        <img
-          src={user.profileImageUrl ? user.profileImageUrl : normal}
-          alt="asd"
-        />
+        <img src={profileImg} alt="asd" />
       </MainCenterListItemAvartar>
       <MainCenterListItemContent>
         <div className="main-header">

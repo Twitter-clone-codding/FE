@@ -38,6 +38,14 @@ const MainCenterHeartIcon: FC<IconWrapperProps> = ({
     "rgba(29, 155, 240,0.1)",
     "rgba(29, 155, 240,0.1)",
   ];
+  const onClickHandler = (event) => {
+    event.stopPropagation();
+    if (index === 0) {
+      onClickIconHandler();
+    } else if (index === 2 && !isLoading) {
+      likeHandler();
+    }
+  };
   const iconElement =
     index === 2 ? (
       playAnimation ? (
@@ -78,13 +86,8 @@ const MainCenterHeartIcon: FC<IconWrapperProps> = ({
         hoverBgColors={hoverBgColors[index]}
         onMouseEnter={() => setColor(hoverColor)}
         onMouseLeave={() => setColor(defaultColor)}
-        onClick={
-          index === 2 && !isLoading
-            ? likeHandler
-            : index === 0 && !isLoading
-            ? onClickIconHandler
-            : () => {}
-        }
+        onClick={index === 2 && !isLoading ? likeHandler : () => {}}
+        // onClick={onClickIconHandler}
       >
         <div className="footer-item-icon">{iconElement}</div>
         {count !== 0 && <span>{count}</span>}

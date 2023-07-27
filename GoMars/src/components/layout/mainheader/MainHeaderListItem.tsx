@@ -1,6 +1,7 @@
 import { useAppSelector } from "@/hooks/useRedux";
 import { LinkContainer } from "@/styles/header/MainheaderStyle";
 import { Icon } from "@/utils";
+import { useEffect } from "react";
 import styled from "styled-components";
 
 interface MainHeaderListItemProps {
@@ -17,11 +18,12 @@ const MainHeaderListItem: React.FC<MainHeaderListItemProps> = (props) => {
   const lowerTitle = title && title.toLowerCase();
   const notice = useAppSelector((state) => state.notice.value);
   const sameTitle = title && pathname && title.toLowerCase() === pathname.substring(1);
+
   const boldIcon = sameTitle ? (
     <>
       {boldPath && (
         <NoticeContainer>
-          {pathname === "Notifications" && notice > 0 && <Notice />}
+          {pathname === "/notifications" && notice > 0 && <Notice />}
           <Icon path={boldPath} width={26.25} height={26.25} color={color} />
         </NoticeContainer>
       )}
@@ -35,7 +37,7 @@ const MainHeaderListItem: React.FC<MainHeaderListItemProps> = (props) => {
   ) : (
     <>
       <NoticeContainer>
-        {pathname === "Notifications" && notice > 0 && <Notice />}
+        {title === "Notifications" && notice > 0 && <Notice />}
         <Icon path={path} width={26.25} height={26.25} color={color} />
       </NoticeContainer>
       {title && (

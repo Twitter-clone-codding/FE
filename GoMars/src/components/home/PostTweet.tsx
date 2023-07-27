@@ -39,6 +39,21 @@ const PostTweet: React.FC<PostTweetProps> = ({ comment, type, reply }) => {
     },
     [dispatch, setForm, setPreviewImage, inputRef]
   );
+
+  /// 해시태그 추출
+  const extractHashtags = (text) => {
+    // 해시태그 추출 정규식
+    const hashtagRegEx = /#[\w가-힣ㄱ-ㅎㅏ-ㅣ]+/g;
+
+    // 정규식을 사용해서 해시태그 추출
+    const hashtags = text.match(hashtagRegEx) || [];
+
+    // 해시태그를 제거한 나머지 텍스트
+    const plainText = text.replace(hashtagRegEx, "").trim();
+
+    return { hashtags, plainText };
+  };
+
   /// 트윗 포스트///
   const onUploadToServerButtonClick = useCallback(async () => {
     const formData = new FormData();
@@ -49,7 +64,7 @@ const PostTweet: React.FC<PostTweetProps> = ({ comment, type, reply }) => {
           JSON.stringify({
             mainTweetId: null,
             tweet: {
-              hashtag: "#1시#133",
+              hashtag: extractHashtags(value["content"]).hashtags.join(""),
               content: value["content"],
             },
           }),

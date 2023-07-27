@@ -116,14 +116,15 @@ interface TweetGetResponse {
 
 interface MainTweetGetResponse {
   msg: string;
-  result: {
-    tweet: Tweet;
-  };
+  result: Tweet;
 }
 
 interface RetweetGetResponse {
   msg: string;
-  result: Tweet[];
+  result: {
+    totalPage: number;
+    tweetsList: Tweet[];
+  };
 }
 
 interface ProfileGetResponse {

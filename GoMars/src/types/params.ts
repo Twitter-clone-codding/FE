@@ -4,7 +4,7 @@ interface MainTweetGetParams {
 interface RetweetGetParams {
   page: number;
   limit: number;
-  MainTweetid: number;
+  MainTweetid: string;
 }
 interface ProfileUpdateParams {
   body: ProfileUpdate;
