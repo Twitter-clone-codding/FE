@@ -116,9 +116,7 @@ interface TweetGetResponse {
 
 interface MainTweetGetResponse {
   msg: string;
-  result: {
-    tweet: Tweet;
-  };
+  result: Tweet;
 }
 
 interface RetweetGetResponse {

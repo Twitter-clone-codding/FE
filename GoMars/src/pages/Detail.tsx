@@ -1,14 +1,17 @@
-import { getRetweets } from "@/api/get";
+import { getMainTweet, getRetweets } from "@/api/get";
 import PostTweet from "@/components/home/PostTweet";
 import MainCenterListItem from "@/components/layout/maincenter/MainCenterListItem";
 import useInfiniteScroll from "@/hooks/useInfinityScroll";
 import { useAppSelector } from "@/hooks/useRedux";
 import { HomeContainer, SpinnerContainer } from "@/styles/sidebar/sidebarStyle";
 import { Spinner } from "@/utils";
-import { useInfiniteQuery } from "react-query";
+import { useEffect, useState } from "react";
+import { useInfiniteQuery, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
 const Detail = () => {
+  const [detailData, setDetailData] = useState<Tweet>();
+  const [Loading, setLoading] = useState(false);
   const myTweet = useAppSelector((state) => state.root.myTweet.tweets);
   const { detail } = useParams();
   const { fetchNextPage, hasNextPage, isFetchingNextPage, data, status, error, isLoading } =
@@ -24,6 +27,16 @@ const Detail = () => {
         cacheTime: 30000,
       }
     );
+  useEffect(() => {
+    const fetch = async () => {
+      setLoading(true);
+      await getMainTweet(detail)
+        .then((res) => setDetailData(res.result))
+        .finally(() => setLoading(false));
+    };
+    fetch();
+    console.log(detailData);
+  }, []);
 
   const lastPostRef = useInfiniteScroll({
     isFetchingNextPage,
@@ -49,7 +62,8 @@ const Detail = () => {
 
   return (
     <HomeContainer>
-      <PostTweet type="tweet" comment="What is happening?!" />
+      {detailData && <MainCenterListItem {...detailData} />}
+      <PostTweet type="tweet" comment="Tweet your reply!" reply={true} />
       {myTweet && myTweet?.map((tweet) => <MainCenterListItem key={tweet.id} {...tweet} />)}
       {isLoading ? (
         <SpinnerContainer>
