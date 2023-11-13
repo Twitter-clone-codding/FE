@@ -12,7 +12,6 @@ const Profile = () => {
   const [profileData, setProfileData] = useState<Profile>();
   const tagName = useAppSelector((state) => state.profile.tagName);
   const myName = useAppSelector((state) => state.user.tagname);
-  console.log(tagName);
   const navigate = useNavigate();
   const param = useParams();
   const SelectorArray = ["Tweets", "Replies", "Media", "Likes"];

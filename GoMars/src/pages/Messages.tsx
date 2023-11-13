@@ -10,13 +10,11 @@ import MessagesHeader from "@/layout/header/MessagesHeader";
 import { MessagesContainer, MessageRoom, ChatingRoom } from "@/styles/message/messageStyle";
 import { Icon, Input } from "@/utils";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 const Messages = () => {
   // <Chat />;
   const [value, onChangeHandler] = useInput({ searchValue: "" });
   const [messageList, setMessageList] = useState<User[]>();
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [selectedRoom, setSelectedRoom] = useState<ChatRooms | null>(null);
   const messageSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,12 +30,9 @@ const Messages = () => {
   });
   const handleRoomClick = (room: ChatRooms) => {
     setSelectedRoom(room);
-    // 여기에서 방 입장 로직을 구현합니다.
-    // 예를 들면, 다른 페이지로 리다이렉트하거나 모달을 표시하는 등의 동작을 수행할 수 있습니다.
   };
 
   const handleUserClick = async (user: User) => {
-    setSelectedUser(user);
     setFocus(false);
     await getChatRoom(user.id)
       .then((res) => res.msg)
