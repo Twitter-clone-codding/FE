@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useRef, FormEvent } from "react";
-import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import StompJs from "stompjs";
-import { ChatContainer, Message, InputArea, MessageInput } from "@/styles/message/chatstyle";
+import {
+  ChatContainer,
+  Message,
+  InputArea,
+  MessageInput,
+} from "@/styles/message/chatstyle";
 import { Input } from "@/utils";
 import styled from "styled-components";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -17,7 +21,6 @@ const Chat: React.FC<ChatRooms> = (room) => {
   const stompClientRef = useRef<any>(null);
   const user = useAppSelector((state) => state.user);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [client, setClient] = useState<Client | null>(null);
   const [currentMessage, setCurrentMessage] = useState<string>("");
 
   const connect = () => {

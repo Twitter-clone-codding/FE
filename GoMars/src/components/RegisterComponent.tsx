@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { SignFourth, SignSecond, SignThird, Signfirst } from "./signupstep";
-import { SignInFormContainer, SignUpFormContainer, SigninBox } from "@/styles/sign/signstyles";
+import {
+  SignInFormContainer,
+  SignUpFormContainer,
+  SigninBox,
+} from "@/styles/sign/signstyles";
 import { Icon } from "@/utils";
 import { close, prev, twitter } from "@/assets/svg";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -25,7 +29,13 @@ const RegisterComponent = ({ state = 1 }: initailStateProp) => {
       case 1:
         return <Signfirst nextStep={nextStep} />;
       case 2:
-        return <SignSecond toggle={toggle} setToggle={setToggle} nextStep={nextStep} />;
+        return (
+          <SignSecond
+            toggle={toggle}
+            setToggle={setToggle}
+            nextStep={nextStep}
+          />
+        );
       case 3:
         return <SignThird nextStep={nextStep} />;
       case 4:
@@ -49,7 +59,12 @@ const RegisterComponent = ({ state = 1 }: initailStateProp) => {
           </div>
           <div className="header-logo">
             <div className="logocontainer">
-              <Icon color={"rgb(29, 155, 240)"} height={53} width={32} path={twitter} />
+              <Icon
+                color={"rgb(29, 155, 240)"}
+                height={53}
+                width={32}
+                path={twitter}
+              />
             </div>
           </div>
           <div className="header-navigate"></div>
